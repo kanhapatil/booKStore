@@ -1,0 +1,122 @@
+.contact {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form .heading {
+  width: 380px;
+  font-size: 1.6em;
+  text-transform: uppercase;
+  color: whitesmoke;
+  font-weight: 700;
+}
+
+.contact form input {
+  width: 100%;
+  display: block;
+  margin-top: 0.6rem;
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 2px solid whitesmoke;
+  font-size: 1rem;
+  background-color: transparent;
+  color: whitesmoke;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input::placeholder {
+  color: whitesmoke;
+}
+
+.select {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid whitesmoke;
+  background-color: transparent;
+  color: whitesmoke;
+  padding: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.select option {
+    background-color: transparent;
+    color: black;
+}
+
+.textarea {
+  width: 100%;
+  height: 150px;
+  border-radius: 2px;
+  border: 2px solid whitesmoke;
+  background-color: transparent;
+  padding: 10px;
+  color: whitesmoke;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+
+.textarea::placeholder {
+  color: whitesmoke;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.textarea:focus,
+.select:focus {
+  outline: none;
+}
+
+.error {
+  color: rgb(225, 23, 23);
+  margin-left: 0.5rem;
+}
+
+.btn {
+  display: block;
+  margin-top: 0.7rem;
+  height: 40px;
+  width: 100%;
+  padding: 0 0.5rem 0 0.5rem;
+  background-color: transparent;
+  color: white;
+  border: 2px solid whitesmoke;
+  font-size: 1rem;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  background-color: whitesmoke;
+  color: hwb(0 17% 35%);
+  font-weight: 700;
+  border: 2px solid hwb(0 17% 35%);
+}
+
+/* Media Queries */
+@media screen and (max-width: 770px) {
+  .signup {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .contact form .heading {
+    font-size: 1.2em;
+    width: 320px;
+  }
+
+  .contact form input,
+  .contact form textarea {
+    font-size: 0.9rem;
+  }
+}

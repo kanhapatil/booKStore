@@ -1,0 +1,16 @@
+====== || Command to generate models diagram || ====== 
+
+
+Step 1. pip install django-extensions
+
+Step 2. INSTALLED_APPS = [
+    'django_extensions',
+]
+
+Step 3. pip install pygraphviz
+
+Step 4. pip install pydotplus
+
+Step 5. python manage.py graph_models app_name --dot -o app_name_model_diagram.dot
+
+Step 6. dot -Tpng app_name_model_diagram.dot -o app_name_model_diagram.png

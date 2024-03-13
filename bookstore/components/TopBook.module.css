@@ -1,0 +1,78 @@
+.top_books {
+    width: 93.5%;
+    margin: 0 auto;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+    row-gap: 2rem;
+  }
+  
+  .title {
+    width: 93.5%;
+    margin: 0 auto;
+    font-size: 1.8em;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  
+  section .book {
+    width: 213px;
+    min-width: 100px;
+    position: relative;
+  }
+  
+  section .book .book_content, .book_count {
+    background-color: wheat;
+    color: rgb(77, 32, 1);
+    width: 60%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 40px;
+    text-align: center;
+    padding-top: 0.6rem;
+    font-weight: 600;
+    position: absolute;
+    top: 92%;
+    left: 20%;
+  }
+
+  section .book .book_count span{
+    padding: 0.8rem;
+  }
+
+
+  .add, .increase, .decrease {
+    cursor: pointer;
+  }
+  
+  .cart-count a {
+    padding: 0 20px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  section .book .book_img img {
+    width: 100%;
+  }
+  
+  /* Media Queries */
+  @media screen and (max-width: 768px) {
+    section .book {
+      width: 155px;
+      min-width: 100px;
+    }
+  
+    section .book .book-content {
+      width: 70%;
+      top: 90%;
+      left: 15%;
+    }
+  
+    .cart-count a {
+      padding: 0 10px;
+      font-size: 16px;
+    }
+  }
