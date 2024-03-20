@@ -114,10 +114,8 @@ const Login = () => {
             <p>Forget password?&nbsp;&nbsp;</p>
           </div>
 
-          {/* Hidden input field for CSRF token */}
           <input type="hidden" name="csrfmiddlewaretoken" value={csrfToken || ''} />
 
-          {/* Disable submit button if csrfToken is not available */}
           <button type="submit" className={styles.btn} disabled={!csrfToken}>
             Log In <span aria-hidden="true">&rarr;</span>
           </button>
