@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -21,9 +21,16 @@ const Header = () => {
   return (
     <>
       <header className="absolute inset-x-0 top-0 z-50">
-        <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+        <nav
+          className="flex items-center justify-between p-6 lg:px-8"
+          aria-label="Global"
+        >
           <div className="flex lg:flex-1">
-            <Link href="/" className="-m-1.5 p-1.5 text-white text-xl font-semibold leading-6" onClick={closeMobileMenu}>
+            <Link
+              href="/"
+              className="-m-1.5 p-1.5 text-white text-xl font-semibold leading-6"
+              onClick={closeMobileMenu}
+            >
               <span className="sr-only">Your Company</span>
               booKStore
             </Link>
@@ -40,22 +47,52 @@ const Header = () => {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-white">
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-sm font-semibold leading-6 text-white"
+              >
                 {item.name}
               </Link>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link href="/Login" className="text-sm font-semibold leading-6 text-white">
+            <Link
+              href="/Login"
+              className="text-sm font-semibold leading-6 text-white"
+            >
               Log in <span aria-hidden="true">&rarr;</span>
+            </Link>
+
+            <Link
+              href="http://127.0.0.1:8000/auth/logout/"
+              className="text-sm font-semibold leading-6 text-white"
+            >
+              Log out <span aria-hidden="true">&rarr;</span>
+            </Link>
+
+            <Link
+              href="/Profile"
+              className="text-sm font-semibold leading-6 text-white"
+            >
+              Profile <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
         </nav>
-        <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+        <Dialog
+          as="div"
+          className="lg:hidden"
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+        >
           <div className="fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <Link href="/" className="-m-1.5 p-1.5 text-white" onClick={closeMobileMenu}>
+              <Link
+                href="/"
+                className="-m-1.5 p-1.5 text-white"
+                onClick={closeMobileMenu}
+              >
                 <span className="sr-only">Your Company</span>
                 booKStore
               </Link>
@@ -89,6 +126,22 @@ const Header = () => {
                     onClick={closeMobileMenu} // Close mobile menu when clicked
                   >
                     Log in
+                  </Link>
+
+                  <Link
+                    href="http://127.0.0.1:8000/auth/logout/"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={closeMobileMenu} // Close mobile menu when clicked
+                  >
+                    Log out
+                  </Link>
+
+                  <Link
+                    href="/Profile"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={closeMobileMenu} // Close mobile menu when clicked
+                  >
+                    Profile
                   </Link>
                 </div>
               </div>

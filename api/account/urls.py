@@ -10,4 +10,6 @@ router.register("address", views.Address, basename="address")
 
 urlpatterns = [
     path("", include(router.urls)),
+    path("get_csrf/", views.GetCSRFToken.as_view(), name="get_csrf"),
+    path("login/", views.LoginView.as_view(), name="login")
 ]

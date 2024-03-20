@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("user/", include("account.urls")),
     path("store/", include("mystore.urls")),
-    # path("auth/", include("rest_framework.urls", namespace="rest_framework"))
+    path("auth/", include("rest_framework.urls", namespace="rest_framework"))
 ] 
