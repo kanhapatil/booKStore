@@ -25,11 +25,13 @@ from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
 
 
+# Register api class
 class Register(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
-    
+
+# Login api class
 class Loginview(APIView):
     def post(self, request):
         username = request.data["username"]
@@ -50,17 +52,6 @@ class Loginview(APIView):
             "access_token": str(access_token),
             "refresh_token": str(refresh_token)
         })
-    
-class LogoutView(APIView):
-    def post(self, request):
-        try:
-            refresh_token = request.data['refresh_token']
-            if refresh_token:
-                token = RefreshToken(refresh_token)
-                token.blacklist()
-            return Response("Logout Successful", status=status.HTTP_200_OK)
-        except TokenError:
-            raise AuthenticationFailed("Invalid Token")
 
 
 # Contact api class
@@ -75,12 +66,4 @@ class Address(viewsets.ModelViewSet):
     serializer_class = AddressSerializer 
 
     def get_queryset(self):
-        print(self.request.user)
         return Addres.objects.filter(user=self.request.user)
-    
-
-class UserDetail(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
-
-    def get_queryset(self):
-        return User.objects.filter(email=self.request.user)

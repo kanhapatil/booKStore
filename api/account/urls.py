@@ -10,6 +10,5 @@ router.register("address", views.Address, basename="address")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("login/", views.Loginview.as_view(), name="login"),
-    path("logout/", views.LogoutView.as_view(), name="logout")
+    path("login/", views.Loginview.as_view(), name="login")
 ]
