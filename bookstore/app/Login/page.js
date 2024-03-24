@@ -1,29 +1,18 @@
 "use client";
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation'
 import LogInImg from '@/components/LogInImg';
 import styles from './Login.module.css';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
-  const [csrfToken, setCsrfToken] = useState(null); // Initialize with null as a fallback value
-
-  useEffect(() => {
-    const fetchCsrfToken = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/user/get_csrf/');
-        setCsrfToken(response.data.csrfToken);
-      } catch (error) {
-        console.error('Error fetching CSRF token:', error);
-      }
-    };
-
-    fetchCsrfToken();
-  }, []);
-
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -35,29 +24,20 @@ const Login = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        if (!csrfToken) {
-          console.error('CSRF token is not available yet.');
-          return;
-        }
-
-        console.log(csrfToken);
-
         const response = await axios.post(
           'http://127.0.0.1:8000/user/login/',
-          values,
-          {
-            headers: {
-              'X-CSRFToken': csrfToken,
-            },
-          }
+          values
         );
 
+        const token = response.data.access_token;
+        localStorage.setItem('token', token);
+
         if (response.status === 200) {
-          console.log('Login successful');
+          router.push('/Profile');
         }
       } catch (error) {
-        console.log(csrfToken);
         console.error('Login failed:', error.response.status);
+        toast.warning("Email or Password is incorect!");
       }
       resetForm();
     },
@@ -66,7 +46,7 @@ const Login = () => {
   return (
     <>
       <LogInImg />
-
+      <ToastContainer />
       <div className={styles.login}>
         <motion.form
           className={styles.form}
@@ -114,9 +94,7 @@ const Login = () => {
             <p>Forget password?&nbsp;&nbsp;</p>
           </div>
 
-          <input type="hidden" name="csrfmiddlewaretoken" value={csrfToken || ''} />
-
-          <button type="submit" className={styles.btn} disabled={!csrfToken}>
+          <button type="submit" className={styles.btn}>
             Log In <span aria-hidden="true">&rarr;</span>
           </button>
         </motion.form>
@@ -126,3 +104,49 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+
+
+
+
+// "use client"
+// import { useState } from 'react';
+// import axios from 'axios';
+
+// const LoginPage = () => {
+//   const [credentials, setCredentials] = useState({
+//     username: '',
+//     password: '',
+//   });
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setCredentials(prevState => ({ ...prevState, [name]: value }));
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await axios.post('http://127.0.0.1:8000/api/auth/login/', credentials);
+//       const token = response.data.access; 
+//       localStorage.setItem('token', token);
+//       console.log(credentials, response.status);
+//       console.log(token);
+//     } catch (error) {
+//       console.error('Login failed:', error);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} style={{ marginTop: '5rem' }}>
+//       <h1>Kanha</h1>
+//       <input type="text" name="username" style={{ background: 'silver' }} placeholder='Username' value={credentials.username} onChange={handleChange} />
+//       <input type="password" name="password" style={{ background: 'silver' }} placeholder='Password' value={credentials.password} onChange={handleChange} />
+//       <button type="submit">Login</button>
+//     </form>
+//   );
+// };
+
+// export default LoginPage;

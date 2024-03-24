@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -13,10 +14,22 @@ const navigation = [
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const token = localStorage.getItem('token');
+  const router = useRouter();
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem('token');
+      router.push("/Login");
+      closeMobileMenu();
+    } catch (error) {
+      console.error('Error occurred during logout:', error);
+    }
+  };  
 
   return (
     <>
@@ -57,26 +70,31 @@ const Header = () => {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link
-              href="/Login"
-              className="text-sm font-semibold leading-6 text-white"
-            >
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
-
-            <Link
-              href="http://127.0.0.1:8000/auth/logout/"
-              className="text-sm font-semibold leading-6 text-white"
-            >
-              Log out <span aria-hidden="true">&rarr;</span>
-            </Link>
-
-            <Link
-              href="/Profile"
-              className="text-sm font-semibold leading-6 text-white"
-            >
-              Profile <span aria-hidden="true">&rarr;</span>
-            </Link>
+            {!token && (
+              <Link
+                href="/Login"
+                className="text-sm font-semibold leading-6 text-white"
+              >
+                Log in <span aria-hidden="true">&rarr;</span>
+              </Link>
+            )}
+            {token && (
+              <>
+                <Link
+                  href="#"
+                  className="text-sm font-semibold leading-6 text-white"
+                  onClick={handleLogout}
+                >
+                  LogOut &nbsp;
+                </Link>
+                <Link
+                  href="/Profile"
+                  className="text-sm font-semibold leading-6 text-white"
+                >
+                  Profile
+                </Link>
+              </>
+            )}
           </div>
         </nav>
         <Dialog
@@ -120,29 +138,33 @@ const Header = () => {
                   ))}
                 </div>
                 <div className="py-6">
-                  <Link
-                    href="/Login"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    onClick={closeMobileMenu} // Close mobile menu when clicked
-                  >
-                    Log in
-                  </Link>
-
-                  <Link
-                    href="http://127.0.0.1:8000/auth/logout/"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    onClick={closeMobileMenu} // Close mobile menu when clicked
-                  >
-                    Log out
-                  </Link>
-
-                  <Link
-                    href="/Profile"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    onClick={closeMobileMenu} // Close mobile menu when clicked
-                  >
-                    Profile
-                  </Link>
+                  {!token && (
+                    <Link
+                      href="/Login"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      onClick={closeMobileMenu} // Close mobile menu when clicked
+                    >
+                      Log in
+                    </Link>
+                  )}
+                  {token && (
+                    <>
+                      <Link
+                        href="#"
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        onClick={handleLogout}
+                      >
+                        LogOut
+                      </Link>
+                      <Link
+                        href="/Profile"
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        onClick={closeMobileMenu}
+                      >
+                        Profile
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

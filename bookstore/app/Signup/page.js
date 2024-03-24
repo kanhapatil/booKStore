@@ -12,16 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const Signup = () => {
-  async function getCSRFToken() {
-    try {
-      const response = await axios.get('http://127.0.0.1:8000/user/get_csrf/');
-      return response.data.csrfToken; // Assuming your server returns csrfToken field in the response
-    } catch (error) {
-      console.error('Error fetching CSRF token:', error);
-      throw error; 
-    }
-  }
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -44,15 +34,13 @@ const Signup = () => {
     
     onSubmit: async (values, { resetForm }) => {
       try {
-        const csrfToken = await getCSRFToken();
-        console.log(csrfToken);
         const myData = { ...values };
         delete myData.confirmPassword;
     
         myData.username = myData.email;
     
         const response = await axios.post(
-          "http://127.0.0.1:8000/user/account/",
+          "http://127.0.0.1:8000/user/register/",
           myData
         );
     

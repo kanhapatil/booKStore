@@ -20,28 +20,47 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.utils.decorators import method_decorator
 from rest_framework import viewsets
 from django.middleware import csrf
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken, TokenError
+from rest_framework import status
+from rest_framework.exceptions import AuthenticationFailed
 
 
-@method_decorator(ensure_csrf_cookie, name='dispatch')
-class GetCSRFToken(APIView):
-    permission_classes = [AllowAny]
-    
-    def get(self, request):
-        csrf_token = csrf.get_token(request)
-        return Response({'csrfToken': csrf_token})
-
-
-# Account api class
-@method_decorator(ensure_csrf_cookie, name='dispatch')
-class Account(viewsets.ModelViewSet):
+class Register(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    
+    
+class Loginview(APIView):
+    def post(self, request):
+        username = request.data["username"]
+        password = request.data["password"]
+        
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise AuthenticationFailed("Account does not exist")
 
-    permission_classes = [AllowAny]
+        if not user.check_password(password):
+            raise AuthenticationFailed("Incorrect Password")
 
-    # Hash the password before saving
-    def perform_create(self, serializer):
-        serializer.save(password=make_password(self.request.data['password']))
+        access_token = AccessToken.for_user(user)
+        refresh_token = RefreshToken.for_user(user)
+        
+        return Response({
+            "access_token": str(access_token),
+            "refresh_token": str(refresh_token)
+        })
+    
+class LogoutView(APIView):
+    def post(self, request):
+        try:
+            refresh_token = request.data['refresh_token']
+            if refresh_token:
+                token = RefreshToken(refresh_token)
+                token.blacklist()
+            return Response("Logout Successful", status=status.HTTP_200_OK)
+        except TokenError:
+            raise AuthenticationFailed("Invalid Token")
 
 
 # Contact api class
@@ -52,26 +71,12 @@ class Contact(viewsets.ModelViewSet):
 
 # Address api class
 class Address(viewsets.ModelViewSet):
-    queryset = Addres.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = AddressSerializer 
 
-
-@method_decorator(csrf_protect, name='dispatch') 
-class LoginView(APIView): 
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
-
-        user = authenticate(request, username=username, password=password)
-     
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return Response({'detail':'Logged in successfully.'}, status=status.HTTP_200_OK)
-        else:
-            return Response({'detail': 'Username or Password is incorrect.'}, status=status.HTTP_400_BAD_REQUEST)
+    def get_queryset(self):
+        print(self.request.user)
+        return Addres.objects.filter(user=self.request.user)
     
 
 class UserDetail(viewsets.ModelViewSet):
@@ -79,9 +84,3 @@ class UserDetail(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return User.objects.filter(email=self.request.user)
-
-
-class LogoutView(APIView):
-    def post(self, request):
-        logout(request)
-        return Response({'detail': 'Logged out successfully.'}, status=status.HTTP_200_OK)

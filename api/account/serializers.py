@@ -7,6 +7,14 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["username", "email", "contact", "password"]
 
+    def create(self, validated_data):
+        password = validated_data.pop("password")
+        instance = self.Meta.model(**validated_data)
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
 
 # Serialize contact model
 class ContactSerializer(serializers.ModelSerializer):
@@ -22,3 +30,9 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = ["id", "user", "state", "city", "area", "zipcode", "houseNo"]
 
 
+
+
+# {
+# "username":"a@gmail.com",
+# "password":"123456"
+# }
