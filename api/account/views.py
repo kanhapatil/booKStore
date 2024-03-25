@@ -27,9 +27,13 @@ from rest_framework.exceptions import AuthenticationFailed
 
 # Register api class
 class Register(viewsets.ModelViewSet):
-    queryset = User.objects.all()
     serializer_class = UserSerializer
-    
+    queryset = User.objects.all()
+
+    def perform_create(self, serializer):
+        user_instance = serializer.save()
+        print(user_instance)
+        Addres.objects.create(user=user_instance)
 
 # Login api class
 class Loginview(APIView):

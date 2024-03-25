@@ -23,8 +23,8 @@ class Contact(models.Model):
 # Address model            
 class Addres(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    state = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    area = models.CharField(max_length=255)
-    zipcode = models.IntegerField()
-    houseNo = models.IntegerField()
+    state = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
+    area = models.CharField(max_length=255, blank=True, null=True)
+    zipcode = models.IntegerField(blank=True, null=True)
+    houseNo = models.IntegerField(blank=True, null=True)

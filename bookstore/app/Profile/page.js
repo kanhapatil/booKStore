@@ -1,118 +1,3 @@
-// "use client"
-// import React from 'react';
-// import { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import LogInImg from "@/components/LogInImg";
-// import styles from "./Profile.module.css";
-// import { useFormik } from 'formik';
-// import { motion } from 'framer-motion';
-
-// const Profile = () => {
-//     const [data, setData] = useState(null);
-
-//     useEffect(() => {
-//       const fetchUserData = async () => {
-//           try {
-//               const token = localStorage.getItem('token');
-//               if (token) {
-//                   const response = await axios.get("http://127.0.0.1:8000/user/address/", {
-//                       headers: {
-//                           'Authorization': `Bearer ${token}`
-//                       }
-//                   });
-//                   setData(response.data);
-//                   console.log(response.data);
-//               } else {
-//                   console.log("something went wrong");
-//               }
-//           } catch (error) {
-//               console.error('Error fetching user data:', error);
-//           }
-//       };
-
-//       fetchUserData();
-//   }, []);
-
-//   return (
-//     <>
-//     <LogInImg />
-//     <div className={styles.signup}>
-//         <motion.form
-//           className={styles.form}
-//           initial="hidden"
-//           animate="visible"
-//           variants={{
-//             hidden: { scale: 0.4, opacity: 0 },
-//             visible: {
-//               scale: 1,
-//               opacity: 1,
-//               transition: {
-//                 delay: 0.2,
-//               },
-//             },
-//           }}
-//         //   onSubmit={formik.handleSubmit}
-//         >
-//           <p className={styles.heading}>Registration form</p>
-
-//           <input
-//             type="email"
-//             placeholder="Email Address"
-//             className={styles.input}
-//             {...formik.getFieldProps("email")}
-//           />
-//           {formik.touched.email && formik.errors.email && (
-//             <div className={styles.error}>{formik.errors.email}</div>
-//           )}
-
-//           <input
-//             type="number"
-//             placeholder="Mobile Number"
-//             className={styles.input}
-//             {...formik.getFieldProps("contact")}
-//           />
-//           {formik.touched.contact && formik.errors.contact && (
-//             <div className={styles.error}>{formik.errors.contact}</div>
-//           )}
-
-//           <input
-//             type="password"
-//             placeholder="Password"
-//             className={styles.input}
-//             {...formik.getFieldProps("password")}
-//           />
-//           {formik.touched.password && formik.errors.password && (
-//             <div className={styles.error}>{formik.errors.password}</div>
-//           )}
-
-//           <input
-//             type="password"
-//             placeholder="Confirm Password"
-//             className={styles.input}
-//             {...formik.getFieldProps("confirmPassword")}
-//           />
-//           {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-//             <div className={styles.error}>{formik.errors.confirmPassword}</div>
-//           )}
-
-//           <div className={styles.account_text}>
-//             <p>
-//               &nbsp;&nbsp;Already have an account?{" "}
-//               <Link href="/Login">Signin</Link>
-//             </p>
-//           </div>
-
-//           <button type="submit" className={styles.btn}>
-//             Register <span aria-hidden="true">&rarr;</span>
-//           </button>
-//         </motion.form>
-//       </div>
-//     </>
-//   )
-// }
-
-// export default Profile
-
 "use client";
 import React from "react";
 import { useFormik } from "formik";
@@ -127,30 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 
 const Signup = () => {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Invalid email address!")
-        .required("Email address is required!"),
-      state: Yup.string().required("State is required!"),
-      city: Yup.string().required("City is required!"),
-      area: Yup.string().required("Area is required!"),
-      houseno: Yup.number().required("House no. is required!"),
-      zipcode: Yup.number().required("Zipcode is required!"),
-    }),
-
-    onSubmit: async (values, { resetForm }) => {
-      try {
-        console.log("ok");
-      } catch (error) {
-        console.log("ok");
-      }
-    },
-  });
-
   const [data, setData] = useState();
   useEffect(() => {
     const fetchUserData = async () => {
@@ -166,8 +27,6 @@ const Signup = () => {
             }
           );
           setData(response.data[0]);
-          console.log(response.data[0]);
-          console.log("my data", data);
         } else {
           console.log("something went wrong");
         }
@@ -179,9 +38,34 @@ const Signup = () => {
     fetchUserData();
   }, []);
 
-  if (data && data["state"]) {
-    console.log(data["state"]);
-  }
+  const handleUpdate = async () => {
+    try {
+      event.preventDefault();
+      const token = localStorage.getItem("token");
+      const response = await axios.patch(
+        `http://127.0.0.1:8000/user/address/${data["id"]}/`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response) {
+        toast.warning("Response is undefined!")
+      }
+
+      if (response.status === 200) {
+        toast.success("Profile updated successfully!");
+      } else {
+        toast.error("Failed to update profile. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred while updating profile.");
+    }
+  };
 
   return (
     <>
@@ -202,7 +86,6 @@ const Signup = () => {
               },
             },
           }}
-          onSubmit={formik.handleSubmit}
         >
           <p className={styles.heading}>User Profile</p>
 
@@ -226,6 +109,7 @@ const Signup = () => {
             placeholder="City"
             className={styles.input}
             value={data ? data["city"] : ""}
+            onChange={(e) => setData({ ...data, city: e.target.value })}
           />
 
           <input
@@ -233,6 +117,7 @@ const Signup = () => {
             placeholder="Area"
             className={styles.input}
             value={data ? data["area"] : ""}
+            onChange={(e) => setData({ ...data, area: e.target.value })}
           />
 
           <input
@@ -240,6 +125,7 @@ const Signup = () => {
             placeholder="House no."
             className={styles.input}
             value={data ? data["houseNo"] : ""}
+            onChange={(e) => setData({ ...data, houseNo: e.target.value })}
           />
 
           <input
@@ -247,9 +133,10 @@ const Signup = () => {
             placeholder="Zipcode"
             className={styles.input}
             value={data ? data["zipcode"] : ""}
+            onChange={(e) => setData({ ...data, zipcode: e.target.value })}
           />
 
-          <button type="submit" className={styles.btn}>
+          <button type="submit" onClick={handleUpdate} className={styles.btn}>
             Update
           </button>
         </motion.form>
