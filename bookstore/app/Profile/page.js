@@ -126,26 +126,20 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 
-
 const Signup = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
-      contact: "",
-      password: "",
-      confirmPassword: "",
     },
     validationSchema: Yup.object({
       email: Yup.string()
         .email("Invalid email address!")
         .required("Email address is required!"),
-      contact: Yup.number().required("Mobile number is required!"),
-      password: Yup.string()
-        .min(6, "Must be at least 6 characters")
-        .required("Password is required!"),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords must match")
-        .required("Confirm password is required!"),
+      state: Yup.string().required("State is required!"),
+      city: Yup.string().required("City is required!"),
+      area: Yup.string().required("Area is required!"),
+      houseno: Yup.number().required("House no. is required!"),
+      zipcode: Yup.number().required("Zipcode is required!"),
     }),
 
     onSubmit: async (values, { resetForm }) => {
@@ -157,7 +151,7 @@ const Signup = () => {
     },
   });
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -171,8 +165,9 @@ const Signup = () => {
               },
             }
           );
-          setData(response.data);
-          console.log(response.data);
+          setData(response.data[0]);
+          console.log(response.data[0]);
+          console.log("my data", data);
         } else {
           console.log("something went wrong");
         }
@@ -184,11 +179,15 @@ const Signup = () => {
     fetchUserData();
   }, []);
 
+  if (data && data["state"]) {
+    console.log(data["state"]);
+  }
+
   return (
     <>
       <LogInImg />
       <ToastContainer />
-      <div className={styles.signup}>
+      <div className={styles.profile}>
         <motion.form
           className={styles.form}
           initial="hidden"
@@ -211,51 +210,66 @@ const Signup = () => {
             type="email"
             placeholder="Email Address"
             className={styles.input}
-            {...formik.getFieldProps("email")}
+            value={localStorage.getItem("email")}
           />
           {formik.touched.email && formik.errors.email && (
             <div className={styles.error}>{formik.errors.email}</div>
           )}
 
           <input
+            type="text"
+            placeholder="State"
+            className={styles.input}
+            value={data ? data["state"] : ""}
+            onChange={(e) => setData({ ...data, state: e.target.value })}
+          />
+
+          {formik.touched.state && formik.errors.state && (
+            <div className={styles.error}>{formik.errors.state}</div>
+          )}
+
+          <input
+            type="text"
+            placeholder="City"
+            className={styles.input}
+            value={data ? data["city"] : ""}
+          />
+          {formik.touched.city && formik.errors.city && (
+            <div className={styles.error}>{formik.errors.city}</div>
+          )}
+
+          <input
+            type="text"
+            placeholder="Area"
+            className={styles.input}
+            value={data ? data["area"] : ""}
+          />
+          {formik.touched.area && formik.errors.area && (
+            <div className={styles.error}>{formik.errors.area}</div>
+          )}
+
+          <input
             type="number"
-            placeholder="Mobile Number"
+            placeholder="House no."
             className={styles.input}
-            {...formik.getFieldProps("contact")}
+            value={data ? data["houseNo"] : ""}
           />
-          {formik.touched.contact && formik.errors.contact && (
-            <div className={styles.error}>{formik.errors.contact}</div>
+          {formik.touched.houseno && formik.errors.houseno && (
+            <div className={styles.error}>{formik.errors.houseno}</div>
           )}
 
           <input
-            type="password"
-            placeholder="Password"
+            type="number"
+            placeholder="Zipcode"
             className={styles.input}
-            {...formik.getFieldProps("password")}
+            value={data ? data["zipcode"] : ""}
           />
-          {formik.touched.password && formik.errors.password && (
-            <div className={styles.error}>{formik.errors.password}</div>
+          {formik.touched.zipcode && formik.errors.zipcode && (
+            <div className={styles.error}>{formik.errors.zipcode}</div>
           )}
-
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className={styles.input}
-            {...formik.getFieldProps("confirmPassword")}
-          />
-          {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-            <div className={styles.error}>{formik.errors.confirmPassword}</div>
-          )}
-
-          <div className={styles.account_text}>
-            <p>
-              &nbsp;&nbsp;Already have an account?{" "}
-              <Link href="/Login">Signin</Link>
-            </p>
-          </div>
 
           <button type="submit" className={styles.btn}>
-            Update <span aria-hidden="true">&rarr;</span>
+            Update
           </button>
         </motion.form>
       </div>

@@ -31,6 +31,7 @@ const Login = () => {
 
         const token = response.data.access_token;
         localStorage.setItem('token', token);
+        localStorage.setItem('email', values.username)
 
         if (response.status === 200) {
           router.push('/Profile');
