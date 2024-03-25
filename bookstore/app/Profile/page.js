@@ -212,9 +212,6 @@ const Signup = () => {
             className={styles.input}
             value={localStorage.getItem("email")}
           />
-          {formik.touched.email && formik.errors.email && (
-            <div className={styles.error}>{formik.errors.email}</div>
-          )}
 
           <input
             type="text"
@@ -224,19 +221,12 @@ const Signup = () => {
             onChange={(e) => setData({ ...data, state: e.target.value })}
           />
 
-          {formik.touched.state && formik.errors.state && (
-            <div className={styles.error}>{formik.errors.state}</div>
-          )}
-
           <input
             type="text"
             placeholder="City"
             className={styles.input}
             value={data ? data["city"] : ""}
           />
-          {formik.touched.city && formik.errors.city && (
-            <div className={styles.error}>{formik.errors.city}</div>
-          )}
 
           <input
             type="text"
@@ -244,9 +234,6 @@ const Signup = () => {
             className={styles.input}
             value={data ? data["area"] : ""}
           />
-          {formik.touched.area && formik.errors.area && (
-            <div className={styles.error}>{formik.errors.area}</div>
-          )}
 
           <input
             type="number"
@@ -254,9 +241,6 @@ const Signup = () => {
             className={styles.input}
             value={data ? data["houseNo"] : ""}
           />
-          {formik.touched.houseno && formik.errors.houseno && (
-            <div className={styles.error}>{formik.errors.houseno}</div>
-          )}
 
           <input
             type="number"
@@ -264,9 +248,6 @@ const Signup = () => {
             className={styles.input}
             value={data ? data["zipcode"] : ""}
           />
-          {formik.touched.zipcode && formik.errors.zipcode && (
-            <div className={styles.error}>{formik.errors.zipcode}</div>
-          )}
 
           <button type="submit" className={styles.btn}>
             Update
