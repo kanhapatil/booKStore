@@ -136,7 +136,7 @@ const Signup = () => {
             onChange={(e) => setData({ ...data, zipcode: e.target.value })}
           />
 
-          <button type="submit" onClick={handleUpdate} className={styles.btn}>
+          <button type="submit" onClick={handleUpdate} className="btn">
             Update
           </button>
         </motion.form>

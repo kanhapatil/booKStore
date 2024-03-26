@@ -95,7 +95,7 @@ const Login = () => {
             <p>Forget password?&nbsp;&nbsp;</p>
           </div>
 
-          <button type="submit" className={styles.btn}>
+          <button type="submit" className="btn">
             Log In <span aria-hidden="true">&rarr;</span>
           </button>
         </motion.form>

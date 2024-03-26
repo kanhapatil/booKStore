@@ -135,7 +135,7 @@ const Signup = () => {
             </p>
           </div>
 
-          <button type="submit" className={styles.btn}>
+          <button type="submit" className="btn">
             Register <span aria-hidden="true">&rarr;</span>
           </button>
         </motion.form>

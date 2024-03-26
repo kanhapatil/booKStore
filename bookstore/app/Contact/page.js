@@ -7,6 +7,10 @@ import * as Yup from "yup";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SlEnvolope } from "react-icons/sl";
+import { CiMobile3 } from "react-icons/ci";
+import { MdLocationCity } from "react-icons/md";
+
 
 
 const Contact = () => {
@@ -125,10 +129,27 @@ const Contact = () => {
             <div className={styles.error}>{formik.errors.message}</div>
           )}
 
-          <button type="submit" className={styles.btn}>
+          <button type="submit" className="btn">
             Send Message <span aria-hidden="true">&rarr;</span>
           </button>
         </motion.form>
+      </div>
+
+      <div className={styles.box}>
+          <div className={styles.box1}>
+            <SlEnvolope style={{'fontSize':'2rem'}} />
+            <h2>kanhap569@gmail.com</h2>
+          </div>
+
+          <div className={styles.box2}>
+            <CiMobile3 style={{'fontSize':'2rem'}} />
+            <h2>+91 9111-7152-45</h2>
+          </div>
+
+          <div className={styles.box3}>
+            <MdLocationCity style={{'fontSize':'2rem'}} />
+            <h2>Vijay nagar scheme no. 78, Slice 4</h2>
+          </div>
       </div>
     </>
   );

@@ -23,6 +23,8 @@ from django.middleware import csrf
 from rest_framework_simplejwt.tokens import AccessToken, RefreshToken, TokenError
 from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 # Register api class
@@ -32,8 +34,8 @@ class Register(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         user_instance = serializer.save()
-        print(user_instance)
         Addres.objects.create(user=user_instance)
+
 
 # Login api class
 class Loginview(APIView):
@@ -62,7 +64,7 @@ class Loginview(APIView):
 class Contact(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
-
+    
 
 # Address api class
 class Address(viewsets.ModelViewSet):

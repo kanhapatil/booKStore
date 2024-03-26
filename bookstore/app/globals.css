@@ -16,3 +16,24 @@
     transform-origin: 0%;
     z-index: 1;
   }
+
+  /* Style Button */
+  .btn {
+    display: block;
+    margin-top: 0.7rem;
+    height: 40px;
+    width: 100%;
+    padding: 0 0.5rem 0 0.5rem;
+    background-color: transparent;
+    color: white;
+    border: 2px solid whitesmoke;
+    font-size: 1rem;
+    transition: 0.5s;
+  }
+
+  .btn:hover {
+    background-color: whitesmoke;
+    color: hwb(0 17% 35%);
+    font-weight: 600;
+    border: 2px solid hwb(0 17% 35%);
+  }
