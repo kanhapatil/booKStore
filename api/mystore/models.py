@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import User
+from account.models import User, Addres
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
@@ -9,6 +9,10 @@ class Mystore(models.Model):
     name = models.CharField(max_length=255)
     contact = models.CharField(max_length=15)
     date = models.DateField(auto_now_add=True)
+    status = models.BooleanField(default=True, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+    verification = models.BooleanField(default=False, blank=True, null=True)
     image = models.ImageField(upload_to="storeImages/")
 
     def __str__(self):

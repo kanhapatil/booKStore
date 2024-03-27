@@ -133,9 +133,8 @@ const Contact = () => {
             Send Message <span aria-hidden="true">&rarr;</span>
           </button>
         </motion.form>
-      </div>
 
-      <div className={styles.box}>
+        <div className={styles.box}>
           <div className={styles.box1}>
             <SlEnvolope style={{'fontSize':'2rem'}} />
             <h2>kanhap569@gmail.com</h2>
@@ -150,6 +149,7 @@ const Contact = () => {
             <MdLocationCity style={{'fontSize':'2rem'}} />
             <h2>Vijay nagar scheme no. 78, Slice 4</h2>
           </div>
+      </div>
       </div>
     </>
   );

@@ -59,14 +59,39 @@
 
   }
   
+  @media screen and (min-width: 1601px) and (max-width: 1900px) {
+    .signup form .heading {
+      font-size: 1.8em;
+      width: 520px;
+    }
+  
+    .signup form input,
+    .signup form textarea {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media screen and (min-width: 1401px) and (max-width: 1600px) {
+    .signup form .heading {
+      font-size: 1.5em;
+      width: 420px;
+    }
+  
+    .signup form input,
+    .signup form textarea {
+      font-size: 1rem;
+    }
+  }
+  
   /* Media Queries */
   @media screen and (max-width: 770px) {
     .signup {
       position: absolute;
-      top: 46%;
+      top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
       }
+
     .signup form .heading {
       font-size: 1.2em;
       width: 320px;

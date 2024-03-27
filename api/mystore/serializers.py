@@ -6,7 +6,7 @@ from rest_framework import serializers
 class MystoreSerialize(serializers.ModelSerializer):
     class Meta:
         model = Mystore
-        fields = ["id", "user", "name", "contact", "date", "image"]
+        fields = ["id", "user", "name", "contact", "status", "city", "location", "date", "image"]
 
 
 # Serialize StoreItem model

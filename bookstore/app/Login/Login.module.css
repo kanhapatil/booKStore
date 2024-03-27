@@ -52,6 +52,30 @@
     color: rgb(225, 23, 23);
     margin-left: 0.5rem;
   }
+
+  @media screen and (min-width: 1601px) and (max-width: 1900px) {
+    .login form .heading {
+      font-size: 1.8em;
+      width: 520px;
+    }
+  
+    .login form input,
+    .login form textarea {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media screen and (min-width: 1401px) and (max-width: 1600px) {
+    .login form .heading {
+      font-size: 1.5em;
+      width: 420px;
+    }
+  
+    .login form input,
+    .login form textarea {
+      font-size: 1rem;
+    }
+  }
   
   /* Media Queries */
   @media screen and (max-width: 770px) {
