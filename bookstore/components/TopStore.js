@@ -1,38 +1,41 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TopStore.module.css";
 import { motion } from "framer-motion";
+import axios from "axios";
 
-const TopStore = () => {
-  const [stores, setStores] = useState([
-    {
-      id: 1,
-      img: "https://www.shutterstock.com/shutterstock/photos/536451070/display_1500/stock-photo-portrait-of-a-beautiful-brunette-woman-looking-for-a-book-in-store-536451070.jpg",
-      title: "Jessica Parker",
-      status: "1 hour ago",
-    },
+const TopStore = () => { 
+  const [stores, setStores] = useState(null);
 
-    {
-      id: 2,
-      img: "https://img.freepik.com/free-photo/abundant-collection-antique-books-wooden-shelves-generated-by-ai_188544-29660.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1709596800&semt=sph",
-      title: "Jessica Parker",
-      status: "1 hour ago",
-    },
+  useEffect(() => {
+    const fetchStores = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if(token){
+          const response = await axios.get(
+            "http://127.0.0.1:8000/store/mystore/", 
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setStores(response.data);
+        } else{
+          const response = await axios.get("http://127.0.0.1:8000/store/mystore/");
+          setStores(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchStores();
+  }, []);
 
-    {
-      id: 3,
-      img: "https://images.pexels.com/photos/626986/pexels-photo-626986.jpeg?auto=compress&cs=tinysrgb&w=600",
-      title: "Jessica Parker",
-      status: "1 hour ago",
-    },
+  if (stores) {
+    console.log(stores);
+  }
 
-    {
-      id: 4,
-      img: "https://img.freepik.com/free-photo/abundant-collection-antique-books-wooden-shelves-generated-by-ai_188544-29660.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1709596800&semt=sph",
-      title: "Jessica Parker",
-      status: "1 hour ago",
-    },
-  ]);
   return (
     <>
       <motion.ul
@@ -44,36 +47,71 @@ const TopStore = () => {
           visible: { scale: 1, opacity: 1, transition: { delay: 0.4 } },
         }}
       >
-        {stores.map((item, key) => (
-          <li key={item.id}>
-            <a href="" className={styles.card}>
-              <img
-                src={item.img}
-                className={styles.card__image}
-                alt=""
-              />
-              <div className={styles.card__overlay}>
-                <div className={styles.card__header}>
-                  <svg
-                    className={styles.card__arc}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path />
-                  </svg>
+        {stores ? (
+          stores.map((item, key) =>
+            item.status ? (
+              <li key={item.id}>
+                <a href="" className={styles.card}>
                   <img
-                    className={styles.card__thumb}
-                    src="https://i.imgur.com/7D7I6dI.png"
+                    src={item.image}
+                    className={styles.card__image}
                     alt=""
                   />
-                  <div className={`${styles.card__header}, {styles.text}`}>
-                    <h3 className={styles.card__title}>{item.title}</h3>
-                    <span className={styles.card__status}>{item.status}</span>
+                  <div className={styles.card__overlay}>
+                    <div className={styles.card__header}>
+                      <svg
+                        className={styles.card__arc}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path />
+                      </svg>
+                      <img
+                        className={styles.card__thumb}
+                        src={`https://www.shutterstock.com/shutterstock/photos/536451070/display_1500/stock-photo-portrait-of-a-beautiful-brunette-woman-looking-for-a-book-in-store-536451070.jpg`}
+                        alt=""
+                      />
+                      <div className={`${styles.card__header}, {styles.text}`}>
+                        <h3 className={styles.card__title}>{item.name}</h3>
+                        <span className={styles.card__status}>⭐⭐⭐⭐⭐</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </a>
-          </li>
-        ))}
+                </a>
+              </li>
+            ) : (
+              <li key={item.id}>
+                <a className={styles.card} style={{'opacity':'0.5', 'cursor': 'not-allowed'}}>
+                  <img
+                    src={item.image}
+                    className={styles.card__image}
+                    alt=""
+                  />
+                  <div className={styles.card__overlay}>
+                    <div className={styles.card__header}>
+                      <svg
+                        className={styles.card__arc}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path />
+                      </svg>
+                      <img
+                        className={styles.card__thumb}
+                        src={`https://www.shutterstock.com/shutterstock/photos/536451070/display_1500/stock-photo-portrait-of-a-beautiful-brunette-woman-looking-for-a-book-in-store-536451070.jpg`}
+                        alt=""
+                      />
+                      <div className={`${styles.card__header}, {styles.text}`}>
+                        <h3 className={styles.card__title}>{item.name}</h3>
+                        <span className={styles.card__status}>⭐⭐⭐⭐⭐</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            )
+          )
+        ) : (
+          <h1>No data</h1>
+        )}
       </motion.ul>
     </>
   );

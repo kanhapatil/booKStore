@@ -1,10 +1,7 @@
 "use client";
 import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import LogInImg from "@/components/LogInImg";
 import styles from "./Profile.module.css";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
