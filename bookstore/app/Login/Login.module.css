@@ -53,7 +53,7 @@
     margin-left: 0.5rem;
   }
 
-  @media screen and (min-width: 1601px) and (max-width: 1900px) {
+  @media screen and (min-width: 1601px) and (max-width: 2500px) {
     .login form .heading {
       font-size: 1.8em;
       width: 520px;
