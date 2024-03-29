@@ -2,6 +2,9 @@
 import MainImg from "@/components/MainImg";
 import styles from "./Hero.module.css";
 import { motion } from "framer-motion";
+import { GoArrowSwitch } from "react-icons/go";
+import Link from "next/link";
+
 
 export default function Hero() {
   return (
@@ -40,6 +43,13 @@ export default function Hero() {
               className={styles.input}
               placeholder="Search for stores, syllabus, book"
             />
+          </div>
+
+          <div className={styles.switch_to_store}>
+            <p>Switch to store</p>
+            <div className={styles.switcher}>
+              <Link href="/Dashboard"><GoArrowSwitch /></Link>
+            </div>
           </div>
         </motion.div>
       </div>

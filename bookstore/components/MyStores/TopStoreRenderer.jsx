@@ -1,41 +1,11 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import styles from "./TopStore.module.css";
+import React from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
+import styles from "./TopStore.module.css";
+import Link from "next/link";
+import NoDataFound from "../NoDataFound";
 
-const TopStore = () => { 
-  const [stores, setStores] = useState(null);
 
-  useEffect(() => {
-    const fetchStores = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if(token){
-          const response = await axios.get(
-            "http://127.0.0.1:8000/store/mystore/", 
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setStores(response.data);
-        } else{
-          const response = await axios.get("http://127.0.0.1:8000/store/mystore/");
-          setStores(response.data);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-    fetchStores();
-  }, []);
-
-  if (stores) {
-    console.log(stores);
-  }
-
+const TopStoreRenderer = ({ stores }) => {
   return (
     <>
       <motion.ul
@@ -51,12 +21,8 @@ const TopStore = () => {
           stores.map((item, key) =>
             item.status ? (
               <li key={item.id}>
-                <a href="" className={styles.card}>
-                  <img
-                    src={item.image}
-                    className={styles.card__image}
-                    alt=""
-                  />
+                <Link href="/StoreItems" className={styles.card}>               
+                  <img src={item.image} className={styles.card__image} alt="" />
                   <div className={styles.card__overlay}>
                     <div className={styles.card__header}>
                       <svg
@@ -76,16 +42,15 @@ const TopStore = () => {
                       </div>
                     </div>
                   </div>
-                </a>
+                </Link>
               </li>
             ) : (
               <li key={item.id}>
-                <a className={styles.card} style={{'opacity':'0.5', 'cursor': 'not-allowed'}}>
-                  <img
-                    src={item.image}
-                    className={styles.card__image}
-                    alt=""
-                  />
+                <a
+                  className={styles.card}
+                  style={{ opacity: "0.5", cursor: "not-allowed" }}
+                >
+                  <img src={item.image} className={styles.card__image} alt="" />
                   <div className={styles.card__overlay}>
                     <div className={styles.card__header}>
                       <svg
@@ -110,11 +75,11 @@ const TopStore = () => {
             )
           )
         ) : (
-          <h1>No data</h1>
+          <NoDataFound />
         )}
       </motion.ul>
     </>
   );
 };
 
-export default TopStore;
+export default TopStoreRenderer;

@@ -1,75 +1,113 @@
 .mid_content {
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mid_content .heading p {
+  font-size: 3.5em;
+  font-weight: bolder;
+  text-align: center;
+  -webkit-text-stroke: 2px whitesmoke;
+  color: whitesmoke;
+  line-height: 1.7em;
+}
+
+.mid_content .heading p span {
+  color: white;
+}
+
+.mid_content .sub_heading p {
+  font-size: 1.5em;
+  text-align: center;
+  color: whitesmoke;
+  padding: 0 1.2rem;
+}
+
+.mid_content .search_bar {
+  margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mid_content .search_bar select {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border: none;
+  width: 50%;
+  height: 42px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.mid_content .search_bar input {
+  flex: 1;
+  height: 42px;
+  border-radius: 0 0.5rem 0.5rem 0;
+  border: 1px solid whitesmoke;
+  color: whitesmoke;
+  font-size: 12px;
+  background-color: transparent;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.select:focus {
+  outline: none;
+}
+
+.input::placeholder {
+  padding-left: 0.6rem;
+  color: whitesmoke;
+}
+
+.switch_to_store {
+  text-align: center;
+  margin-top: 1rem;
+  color: whitesmoke;
+  font-weight: 600;
+}
+
+.switcher {
+  font-size: 1.5rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1600px) and (max-width: 2500px) {
   .mid_content .heading p {
-    font-size: 3.5em;
+    font-size: 6em;
     font-weight: 900;
     text-align: center;
     -webkit-text-stroke: 1px whitesmoke;
     color: whitesmoke;
-    line-height: 1.7em;
+    line-height: 1.5em;
   }
-  
-  .mid_content .heading p span {
-    color: white;
-  }
-  
+
   .mid_content .sub_heading p {
-    font-size: 1.5em;
-    text-align: center;
-    color: whitesmoke;
-    padding: 0 1.2rem;
+    font-size: 2em;
+  }
+
+  .switch_to_store {
+    font-size: 1.5rem;
   }
   
-  .mid_content .search_bar {
-    margin-top: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .switcher {
+    font-size: 2rem;
   }
-  
-  .mid_content .search_bar select {
-    border-radius: 0.5rem 0 0 0.5rem;
-    border: none;
-    width: 50%;
-    height: 42px;
-    text-align: center;
-    font-size: 12px;
+}
+
+@media screen and (max-width: 768px) {
+  .mid-content .heading p {
+    font-size: 3.4em;
+    font-weight: 900;
   }
-  
-  .mid_content .search_bar input {
-    flex: 1;
-    height: 42px;
-    border-radius: 0 0.5rem 0.5rem 0;
-    border: 1px solid whitesmoke;
-    color: whitesmoke;
-    font-size: 12px;
-    background-color: transparent;
+
+  .mid_content .sub_heading p {
+    font-size: 1.2em;
   }
-  
-  .input:focus {
-    outline: none;
-  }
-  
-  .select:focus {
-    outline: none;
-  }
-  
-  .input::placeholder {
-    padding-left: 0.6rem;
-    color: whitesmoke;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .mid-content .heading p {
-      font-size: 3.4em;
-    }
-  
-    .mid_content .sub_heading p {
-      font-size: 1.2em;
-    }
-  }
+}

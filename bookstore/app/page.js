@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Hero from "@/components/Hero";
-import TopStore from "@/components/TopStore";
+import TopStore from "@/components/MyStores/TopStore";
 import TopBook from "@/components/TopBook";
 
 
