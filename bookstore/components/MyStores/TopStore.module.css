@@ -81,3 +81,8 @@
   font-size: 0.8em;
   color: #d7bdca;
 }
+
+.noData{
+  margin-top: 5rem;
+  height: 22vh;
+}

@@ -21,8 +21,8 @@ const TopStoreRenderer = ({ stores }) => {
           stores.map((item, key) =>
             item.status ? (
               <li key={item.id}>
-                <Link href="/StoreItems" className={styles.card}>               
-                  <img src={item.image} className={styles.card__image} alt="" />
+                <Link href={`/StoreItems/${item.id}`} className={styles.card}>               
+                  <img src={item.image1} className={styles.card__image} alt="" />
                   <div className={styles.card__overlay}>
                     <div className={styles.card__header}>
                       <svg
@@ -50,7 +50,7 @@ const TopStoreRenderer = ({ stores }) => {
                   className={styles.card}
                   style={{ opacity: "0.5", cursor: "not-allowed" }}
                 >
-                  <img src={item.image} className={styles.card__image} alt="" />
+                  <img src={item.image1} className={styles.card__image} alt="" />
                   <div className={styles.card__overlay}>
                     <div className={styles.card__header}>
                       <svg
@@ -75,7 +75,9 @@ const TopStoreRenderer = ({ stores }) => {
             )
           )
         ) : (
-          <NoDataFound />
+          <div className={styles.noData}>
+            <NoDataFound />
+          </div>
         )}
       </motion.ul>
     </>

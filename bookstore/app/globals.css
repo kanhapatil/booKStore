@@ -38,6 +38,8 @@
     border: 2px solid hwb(0 17% 35%);
   }
 
-
-
-  
+  @media screen and (max-width: 770px) {
+    .progress-bar{
+      height: 6px;
+    }
+  }

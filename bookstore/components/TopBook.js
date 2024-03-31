@@ -60,7 +60,7 @@ const TopBook = () => {
 
   return (
     <>
-      <section>
+      {/*<section>
         <div className={styles.title}>
           <p>Top Collections</p>
         </div>
@@ -93,7 +93,7 @@ const TopBook = () => {
             </div>
           ))}
         </div>
-      </section>
+              </section>*/}
     </>
   );
 };
