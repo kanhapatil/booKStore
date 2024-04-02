@@ -30,7 +30,7 @@ ITEM_TYPES = (
     ("Other", "Other"), 
 ) 
 class StoreItem(models.Model):
-    store = models.ForeignKey(Mystore, on_delete=models.CASCADE)
+    store = models.ForeignKey(Mystore, on_delete=models.CASCADE, related_name="storeItem")
     name = models.CharField(max_length=100, blank=True, null=True)
     type = models.CharField(max_length=100, blank=True, null=True, choices=ITEM_TYPES)
     standard = models.CharField(max_length=255, blank=True, null=True)

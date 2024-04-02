@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./StoreItems.module.css";
 import NoDataFound from "@/components/NoDataFound";
+import ReactStars from "react-stars";
 
 const StoreItems = () => {
   const [storeItems, setStoreItems] = useState(null);
@@ -60,7 +61,16 @@ const StoreItems = () => {
               <p className={styles.address}>
                 {storeDetails.city}, {storeDetails.location}
               </p>
-              <p className={styles.ratings}>⭐⭐⭐⭐(10+ ratings)</p>
+              <div className={styles.ratingContainer}>
+                <ReactStars
+                  count={5}
+                  size={24}
+                  color2={"#ffd700"}
+                  value={storeDetails.average_rating}
+                  edit={false}
+                />
+                <p className={styles.ratingsText}>(10+ ratings)</p>
+              </div>
               <button className={styles.button}>Direction</button> &nbsp;
               <button className={styles.button}>Share</button> &nbsp;
               <button className={styles.button}>Call</button>
@@ -87,7 +97,16 @@ const StoreItems = () => {
                       Class {item.standard}
                       <sup>th</sup>
                     </p>
-                    <p>⭐4.1(10)</p>
+                    <div className={styles.ratingContainer}>
+                      <ReactStars
+                        count={5}
+                        size={24}
+                        color2={"#ffd700"}
+                        value={item.average_rating}
+                        edit={false}
+                      />
+                      <p className={styles.ratingsText}>({item.user_count}+)</p>
+                    </div>
                     <p className={styles.itemDesc}>{item.itemDesc}</p>
                   </div>
                   <div className={styles.itemImage}>

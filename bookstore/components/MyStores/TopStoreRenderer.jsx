@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import styles from "./TopStore.module.css";
 import Link from "next/link";
 import NoDataFound from "../NoDataFound";
-
+import ReactStars from "react-stars";
 
 const TopStoreRenderer = ({ stores }) => {
   return (
@@ -21,8 +21,12 @@ const TopStoreRenderer = ({ stores }) => {
           stores.map((item, key) =>
             item.status ? (
               <li key={item.id}>
-                <Link href={`/StoreItems/${item.id}`} className={styles.card}>               
-                  <img src={item.image1} className={styles.card__image} alt="" />
+                <Link href={`/StoreItems/${item.id}`} className={styles.card}>
+                  <img
+                    src={item.image1}
+                    className={styles.card__image}
+                    alt=""
+                  />
                   <div className={styles.card__overlay}>
                     <div className={styles.card__header}>
                       <svg
@@ -38,7 +42,15 @@ const TopStoreRenderer = ({ stores }) => {
                       />
                       <div className={`${styles.card__header}, {styles.text}`}>
                         <h3 className={styles.card__title}>{item.name}</h3>
-                        <span className={styles.card__status}>⭐⭐⭐⭐⭐</span>
+                        <span className={styles.card__status}>
+                          <ReactStars
+                            count={5}
+                            size={24}
+                            color2={"#ffd700"}
+                            value={item.average_rating}
+                            edit={false}
+                          />
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -50,7 +62,11 @@ const TopStoreRenderer = ({ stores }) => {
                   className={styles.card}
                   style={{ opacity: "0.5", cursor: "not-allowed" }}
                 >
-                  <img src={item.image1} className={styles.card__image} alt="" />
+                  <img
+                    src={item.image1}
+                    className={styles.card__image}
+                    alt=""
+                  />
                   <div className={styles.card__overlay}>
                     <div className={styles.card__header}>
                       <svg
@@ -66,7 +82,15 @@ const TopStoreRenderer = ({ stores }) => {
                       />
                       <div className={`${styles.card__header}, {styles.text}`}>
                         <h3 className={styles.card__title}>{item.name}</h3>
-                        <span className={styles.card__status}>⭐⭐⭐⭐⭐</span>
+                        <span className={styles.card__status}>
+                          <ReactStars
+                            count={5}
+                            size={24}
+                            color2={"#ffd700"}
+                            value={item.average_rating}
+                            edit={false}
+                          />
+                        </span>
                       </div>
                     </div>
                   </div>
