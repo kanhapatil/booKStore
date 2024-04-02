@@ -5,7 +5,6 @@ import TopStoreRenderer from './TopStoreRenderer';
 
 const TopStore = () => {
     const [stores, setStores] = useState(null);
-
   return (
     <>
       <TopStoreFetcher setStores={setStores} />

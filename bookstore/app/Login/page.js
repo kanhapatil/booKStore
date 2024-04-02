@@ -34,7 +34,7 @@ const Login = () => {
         localStorage.setItem('email', values.username)
 
         if (response.status === 200) {
-          router.push('/Profile');
+          router.push('/');
         }
       } catch (error) {
         console.error('Login failed:', error.response.status);

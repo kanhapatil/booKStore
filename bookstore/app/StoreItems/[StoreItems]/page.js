@@ -3,112 +3,99 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./StoreItems.module.css";
 import NoDataFound from "@/components/NoDataFound";
-import { FaDirections } from "react-icons/fa";
 
 const StoreItems = () => {
-  const id = window.location.href.split("/").pop();
   const [storeItems, setStoreItems] = useState(null);
   const [storeDetails, setStoreDetails] = useState(null);
 
   useEffect(() => {
-    if (id) {
-      const fetchStoreItems = async () => {
-        try {
-          // Get store items data
-          const response = await axios.get(
+    const fetchData = async () => {
+      try {
+        const id = window.location.href.split("/").pop();
+
+        const [itemsResponse, detailsResponse] = await Promise.all([
+          axios.get(
             `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}`
-          );
-          if (response.status === 200) {
-            setStoreItems(response.data);
-          }
+          ),
+          axios.get(`http://127.0.0.1:8000/store/mystore/${id}/`),
+        ]);
 
-          // Get store details
-          const response2 = await axios.get(
-            `http://127.0.0.1:8000/store/mystore/${id}/`
-          );
-          if (response2.status === 200) {
-            setStoreDetails(response2.data);
-          }
-        } catch (error) {
-          console.log("Data not fetched", error.response.status);
-        }
-      };
-      fetchStoreItems();
-    } else {
-      console.log("Id is not available");
-    }
-  }, [id]);
+        setStoreItems(itemsResponse.data);
+        setStoreDetails(detailsResponse.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  useEffect(() => {
-    if (storeItems) {
-      console.log("");
-    }
-  }, [storeItems, storeDetails]);
+    fetchData();
+  }, []);
 
   return (
-    <>
-      <div className={styles.main}>
-        <div className={styles.header}></div>
+    <div className={styles.main}>
+      <div className={styles.header}></div>
 
-        <div className={styles.container}>
-          <div className={styles.myStore}>
-            <div className={styles.storePoster}>
-              <div className={styles.left}>
-                <img
-                  src={storeDetails ? storeDetails.image1 : null}
-                  alt="Store Image"
-                />
-              </div>
-
-              <div className={styles.right}>
-                <div className={styles.top}>
-                  <img
-                    src={storeDetails ? storeDetails.image2 : null}
-                    alt="Store Image"
-                  />
+      <div className={styles.container}>
+        <div className={styles.myStore}>
+          <div className={styles.storePoster}>
+            {storeDetails && (
+              <>
+                <div className={styles.left}>
+                  <img src={storeDetails.image1} alt="Store Image" />
                 </div>
-
-                <div className={styles.bottom}>
-                  <img
-                    src={storeDetails ? storeDetails.image3 : null}
-                    alt="Store Image"
-                  />
+                <div className={styles.right}>
+                  <div className={styles.top}>
+                    <img src={storeDetails.image2} alt="Store Image" />
+                  </div>
+                  <div className={styles.bottom}>
+                    <img src={storeDetails.image3} alt="Store Image" />
+                  </div>
                 </div>
-              </div>
-            </div>
-            {/* Store information */}
+              </>
+            )}
+          </div>
+
+          {storeDetails && (
             <div className={styles.storeInformation}>
-              <p className={styles.name}>
-                {storeDetails ? storeDetails.name : null}
-              </p>
+              <p className={styles.name}>{storeDetails.name}</p>
               <p className={styles.address}>
-                {storeDetails ? storeDetails.city : null},{" "}
-                {storeDetails ? storeDetails.location : null}
+                {storeDetails.city}, {storeDetails.location}
               </p>
               <p className={styles.ratings}>⭐⭐⭐⭐(10+ ratings)</p>
               <button className={styles.button}>Direction</button> &nbsp;
               <button className={styles.button}>Share</button> &nbsp;
               <button className={styles.button}>Call</button>
             </div>
+          )}
 
-            {/* Search bar */}
-            <p className={styles.sub_heading}>⇤all items⇥</p>
-            <div className={styles.search}>
-              <input type="search" className={styles.input} placeholder="Search for items" />
-            </div>
-
-            {/* Store items */}
-            <div className={styles.allItems}>
-              <div className={styles.item}></div>
-              <div className={styles.item}></div>
-              <div className={styles.item}></div>
-            </div>
+          <p className={styles.sub_heading}>⇤all items⇥</p>
+          <div className={styles.search}>
+            <input
+              type="search"
+              className={styles.input}
+              placeholder="Search for items"
+            />
           </div>
-          {/*<div className={styles.allItems}>
+
+          <div className={styles.allItems}>
             {storeItems ? (
-              storeItems.map((item, key) => (
-                <div key={item.id} className={styles.items}>
-                  <img src={item.itemImages[0].img} className={styles.image} />
+              storeItems.map((item) => (
+                <div key={item.id} className={styles.item}>
+                  <div className={styles.itemInfo}>
+                    <p className={styles.itemName}>{item.name}</p>
+                    <p>₨.{item.price}</p>
+                    <p>
+                      Class {item.standard}
+                      <sup>th</sup>
+                    </p>
+                    <p>⭐4.1(10)</p>
+                    <p className={styles.itemDesc}>{item.itemDesc}</p>
+                  </div>
+                  <div className={styles.itemImage}>
+                    <img
+                      className={styles.img}
+                      src={item.itemImages[0]?.img || ""}
+                    />
+                  </div>
                 </div>
               ))
             ) : (
@@ -116,10 +103,10 @@ const StoreItems = () => {
                 <NoDataFound />
               </div>
             )}
-            </div>*/}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

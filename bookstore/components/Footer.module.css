@@ -1,0 +1,30 @@
+.footer {
+    background-color: #7a1f1f;
+}
+
+.icons {
+    color: #7a1f1f;
+}
+
+.input {
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+}
+
+.input:focus {
+    border: none;
+}
+
+.button {
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+}
+
+.about {
+    color: whitesmoke;
+}
+
+.bottom {
+    color: whitesmoke;
+    background-color: rgb(48, 3, 3);
+}

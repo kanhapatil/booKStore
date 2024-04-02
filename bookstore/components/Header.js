@@ -67,15 +67,14 @@ const Header = () => {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            {!token && (
+            {!token ? (
               <Link
                 href="/Login"
                 className="text-sm font-semibold leading-6 text-white"
               >
-                Log in <span aria-hidden="true">&rarr;</span>
+                LogIn <span aria-hidden="true">&rarr;</span>
               </Link>
-            )}
-            {token && (
+            ) : (
               <>
                 <Link
                   href="#"
@@ -135,16 +134,15 @@ const Header = () => {
                   ))}
                 </div>
                 <div className="py-6">
-                  {!token && (
+                  {!token ? (
                     <Link
                       href="/Login"
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       onClick={closeMobileMenu}
                     >
-                      Log in
+                      LogIn
                     </Link>
-                  )}
-                  {token && (
+                  ) : (
                     <>
                       <Link
                         href="#"
