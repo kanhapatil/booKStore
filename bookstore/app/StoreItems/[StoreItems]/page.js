@@ -31,6 +31,12 @@ const StoreItems = () => {
     fetchData();
   }, []);
 
+  const handleAdd = (id) => {
+    console.log("ok", id);
+    if (storeItems) {
+      console.log(storeItems);
+    }
+  };
   return (
     <div className={styles.main}>
       <div className={styles.header}></div>
@@ -89,31 +95,66 @@ const StoreItems = () => {
           <div className={styles.allItems}>
             {storeItems ? (
               storeItems.map((item) => (
-                <div key={item.id} className={styles.item}>
-                  <div className={styles.itemInfo}>
-                    <p className={styles.itemName}>{item.name}</p>
-                    <p>₨.{item.price}</p>
-                    <p>
-                      Class {item.standard}
-                      <sup>th</sup>
-                    </p>
-                    <div className={styles.ratingContainer}>
-                      <ReactStars
-                        count={5}
-                        size={24}
-                        color2={"#ffd700"}
-                        value={item.average_rating}
-                        edit={false}
-                      />
-                      <p className={styles.ratingsText}>({item.user_count}+)</p>
+                <div key={item.id} className={styles.itemDetails}>
+                  <div className={styles.item}>
+                    <div className={styles.itemInfo}>
+                      <p className={styles.itemName}>{item.name}</p>
+                      <p>₨.{item.price}</p>
+                      <p>
+                        Class {item.standard}
+                        <sup>th</sup>
+                      </p>
+                      <div className={styles.ratingContainer}>
+                        <ReactStars
+                          count={5}
+                          size={24}
+                          color2={"#ffd700"}
+                          value={item.average_rating}
+                          edit={false}
+                        />
+                        <p className={styles.ratingsText}>
+                          ({item.user_count}+)
+                        </p>
+                      </div>
+                      <p className={styles.itemDesc}>{item.itemDesc}</p>
                     </div>
-                    <p className={styles.itemDesc}>{item.itemDesc}</p>
+
+                    <div className={styles.itemImage}>
+                      <img
+                        className={styles.img}
+                        src={item.itemImages[0]?.img || ""}
+                      />
+
+                      <div className={styles.add}>
+                        <p onClick={() => handleAdd(item.id)}>ADD</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className={styles.itemImage}>
-                    <img
-                      className={styles.img}
-                      src={item.itemImages[0]?.img || ""}
-                    />
+
+                  <div className={styles.itemReviews}>
+                    <p>
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry. Lorem Ipsum has been the industry's
+                      standard dummy text ever since the 1500s, when an unknown
+                      printer took a galley of type and scrambled it to make a
+                      type specimen book. It has survived not only five
+                      centuries, but also the leap into electronic typesetting,
+                      remaining essentially unchanged. It was popularised in the
+                      1960s with the release of Letraset sheets containing Lorem
+                      Ipsum passages, and more recently with desktop publishing
+                      software like Aldus PageMaker including versions of Lorem
+                      Ipsum. Lorem Ipsum is simply dummy text of the printing
+                      and typesetting industry. Lorem Ipsum has been the
+                      industry's standard dummy text ever since the 1500s, when
+                      an unknown printer took a galley of type and scrambled it
+                      to make a type specimen book. It has survived not only
+                      five centuries, but also the leap into electronic
+                      typesetting, remaining essentially unchanged. It was
+                      popularised in the 1960s with the release of Letraset
+                      sheets containing Lorem Ipsum passages, and more recently
+                      with desktop publishing software like Aldus PageMaker
+                      including versions of Lorem Ipsum.
+                    </p>
                   </div>
                 </div>
               ))
@@ -123,6 +164,8 @@ const StoreItems = () => {
               </div>
             )}
           </div>
+
+          <div className={styles.endLine}></div>
         </div>
       </div>
     </div>

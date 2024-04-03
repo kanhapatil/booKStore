@@ -170,16 +170,21 @@
   margin-top: 1rem;
   width: 100%;
   height: auto;
+}
 
+.itemDetails {
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .item {
+  position: relative;
   margin-top: 1rem;
+  margin-bottom: 0.6rem;
   width: 100%;
-  height: auto;
+  height: 200px;
   border-top: 1px solid rgb(174, 174, 174);
 
   display: flex;
@@ -194,15 +199,31 @@
 
 .itemImage {
   margin-top: 1rem;
-  width: 180px;
-  height: 200px;
-  overflow: hidden;
+  min-width: 180px;
+  width: 10%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .img {
+  border-radius: 5px;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.add {
+  position: absolute;
+  top: 88%;
+  border-radius: 5px;
+  border: 2px solid #7a1f1f;
+  background-color: rgba(250, 250, 250);
+  color: #7a1f1f;
+  font-weight: 600;
+  padding: 0.4rem 2.5rem;
+  cursor: pointer;
 }
 
 .itemInfo {
@@ -231,6 +252,23 @@
 
 .noData {
   margin-top: 4rem;
+}
+
+.itemReviews {
+  margin-top: 1rem;
+  width: 100%;
+  height: 200px;
+  border: 2px solid red;
+  overflow: scroll;
+  padding: 1rem;
+}
+
+.endLine {
+  margin-top: 1rem;
+  width: 100%;
+  height: 20px;
+  background-color: transparent;
+  border-top: 1px solid rgb(174, 174, 174);
 }
 
 @media screen and (max-width: 700px) {

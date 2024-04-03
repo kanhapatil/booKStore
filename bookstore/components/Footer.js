@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Ripple, initTWE } from "tw-elements";
 import styles from "./Footer.module.css";
+import Link from "next/link";
 
 
 initTWE({ Input, Ripple });
@@ -169,7 +170,26 @@ const Footer = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4">
             <div className={`${styles.about} mb-6`}>
-              <h5 className="mb-2.5 font-bold uppercase">Links</h5>
+              <h5 className="mb-2.5 font-bold uppercase">Quick links I</h5>
+
+              <ul className="mb-0 list-none">
+                <li>
+                  <Link href="/">Home</Link>
+                </li>
+                <li>
+                  <Link href="/Signup">SignUp</Link>
+                </li>
+                <li>
+                  <Link href="/Login">SignIn</Link>
+                </li>
+                <li>
+                  <Link href="/Contact">Contact</Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className={`${styles.about} mb-6`}>
+              <h5 className="mb-2.5 font-bold uppercase">Quick links II</h5>
 
               <ul className="mb-0 list-none">
                 <li>
@@ -207,39 +227,17 @@ const Footer = () => {
             </div>
 
             <div className={`${styles.about} mb-6`}>
-              <h5 className="mb-2.5 font-bold uppercase">Links</h5>
+              <h5 className="mb-2.5 font-bold uppercase">Get in touch</h5>
 
               <ul className="mb-0 list-none">
                 <li>
-                  <a href="#!">Link 1</a>
+                  <a href="#!">kanhap569@gmail.com</a>
                 </li>
                 <li>
-                  <a href="#!">Link 2</a>
+                  <a href="#!">+91 9111-7152-45</a>
                 </li>
                 <li>
-                  <a href="#!">Link 3</a>
-                </li>
-                <li>
-                  <a href="#!">Link 4</a>
-                </li>
-              </ul>
-            </div>
-
-            <div className={`${styles.about} mb-6`}>
-              <h5 className="mb-2.5 font-bold uppercase">Links</h5>
-
-              <ul className="mb-0 list-none">
-                <li>
-                  <a href="#!">Link 1</a>
-                </li>
-                <li>
-                  <a href="#!">Link 2</a>
-                </li>
-                <li>
-                  <a href="#!">Link 3</a>
-                </li>
-                <li>
-                  <a href="#!">Link 4</a>
+                  <p>Indore, Vijay nagar scheme no. 78, slice 4</p>
                 </li>
               </ul>
             </div>

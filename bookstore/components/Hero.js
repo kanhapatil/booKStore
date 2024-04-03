@@ -48,9 +48,9 @@ export default function Hero() {
             <div className={styles.switch_to_store}>
               <p>Switch to store</p>
               <div className={styles.switcher}>
-                <Link href="/Dashboard">
+                <a href="http://127.0.0.1:8000/admin/login/">
                   <GoArrowSwitch />
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>
