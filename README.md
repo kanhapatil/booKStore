@@ -45,6 +45,4 @@ If you have any questions or need assistance, you can reach out to us by
 - email: kanhap569@gmail.com
 - contact: +91 9111-7152-45
 
-### License
-
 Note : Project is ongoing...
