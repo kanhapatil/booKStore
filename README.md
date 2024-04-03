@@ -41,9 +41,9 @@ We strive to maintain a friendly and inclusive community around booKStore. Pleas
 
 ### Contact
 
-If you have any questions or need assistance, you can [reach out to us]
-email: kanhap569@gmail.com
-contact: +91 9111-7152-45
+If you have any questions or need assistance, you can reach out to us by
+- email: kanhap569@gmail.com
+- contact: +91 9111-7152-45
 
 ### License
 
