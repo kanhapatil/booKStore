@@ -257,10 +257,16 @@
 .itemReviews {
   margin-top: 1rem;
   width: 100%;
-  height: 200px;
-  border: 2px solid red;
+  height: 150px;
+  border: 1px solid rgb(174, 174, 174);
   overflow: scroll;
-  padding: 1rem;
+  padding: 0 1rem;
+}
+
+.review {
+  margin-top: 0rem;
+  border-bottom: 1px solid rgb(174, 174, 174);
+  padding: 0.5rem;
 }
 
 .endLine {

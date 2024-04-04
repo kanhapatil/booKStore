@@ -131,31 +131,34 @@ const StoreItems = () => {
                     </div>
                   </div>
 
-                  <div className={styles.itemReviews}>
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book. It has survived not only five
-                      centuries, but also the leap into electronic typesetting,
-                      remaining essentially unchanged. It was popularised in the
-                      1960s with the release of Letraset sheets containing Lorem
-                      Ipsum passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions of Lorem
-                      Ipsum. Lorem Ipsum is simply dummy text of the printing
-                      and typesetting industry. Lorem Ipsum has been the
-                      industry's standard dummy text ever since the 1500s, when
-                      an unknown printer took a galley of type and scrambled it
-                      to make a type specimen book. It has survived not only
-                      five centuries, but also the leap into electronic
-                      typesetting, remaining essentially unchanged. It was
-                      popularised in the 1960s with the release of Letraset
-                      sheets containing Lorem Ipsum passages, and more recently
-                      with desktop publishing software like Aldus PageMaker
-                      including versions of Lorem Ipsum.
-                    </p>
-                  </div>
+                  {item.store_review && item.store_review.length > 0 ? (
+                    <div className={styles.itemReviews}>
+                      {item.store_review.map((review) => (
+                        <div className={styles.review}>
+                          <div key={review.id}>
+                            <p>
+                              <strong>User:</strong> {review.user}
+                            </p>
+                            <p>
+                              <ReactStars
+                                count={5}
+                                size={24}
+                                color2={"#ffd700"}
+                                value={review.rating}
+                                edit={false}
+                              />
+                            </p>
+                            <p>
+                              <strong>Description:</strong> {review.description}
+                            </p>
+                            <p>
+                              <strong>Created at:</strong> {review.created_at}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
               ))
             ) : (
