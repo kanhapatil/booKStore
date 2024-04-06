@@ -1,30 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import User, Contact, Addres
 from .serializers import UserSerializer, ContactSerializer, AddressSerializer
 from rest_framework import viewsets
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth import authenticate, login, logout
-from django.http import JsonResponse
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 from account.models import User
-from django.contrib.auth.tokens import default_token_generator
-from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from account.serializers import UserSerializer
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
-from django.utils.decorators import method_decorator
 from rest_framework import viewsets
-from django.middleware import csrf
 from rest_framework_simplejwt.tokens import AccessToken, RefreshToken, TokenError
-from rest_framework import status
 from rest_framework.exceptions import AuthenticationFailed
-from django.core.mail import send_mail
-from django.conf import settings
 
 
 # Register api class
@@ -73,3 +59,11 @@ class Address(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Addres.objects.filter(user=self.request.user)
+
+
+## Admin logout function
+def logout_view(request):
+  logout(request)
+  response = redirect('/admin/login/?next=/admin/account/user/')
+  response.delete_cookie('example_cookie')
+  return response
