@@ -1,131 +1,142 @@
 .nav {
-    width: 100%;
-    background-color: #7a1f1f;
-    height: 70px;
+  width: 100%;
+  background-color: #7a1f1f;
+  height: 70px;
+  margin-bottom: 1.5rem;
 }
 
 .section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .shoppingCart {
-    margin-top: 2rem;
-    width: 70%;
-    border: 1px solid rgb(159, 158, 158);
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 1rem;
+  width: 70%;
+  border: 1px solid rgb(219, 217, 217);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .heading {
-    margin-top: 1rem;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 600;
-    padding-bottom: 2rem;
-    color: brown;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  padding-bottom: 2rem;
+  color: brown;
 }
 
 .cart {
-    width: 50%;
-    min-width: 360px;
-    border-top: 1px solid rgb(159, 158, 158);
-    padding-bottom: 1.5rem;
-    display: flex;
-    justify-content: space-between;
+  width: 50%;
+  min-width: 360px;
+  border-top: 1px solid rgb(219, 217, 217);
+  padding-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .cartItem {
-    margin-top: 1.5em;
-    width: 40%;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 1.5em;
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .image {
-    width: 45%;
-    min-width: 90px;
-    height: 100px;
+  width: 45%;
+  min-width: 90px;
+  height: 100px;
 }
 
 .image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
 }
 
 .details {
-    width: 55%;
-    min-width: 140px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: 1rem;
+  width: 55%;
+  min-width: 140px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 1rem;
+}
+
+.name {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.continue {
+    padding-top: 0.3rem;
 }
 
 .cartPrice {
-    margin-top: 1.5rem;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    height: 100px;
-    justify-content: space-between;
-    align-items: end;
+  margin-top: 1.5rem;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: space-between;
+  align-items: end;
 }
 
 .summary {
-    border-top: 1px solid rgb(159, 158, 158);
-    width: 50%;
-    min-width: 360px;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
+  border-top: 1px solid rgb(159, 158, 158);
+  width: 50%;
+  min-width: 360px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .summary .info {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .total {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .button {
-    width: 50%;
-    min-width: 360px;
-    height: 80px;
-    text-align: center;
-    
+  width: 50%;
+  min-width: 360px;
+  height: 80px;
+  text-align: center;
 }
 
 .button button {
-    width: 100%;
-    height: 44px;
-    border-radius: 5px;
-    color: whitesmoke;
-    background-color: brown;
-    font-weight: 600;
-    border: none;
+  width: 100%;
+  height: 44px;
+  border-radius: 5px;
+  color: whitesmoke;
+  background-color: brown;
+  font-weight: 600;
+  border: none;
 }
 
 .remove {
-    color: brown;
-    font-weight: 600;
+  color: brown;
+  font-weight: 600;
 }
 
-@media screen and (max-width:640px) {
-    .shoppingCart {
-        width: 98%;
-        border: none;
-    }
+@media screen and (max-width: 640px) {
+  .shoppingCart {
+    width: 98%;
+    border: none;
+  }
 
-    .heading {
-        font-size: 1.6rem;
-    }
+  .heading {
+    font-size: 1.6rem;
+  }
 }

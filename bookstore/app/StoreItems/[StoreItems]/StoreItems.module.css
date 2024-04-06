@@ -277,6 +277,24 @@
   border-top: 1px solid rgb(174, 174, 174);
 }
 
+.bottomCart {
+  position: fixed;
+  top: 93%;
+  width: 70%;
+  height: 48px;
+  border-radius: 5px;
+  background-color: #7a1f1f;
+  display: flex;
+  justify-content: space-around;
+  text-transform: uppercase;
+  color: whitesmoke;
+  font-weight: 600;
+}
+
+.goCart {
+  margin-top: 0.8rem;
+}
+
 @media screen and (max-width: 700px) {
   .myStore {
     width: 90%;

@@ -15,7 +15,7 @@ class CartItemSerialize(serializers.ModelSerializer):
 
     def get_item_images(self, obj): 
         item = obj.item 
-        images = item.item_images.all()  # Assuming item_images is related_name for ItemImage
+        images = item.itemImages.all()  # Assuming item_images is related_name for ItemImage
         return [image.img.url for image in images] 
     
     def get_total_price(self, obj):

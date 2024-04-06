@@ -6,10 +6,14 @@ import NoDataFound from "@/components/NoDataFound";
 import ReactStars from "react-stars";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
+
 
 const StoreItems = () => {
   const [storeItems, setStoreItems] = useState(null);
   const [storeDetails, setStoreDetails] = useState(null);
+  const [count, setCount] = useState(0);
+  const [click, setClick] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +38,9 @@ const StoreItems = () => {
   }, []);
 
   const handleAdd = (itemId) => {
+    setClick(true);
+    setCount(count + 1);
+    console.log("ok", count);
     const storeId = window.location.href.split("/").pop();
 
     try {
@@ -70,7 +77,7 @@ const StoreItems = () => {
             cartItemData
           );
           console.log("CartItem Response:", cartItemResponse);
-        }else{
+        } else {
           toast.warning("Please login yourself");
         }
       };
@@ -213,6 +220,14 @@ const StoreItems = () => {
           </div>
 
           <div className={styles.endLine}></div>
+          {
+            click?<Link href="/ShoppingCart">
+            <div className={styles.bottomCart}>
+              <p className={styles.goCart}>View Cart</p>
+              <p className={styles.goCart}>Items {count}</p>
+            </div>
+          </Link>:null
+          }
         </div>
       </div>
     </div>
