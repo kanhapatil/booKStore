@@ -4,6 +4,8 @@ import axios from "axios";
 import styles from "./StoreItems.module.css";
 import NoDataFound from "@/components/NoDataFound";
 import ReactStars from "react-stars";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const StoreItems = () => {
   const [storeItems, setStoreItems] = useState(null);
@@ -31,15 +33,57 @@ const StoreItems = () => {
     fetchData();
   }, []);
 
-  const handleAdd = (id) => {
-    console.log("ok", id);
-    if (storeItems) {
-      console.log(storeItems);
+  const handleAdd = (itemId) => {
+    const storeId = window.location.href.split("/").pop();
+
+    try {
+      const cartData = {
+        store: Number(storeId),
+      };
+
+      const createCart = async () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+          const cartResponse = await axios.post(
+            "http://127.0.0.1:8000/cart/mycart/",
+            cartData,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          let cartId;
+          if (cartResponse.data.id) {
+            cartId = cartResponse.data.id;
+          } else {
+            cartId = cartResponse.data.cart_id;
+          }
+          console.log("Cart Response:", cartResponse);
+          const cartItemData = {
+            cart: cartId,
+            item: itemId,
+            quantity: 1,
+          };
+          const cartItemResponse = await axios.post(
+            "http://127.0.0.1:8000/cart/mycartitem/",
+            cartItemData
+          );
+          console.log("CartItem Response:", cartItemResponse);
+        }else{
+          toast.warning("Please login yourself");
+        }
+      };
+      createCart();
+    } catch (error) {
+      console.error("Error occurred:", error);
     }
   };
+
   return (
     <div className={styles.main}>
       <div className={styles.header}></div>
+      <ToastContainer />
 
       <div className={styles.container}>
         <div className={styles.myStore}>
