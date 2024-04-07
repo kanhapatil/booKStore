@@ -161,6 +161,16 @@
   outline: none;
 }
 
+.filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filter button {
+  margin-right: 0.5rem;
+}
+
 .line {
   margin-top: 2rem;
   border: 0.3px solid rgb(83, 83, 83);

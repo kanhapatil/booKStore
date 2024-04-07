@@ -2,8 +2,8 @@ from django.shortcuts import render
 from .models import Mystore, StoreItem, ReviewItem, ItemImage
 from .serializers import MystoreSerialize, StoreItemSerialize, ReviewItemSerialize, ItemImageSerialize
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
 from account.models import Addres
+from django_filters import rest_framework as filters
 
 
 # Mystore api class
@@ -39,6 +39,9 @@ class Images(viewsets.ModelViewSet):
 class StoreRelatedItem(viewsets.ModelViewSet):
     serializer_class = StoreItemSerialize
 
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('name', 'type', 'standard', 'price')
+    
     def get_queryset(self):
         store_id = self.request.query_params.get('store_id')
         if store_id:
