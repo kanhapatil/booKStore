@@ -3,7 +3,10 @@ from .models import Mystore, StoreItem, ReviewItem, ItemImage
 from .serializers import MystoreSerialize, StoreItemSerialize, ReviewItemSerialize, ItemImageSerialize
 from rest_framework import viewsets
 from account.models import Addres
-from django_filters import rest_framework as filters
+from rest_framework import viewsets
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 # Mystore api class
@@ -39,9 +42,10 @@ class Images(viewsets.ModelViewSet):
 class StoreRelatedItem(viewsets.ModelViewSet):
     serializer_class = StoreItemSerialize
 
-    filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('name', 'type', 'standard', 'price')
-    
+    filter_backends = (DjangoFilterBackend, SearchFilter)
+    filterset_fields = ('price',)
+    search_fields = ['name', 'price', 'standard']
+
     def get_queryset(self):
         store_id = self.request.query_params.get('store_id')
         if store_id:
@@ -52,6 +56,7 @@ class StoreRelatedItem(viewsets.ModelViewSet):
                 return StoreItem.objects.none
         else:
             return StoreItem.objects.all()
+
 
 
 # ReviewItem api class

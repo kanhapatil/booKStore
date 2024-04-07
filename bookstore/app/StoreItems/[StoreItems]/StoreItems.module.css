@@ -161,15 +161,10 @@
   outline: none;
 }
 
-.filter {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+.searchInput::-webkit-search-cancel-button {
+  -webkit-appearance: none;
 }
 
-.filter button {
-  margin-right: 0.5rem;
-}
 
 .line {
   margin-top: 2rem;

@@ -14,6 +14,7 @@ const StoreItems = () => {
   const [storeDetails, setStoreDetails] = useState(null);
   const [count, setCount] = useState(0);
   const [click, setClick] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +23,7 @@ const StoreItems = () => {
 
         const [itemsResponse, detailsResponse] = await Promise.all([
           axios.get(
-            `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}`
+            `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}`
           ),
           axios.get(`http://127.0.0.1:8000/store/mystore/${id}/`),
         ]);
@@ -33,9 +34,8 @@ const StoreItems = () => {
         console.log(error);
       }
     };
-
     fetchData();
-  }, []);
+  }, [searchValue]);
 
   const handleAdd = (itemId) => {
     setClick(true);
@@ -87,29 +87,35 @@ const StoreItems = () => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      setSearchValue(event.target.value);
+    }
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.header}></div>
       <ToastContainer />
 
-      <div className={styles.container}>
-        <div className={styles.myStore}>
-          <div className={styles.storePoster}>
-            {storeDetails && (
-              <>
-                <div className={styles.left}>
-                  <img src={storeDetails.image1} alt="Store Image" />
-                </div>
-                <div className={styles.right}>
-                  <div className={styles.top}>
-                    <img src={storeDetails.image2} alt="Store Image" />
-                  </div>
-                  <div className={styles.bottom}>
-                    <img src={storeDetails.image3} alt="Store Image" />
-                  </div>
-                </div>
-              </>
-            )}
+      <div className={styles.container}> 
+        <div className={styles.myStore}> 
+          <div className={styles.storePoster}> 
+            {storeDetails && ( 
+              <> 
+                <div className={styles.left}> 
+                  <img src={storeDetails.image1} alt="Store Image" /> 
+                </div> 
+                <div className={styles.right}> 
+                  <div className={styles.top}> 
+                    <img src={storeDetails.image2} alt="Store Image" /> 
+                  </div> 
+                  <div className={styles.bottom}> 
+                    <img src={storeDetails.image3} alt="Store Image" /> 
+                  </div> 
+                </div> 
+              </> 
+            )} 
           </div>
 
           {storeDetails && (
@@ -138,8 +144,9 @@ const StoreItems = () => {
           <div className={styles.search}>
             <input
               type="search"
-              className={styles.input}
-              placeholder="Search for items"
+              className={`${styles.input} ${styles.searchInput}`}
+              onKeyDown={handleKeyDown}
+              placeholder="Search for name, standard, price"
             />
           </div>
 
@@ -185,12 +192,12 @@ const StoreItems = () => {
                   {item.store_review && item.store_review.length > 0 ? (
                     <div className={styles.itemReviews}>
                       {item.store_review.map((review) => (
-                        <div className={styles.review}>
-                          <div key={review.id}>
+                        <div key={review.id} className={styles.review}>
+                          <div>
                             <p>
                               <strong>User:</strong> {review.user}
                             </p>
-                            <p>
+                            <div>
                               <ReactStars
                                 count={5}
                                 size={24}
@@ -198,7 +205,7 @@ const StoreItems = () => {
                                 value={review.rating}
                                 edit={false}
                               />
-                            </p>
+                            </div>
                             <p>
                               <strong>Description:</strong> {review.description}
                             </p>
