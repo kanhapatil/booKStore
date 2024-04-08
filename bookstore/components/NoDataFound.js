@@ -3,18 +3,17 @@ import Image from 'next/image';
 
 const NoDataFound = () => {
   return (
-    <div className='noDataFound'>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh'}}>
       <Image 
+        width={300}
+        height={300}
         src="/images/notFound.svg"
         alt="No Data Found"
-        width={300}
-        height={300} 
-        layout="responsive"
+        quality={100}
       />
     </div>
   )
 }
-
 
 
 export default NoDataFound;

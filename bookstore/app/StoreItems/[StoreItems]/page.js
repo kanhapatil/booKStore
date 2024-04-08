@@ -13,23 +13,29 @@ const StoreItems = () => {
   const [storeItems, setStoreItems] = useState(null);
   const [storeDetails, setStoreDetails] = useState(null);
   const [count, setCount] = useState(0);
-  const [click, setClick] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const id = window.location.href.split("/").pop();
-
-        const [itemsResponse, detailsResponse] = await Promise.all([
+        const token = localStorage.getItem("token");
+        
+        const [itemsResponse, detailsResponse, cartResponse] = await Promise.all([
           axios.get(
             `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}`
           ),
           axios.get(`http://127.0.0.1:8000/store/mystore/${id}/`),
+          axios.get(`http://127.0.0.1:8000/cart/mycartitem/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
         ]);
-
+  
         setStoreItems(itemsResponse.data);
         setStoreDetails(detailsResponse.data);
+        setCount(cartResponse.data.length)
       } catch (error) {
         console.log(error);
       }
@@ -38,9 +44,10 @@ const StoreItems = () => {
   }, [searchValue]);
 
   const handleAdd = (itemId) => {
-    setClick(true);
-    setCount(count + 1);
-    console.log("ok", count);
+    if(count == 0){
+      setCount(count + 1);
+    }
+
     const storeId = window.location.href.split("/").pop();
 
     try {
@@ -74,7 +81,11 @@ const StoreItems = () => {
           };
           const cartItemResponse = await axios.post(
             "http://127.0.0.1:8000/cart/mycartitem/",
-            cartItemData
+            cartItemData,{
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
           );
           console.log("CartItem Response:", cartItemResponse);
         } else {
@@ -228,7 +239,7 @@ const StoreItems = () => {
 
           <div className={styles.endLine}></div>
           {
-            click?<Link href="/ShoppingCart">
+            count?<Link href="/ShoppingCart">
             <div className={styles.bottomCart}>
               <p className={styles.goCart}>View Cart</p>
               <p className={styles.goCart}>Items {count}</p>

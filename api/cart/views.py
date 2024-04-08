@@ -4,6 +4,10 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import AnonymousUser
+
 
 
 ## Cart api class
@@ -35,7 +39,21 @@ class MyCart(viewsets.ModelViewSet):
 ## CartItem api class                    
 class MyCartItem(viewsets.ModelViewSet):   
     queryset = CartItem.objects.all()      
-    serializer_class = CartItemSerialize   
+    serializer_class = CartItemSerialize 
+
+    permission_classes = [IsAuthenticated] 
+
+    def get_queryset(self):
+        try:
+            user = self.request.user
+            if not isinstance(user, AnonymousUser):
+                user_cart = Cart.objects.filter(user=user)
+                return CartItem.objects.filter(cart__in=user_cart)
+            else:
+                return CartItem.objects.none()
+            
+        except ObjectDoesNotExist:
+            return CartItem.objects.none()
     
     def create(self, request): 
         cart_id = request.data.get("cart") 
