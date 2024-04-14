@@ -52,8 +52,8 @@ class ItemImage(models.Model):
 
 # Review model
 class ReviewItem(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    item = models.ForeignKey(StoreItem, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_review")
+    item = models.ForeignKey(StoreItem, on_delete=models.CASCADE, related_name="item_review")
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     description = models.TextField()
     created_at = models.DateField(auto_now_add=True)

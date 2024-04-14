@@ -32,19 +32,22 @@ class ItemImageSerialize(serializers.ModelSerializer):
         fields = "__all__"
 
 
+# Serialize ReviewItem
+class ReviewItemSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = ReviewItem
+        fields = "__all__"
+
+
 # Serialize StoreItem model
 class StoreItemSerialize(serializers.ModelSerializer):
-    store_review = serializers.SerializerMethodField()
+    item_review = ReviewItemSerialize(many=True, read_only=True)
     itemImages = ItemImageSerialize(many=True, read_only=True)
     average_rating = serializers.SerializerMethodField()
     user_count = serializers.SerializerMethodField()
     class Meta:
         model = StoreItem
-        fields = ["id", "store", "name", "type", "standard", "price", "itemDesc", "itemImages", "average_rating", "user_count", "store_review"]
-
-    def get_store_review(self, obj):
-        reviews = ReviewItem.objects.filter(item=obj)
-        return ReviewItemSerialize(reviews, many=True).data
+        fields = ["id", "store", "name", "type", "standard", "price", "itemDesc", "itemImages", "item_review", "average_rating", "user_count"]
 
     def get_average_rating(self, obj):
         average_rating = ReviewItem.objects.filter(item=obj).aggregate(Avg('rating'))['rating__avg']
@@ -53,10 +56,3 @@ class StoreItemSerialize(serializers.ModelSerializer):
     def get_user_count(self, obj):
         count = ReviewItem.objects.filter(item=obj).count()
         return count
-
-
-# Serialize ReviewItem
-class ReviewItemSerialize(serializers.ModelSerializer):
-    class Meta:
-        model = ReviewItem
-        fields = "__all__"

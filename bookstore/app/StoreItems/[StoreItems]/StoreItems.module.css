@@ -190,7 +190,7 @@
   margin-bottom: 0.6rem;
   width: 100%;
   height: 200px;
-  border-top: 1px solid rgb(174, 174, 174);
+  border-top: 1px solid rgb(228, 227, 227);
 
   display: flex;
   justify-content: space-between;
@@ -263,28 +263,29 @@
   margin-top: 1rem;
   width: 100%;
   height: 150px;
-  border: 1px solid rgb(174, 174, 174);
+  border: 1px solid rgb(228, 227, 227);
+  border-radius: 5px;
   overflow: scroll;
   padding: 0 1rem;
 }
 
 .review {
   margin-top: 0rem;
-  border-bottom: 1px solid rgb(174, 174, 174);
+  border-bottom: 1px solid rgb(228, 227, 227);
   padding: 0.5rem;
 }
 
 .endLine {
   margin-top: 1rem;
   width: 100%;
-  height: 20px;
+  height: 50px;
   background-color: transparent;
-  border-top: 1px solid rgb(174, 174, 174);
+  border-top: 1px solid rgb(228, 227, 227);
 }
 
 .bottomCart {
   position: fixed;
-  top: 93%;
+  top: 93.6%;
   width: 70%;
   height: 48px;
   border-radius: 5px;
@@ -338,5 +339,9 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .bottomCart{
+    width: 90%;
   }
 }
