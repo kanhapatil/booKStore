@@ -13,9 +13,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 class Store(viewsets.ModelViewSet):
     serializer_class = MystoreSerialize
 
+    filter_backends = (DjangoFilterBackend, SearchFilter)
+    search_fields = ['city']
+
     def get_queryset(self):
         try:
-            print("try", self.request.user)
             user_city = Addres.objects.filter(user=self.request.user)[0].city
             if user_city:
                 return Mystore.objects.filter(city=user_city) 

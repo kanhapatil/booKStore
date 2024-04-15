@@ -4,7 +4,11 @@ import styles from "./Hero.module.css";
 import { motion } from "framer-motion";
 import { GoArrowSwitch } from "react-icons/go";
 
-export default function Hero() {
+export default function Hero({ setFilterCity }) {
+  const handleCityChange = (event) => {
+    setFilterCity(event.target.value);
+  }
+
   return (
     <>
       <div className="bg-white">
@@ -30,7 +34,13 @@ export default function Hero() {
 
             <div className={styles.search_bar}>
               <i className={styles.material_icons}></i>
-              <select name="city" id="city" className={styles.select}>
+              <select
+                name="city"
+                id="city"
+                className={styles.select}
+                onChange={handleCityChange}
+              >
+                <option value="">Select city</option>
                 <option value="Indore">Indore</option>
                 <option value="Khargone">Khargone</option>
                 <option value="Bhopal">Bhopal</option>

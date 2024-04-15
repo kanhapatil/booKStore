@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 
-const TopStoreFetcher = ({ setStores }) => {
+const TopStoreFetcher = ({ setStores, filterCity }) => {
   useEffect(() => {
     const fetchStores = async () => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
           const response = await axios.get(
-            "http://127.0.0.1:8000/store/mystore/",
+            `http://127.0.0.1:8000/store/mystore/?search=${filterCity}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -18,7 +18,7 @@ const TopStoreFetcher = ({ setStores }) => {
           setStores(response.data);
         } else {
           const response = await axios.get(
-            "http://127.0.0.1:8000/store/mystore/"
+            `http://127.0.0.1:8000/store/mystore/?search=${filterCity}`
           );
           setStores(response.data);
         }
@@ -28,7 +28,7 @@ const TopStoreFetcher = ({ setStores }) => {
     };
 
     fetchStores();
-  }, [setStores]);
+  }, [setStores, filterCity]);
 
   return null;
 };

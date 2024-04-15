@@ -18,34 +18,29 @@ const StoreItems = () => {
       try {
         const id = window.location.href.split("/").pop();
         const token = localStorage.getItem("token");
+        const requests = [
+          axios.get(
+            `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}`
+          ),
+          axios.get(`http://127.0.0.1:8000/store/mystore/${id}/`),
+        ];
+
         if (token) {
-          const [itemsResponse, detailsResponse, cartResponse] =
-            await Promise.all([
-              axios.get(
-                `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}`
-              ),
-              axios.get(`http://127.0.0.1:8000/store/mystore/${id}/`),
-              axios.get(`http://127.0.0.1:8000/cart/mycartitem/`, {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }),
-            ]);
-          setStoreItems(itemsResponse.data);
-          setStoreDetails(detailsResponse.data);
-          setCount(cartResponse.data.length);
-        } else {
-          const [itemsResponse, detailsResponse] = await Promise.all([
-            axios.get(
-              `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}`
-            ),
-            axios.get(`http://127.0.0.1:8000/store/mystore/${id}/`),
-          ]);
-          setStoreItems(itemsResponse.data);
-          setStoreDetails(detailsResponse.data);
+          requests.push(
+            axios.get(`http://127.0.0.1:8000/cart/mycartitem/`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+          );
         }
+
+        const [itemsResponse, detailsResponse, cartResponse] = await Promise.all(requests);
+        setStoreItems(itemsResponse.data);
+        setStoreDetails(detailsResponse.data);
+        setCount(token ? cartResponse.data.length : 0);
       } catch (error) {
-        console.log(error, "adkf");
+        console.error("Error occurred:", error);
       }
     };
     fetchData();
