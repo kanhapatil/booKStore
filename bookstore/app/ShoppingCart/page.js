@@ -7,7 +7,6 @@ import Link from "next/link";
 
 const ShoppingCart = () => {
   const [cart, setCart] = useState();
-  const [cartItem, setCartItem] = useState();
 
   useEffect(() => {
     const fetchShoppingCart = async () => {
@@ -37,6 +36,11 @@ const ShoppingCart = () => {
   if (cart) {
     console.log(cart);
   }
+
+  const handleRemove = (cartItemId) => {
+    console.log("I will remove this item", cartItemId);
+  }
+
   return (
     <>
       <div className={styles.nav}></div>
@@ -73,7 +77,7 @@ const ShoppingCart = () => {
                     <p>
                       <strong>${items.price}</strong>
                     </p>
-                    <p className={styles.remove}>Remove</p>
+                    <p className={styles.remove} onClick={() => handleRemove(items.id)}>Remove</p>
                   </div>
                 </div>
               ))}
