@@ -12,14 +12,17 @@ const AllStoreItems = ({ storeItems, count, setCount }) => {
   const [idArray, setIdArray] = useState([]);
 
   const handleAdd = async (itemId) => {
-    if (idArray.includes(itemId)) {
-      toast.info("Item is already in the cart");
-      return;
-    }
+    const token = localStorage.getItem("token");
 
-    // Update count and idArray state
-    setCount((prevCount) => prevCount + 1);
-    setIdArray((prevIdArray) => [...prevIdArray, itemId]);
+    if (token) {
+      if (idArray.includes(itemId)) {
+        toast.info("Item is already in the cart");
+        return;
+      }
+      // Update count and idArray state
+      setCount((prevCount) => prevCount + 1);
+      setIdArray((prevIdArray) => [...prevIdArray, itemId]);
+    }
 
     // Get store ID
     const storeId = window.location.href.split("/").pop();
@@ -56,6 +59,7 @@ const AllStoreItems = ({ storeItems, count, setCount }) => {
       console.error("Error occurred:", error);
     }
   };
+  
   return (
     <>
       <ToastContainer />

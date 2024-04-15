@@ -18,31 +18,39 @@ const StoreItems = () => {
       try {
         const id = window.location.href.split("/").pop();
         const token = localStorage.getItem("token");
-
-        const [itemsResponse, detailsResponse, cartResponse] =
-          await Promise.all([
+        if (token) {
+          const [itemsResponse, detailsResponse, cartResponse] =
+            await Promise.all([
+              axios.get(
+                `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}`
+              ),
+              axios.get(`http://127.0.0.1:8000/store/mystore/${id}/`),
+              axios.get(`http://127.0.0.1:8000/cart/mycartitem/`, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }),
+            ]);
+          setStoreItems(itemsResponse.data);
+          setStoreDetails(detailsResponse.data);
+          setCount(cartResponse.data.length);
+        } else {
+          const [itemsResponse, detailsResponse] = await Promise.all([
             axios.get(
               `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}`
             ),
             axios.get(`http://127.0.0.1:8000/store/mystore/${id}/`),
-            axios.get(`http://127.0.0.1:8000/cart/mycartitem/`, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }),
           ]);
-
-        setStoreItems(itemsResponse.data);
-        setStoreDetails(detailsResponse.data);
-        setCount(cartResponse.data.length);
+          setStoreItems(itemsResponse.data);
+          setStoreDetails(detailsResponse.data);
+        }
       } catch (error) {
-        console.log(error);
+        console.log(error, "adkf");
       }
     };
     fetchData();
   }, [searchValue]);
 
- 
   const handleOnChange = (event) => {
     setSearchValue(event.target.value);
   };
@@ -55,7 +63,7 @@ const StoreItems = () => {
       <div className={styles.container}>
         <div className={styles.myStore}>
           {/* Store details component start */}
-            {storeDetails && <StoreDetails storeDetails={storeDetails} />}
+          {storeDetails && <StoreDetails storeDetails={storeDetails} />}
           {/* Store details component end */}
 
           <p className={styles.sub_heading}>⇤all items⇥</p>
@@ -69,9 +77,13 @@ const StoreItems = () => {
           </div>
 
           {/* Store Items component start */}
-            <div className={styles.allItems}>
-              <AllStoreItems storeItems={storeItems} count={count} setCount={setCount} />
-            </div>
+          <div className={styles.allItems}>
+            <AllStoreItems
+              storeItems={storeItems}
+              count={count}
+              setCount={setCount}
+            />
+          </div>
           {/* Store Items component end */}
         </div>
       </div>
