@@ -3,11 +3,11 @@ import TopStoreFetcher from './TopStoreFetcher';
 import TopStoreRenderer from './TopStoreRenderer';
 
 
-const TopStore = ({filterCity}) => {
+const TopStore = () => {
     const [stores, setStores] = useState(null);
   return (
     <>
-      <TopStoreFetcher setStores={setStores} filterCity={filterCity} />
+      <TopStoreFetcher setStores={setStores} />
       <TopStoreRenderer stores={stores} />
     </>
   )

@@ -3,8 +3,12 @@ import MainImg from "@/components/MainImg";
 import styles from "./Hero.module.css";
 import { motion } from "framer-motion";
 import { GoArrowSwitch } from "react-icons/go";
+import { useFilter } from "./Context";
 
-export default function Hero({ setFilterCity }) {
+
+export default function Hero() {
+  const {setFilterCity} = useFilter();
+  
   const handleCityChange = (event) => {
     setFilterCity(event.target.value);
   }

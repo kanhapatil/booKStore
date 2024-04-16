@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import { useFilter } from "../Context";
 
-const TopStoreFetcher = ({ setStores, filterCity }) => {
+const TopStoreFetcher = ({ setStores }) => {
+  const { filterCity } = useFilter();
   useEffect(() => {
     const fetchStores = async () => {
       try {
