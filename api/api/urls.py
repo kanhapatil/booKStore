@@ -13,6 +13,7 @@ urlpatterns = [
     path("user/", include("account.urls")),
     path("store/", include("mystore.urls")),
     path("cart/", include("cart.urls")),
+    path("order/", include("order.urls")),
 
     path('token/', jwt_views.TokenObtainPairView.as_view(), name ="token_obtain_pair"),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name="token_refresh"),

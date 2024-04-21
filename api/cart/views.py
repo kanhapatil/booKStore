@@ -50,7 +50,7 @@ class MyCartItem(viewsets.ModelViewSet):
                 user_cart = Cart.objects.filter(user=user)
                 return CartItem.objects.filter(cart__in=user_cart)
             else:
-                return CartItem.objects.none()
+                return CartItem.objects.all()
             
         except ObjectDoesNotExist:
             return CartItem.objects.none()
@@ -71,3 +71,18 @@ class MyCartItem(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True) 
             serializer.save() 
             return Response({"msg": "Item added to cart"}, status=status.HTTP_201_CREATED) 
+        
+    def destroy(self, request, pk=None):
+        try:
+            cart_item = CartItem.objects.get(id=pk)
+        except CartItem.DoesNotExist:
+            return Response({"error": "Cart item does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+        cart_item.delete()
+
+        cart = Cart.objects.filter(user=request.user)
+        for i in cart:
+            if CartItem.objects.filter(cart=i).count() == 0:
+                i.delete()
+
+        return Response({"msg": "Item deleted successfully"}, status=status.HTTP_200_OK)

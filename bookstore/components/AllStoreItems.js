@@ -82,7 +82,7 @@ const AllStoreItems = ({ storeItems, count, setCount }) => {
                     value={item.average_rating}
                     edit={false}
                   />
-                  <p className={styles.ratingsText}>({item.user_count}+)</p>
+                  <p className={styles.ratingsText}>({item.user_count})</p>
                 </div>
                 <p className={styles.itemDesc}>{item.itemDesc}</p>
               </div>
@@ -105,7 +105,7 @@ const AllStoreItems = ({ storeItems, count, setCount }) => {
                   <div key={review.id} className={styles.review}>
                     <div>
                       <p>
-                        <strong>User:</strong> {review.user}
+                        <strong>User:</strong> {review.username}
                       </p>
                       <div>
                         <ReactStars

@@ -7,9 +7,11 @@ import Link from "next/link";
 
 const ShoppingCart = () => {
   const [cart, setCart] = useState();
+  const [updateFlag, setUpdateFlag] = useState(false);
 
   useEffect(() => {
     const fetchShoppingCart = async () => {
+      setUpdateFlag(false);
       try {
         const token = localStorage.getItem("token");
         if (token) {
@@ -31,15 +33,34 @@ const ShoppingCart = () => {
     };
 
     fetchShoppingCart();
-  }, []);
+  }, [updateFlag]);
 
-  if (cart) {
-    console.log(cart);
+  if(cart){
+    const data = cart;
+    console.log(data);
   }
 
-  const handleRemove = (cartItemId) => {
-    console.log("I will remove this item", cartItemId);
-  }
+  const handleRemove = async (cartItemId) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const itemDelete = await axios.delete(
+          `http://127.0.0.1:8000/cart/mycartitem/${cartItemId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (itemDelete.status === 200) {
+          setUpdateFlag(true);
+        }
+      }
+    } catch (error) {
+      console.log("Error occurred while removing item from cart:", error);
+    }
+  };
 
   return (
     <>
@@ -48,7 +69,8 @@ const ShoppingCart = () => {
         cart.map((mainCart, key) => (
           <section key={mainCart.id} className={styles.section}>
             <div className={styles.shoppingCart}>
-              <div className={styles.heading}>Shopping Cart</div>
+              <div className={styles.heading}>{mainCart.store_name}</div>
+              <p className={styles.subheading} >Shopping Cart</p>
 
               {mainCart.cart.map((items, key) => (
                 <div key={items.id} className={styles.cart}>
@@ -77,7 +99,12 @@ const ShoppingCart = () => {
                     <p>
                       <strong>${items.price}</strong>
                     </p>
-                    <p className={styles.remove} onClick={() => handleRemove(items.id)}>Remove</p>
+                    <p
+                      className={styles.remove}
+                      onClick={() => handleRemove(items.id)}
+                    >
+                      Remove
+                    </p>
                   </div>
                 </div>
               ))}
@@ -90,7 +117,7 @@ const ShoppingCart = () => {
                 </div>
                 <div className={styles.total}>
                   <p>
-                    <strong>$1299</strong>
+                    <strong>${mainCart.subtotal}</strong>
                   </p>
                 </div>
               </div>

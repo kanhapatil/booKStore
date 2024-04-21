@@ -34,9 +34,10 @@ class ItemImageSerialize(serializers.ModelSerializer):
 
 # Serialize ReviewItem
 class ReviewItemSerialize(serializers.ModelSerializer):
+    username = serializers.CharField(source="user.username", read_only=True)
     class Meta:
         model = ReviewItem
-        fields = "__all__"
+        fields = ["id", "username", "item", "rating", "description"]
 
 
 # Serialize StoreItem model
