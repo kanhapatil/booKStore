@@ -4,6 +4,8 @@ import styles from "./ShoppingCart.module.css";
 import axios from "axios";
 import EmptyCart from "@/components/EmptyCart";
 import Link from "next/link";
+import { CiSquarePlus } from "react-icons/ci";
+import { CiSquareMinus } from "react-icons/ci";
 
 const ShoppingCart = () => {
   const [cart, setCart] = useState();
@@ -35,7 +37,7 @@ const ShoppingCart = () => {
     fetchShoppingCart();
   }, [updateFlag]);
 
-  if(cart){
+  if (cart) {
     const data = cart;
     console.log(data);
   }
@@ -62,6 +64,14 @@ const ShoppingCart = () => {
     }
   };
 
+  const handleIncrease = (cartItemId) => {
+    console.log("Increase", cartItemId);
+  }
+
+  const handleDecrease = (cartItemId) => {
+    console.log("Decrease", cartItemId);
+  }
+
   return (
     <>
       <div className={styles.nav}></div>
@@ -70,7 +80,6 @@ const ShoppingCart = () => {
           <section key={mainCart.id} className={styles.section}>
             <div className={styles.shoppingCart}>
               <div className={styles.heading}>{mainCart.store_name}</div>
-              <p className={styles.subheading} >Shopping Cart</p>
 
               {mainCart.cart.map((items, key) => (
                 <div key={items.id} className={styles.cart}>
@@ -86,7 +95,17 @@ const ShoppingCart = () => {
                         <p className={styles.name}>
                           <strong>{items.name}</strong>
                         </p>
-                        <p>Quantity: {items.quantity}</p>
+
+                        <p className={styles.quantity}>Quantity: {items.quantity}</p>
+
+                        <p className={styles.qt}>
+                          <span className={styles.plus} onClick={() => handleIncrease(items.id)}>
+                            <CiSquarePlus />
+                          </span>
+                          <span className={styles.plus} onClick={() => handleDecrease(items.id)}>
+                            <CiSquareMinus />
+                          </span>
+                        </p>
                       </div>
                       <div className={styles.inStock}>
                         <p>
@@ -99,6 +118,7 @@ const ShoppingCart = () => {
                     <p>
                       <strong>${items.price}</strong>
                     </p>
+
                     <p
                       className={styles.remove}
                       onClick={() => handleRemove(items.id)}

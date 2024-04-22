@@ -29,13 +29,13 @@
   font-weight: 600;
   text-transform: uppercase;
   color: brown;
+  padding-bottom: 1rem;
 }
 
-.subheading{
-  color: black;
-  font-weight: 500;
-  text-transform: uppercase;
-  padding-bottom: 1rem;
+.qt {
+  display: inline;
+  font-weight: 700;
+  font-size: 1.3rem;
 }
 
 .cart {
@@ -136,6 +136,14 @@
   color: brown;
   font-weight: 600;
   cursor: pointer;
+}
+
+.quantity{
+  line-height: 1.5rem;
+}
+
+.plus {
+  display: inline-block
 }
 
 @media screen and (max-width: 640px) {
