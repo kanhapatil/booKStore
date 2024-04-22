@@ -9,13 +9,14 @@ class Mystore(models.Model):
     name = models.CharField(max_length=255)
     contact = models.CharField(max_length=15)
     date = models.DateField(auto_now_add=True)
-    status = models.BooleanField(default=True, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     verification = models.BooleanField(default=False, blank=True, null=True)
+    recharge = models.PositiveIntegerField(blank=True, null=True)
     image1 = models.ImageField(upload_to="storeImages/")
     image2 = models.ImageField(upload_to="storeImages/", blank=True, null=True)
     image3 = models.ImageField(upload_to="storeImages/", blank=True, null=True)
+    url = models.ImageField(upload_to="storeImages/", blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -34,6 +35,7 @@ class StoreItem(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     type = models.CharField(max_length=100, blank=True, null=True, choices=ITEM_TYPES)
     standard = models.CharField(max_length=255, blank=True, null=True)
+    inStock = models.PositiveIntegerField(blank=True, null=True)
     price = models.IntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
     itemDesc = models.TextField(blank=True, null=True)
 

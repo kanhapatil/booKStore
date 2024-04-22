@@ -9,8 +9,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from account.serializers import UserSerializer
 from rest_framework import viewsets
-from rest_framework_simplejwt.tokens import AccessToken, RefreshToken, TokenError
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 from rest_framework.exceptions import AuthenticationFailed
+from django.contrib.auth.models import Group
+from rest_framework import status
+from mystore.models import Mystore
 
 
 # Register api class
@@ -50,6 +53,25 @@ class Loginview(APIView):
 class Contact(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+
+    def create(self, request):
+        subject = request.data.get("subject")
+        username = request.data.get("email")
+
+        print(subject)
+        
+        if subject == "Open store":
+            group = Group.objects.get(name="staff")
+            user_instance = User.objects.get(username=username)
+            user_instance.is_staff = True
+            user_instance.save()
+            user_instance.groups.add(group)
+
+            # Create instance of store for this user
+            Mystore.objects.create(user=user_instance)
+        
+        # Call the superclass method to continue with regular object creation
+        return super().create(request)
     
 
 # Address api class

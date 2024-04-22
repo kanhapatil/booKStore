@@ -61,7 +61,7 @@ export default function Hero() {
             <div className={styles.switch_to_store}>
               <p>Switch to store</p>
               <div className={styles.switcher}>
-                <a href="http://127.0.0.1:8000/admin/login/">
+                <a href="http://127.0.0.1:8000/admin/login/?next=/admin/account/user/">
                   <GoArrowSwitch />
                 </a>
               </div>

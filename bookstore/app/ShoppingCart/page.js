@@ -90,7 +90,7 @@ const ShoppingCart = () => {
                       </div>
                       <div className={styles.inStock}>
                         <p>
-                          <strong>In Stock</strong>
+                          <strong>✅In Stock</strong>
                         </p>
                       </div>
                     </div>

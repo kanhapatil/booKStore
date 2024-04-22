@@ -8,7 +8,7 @@ class MystoreSerialize(serializers.ModelSerializer):
     average_rating = serializers.SerializerMethodField()
     class Meta:
         model = Mystore
-        fields = ["id", "user", "name", "contact", "status", "city", "location", "date", "image1", "image2", "image3", "average_rating"]
+        fields = ["id", "user", "name", "contact", "verification", "city", "location", "date", "image1", "image2", "image3", "average_rating"]
 
     def get_average_rating(self, obj):
         # Calculate average rating for all store items

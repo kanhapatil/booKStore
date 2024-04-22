@@ -19,7 +19,7 @@ const TopStoreRenderer = ({ stores }) => {
       >
         {stores ? (
           stores.map((item, key) =>
-            item.status ? (
+            item.verification ? (
               <li key={item.id}>
                 <Link href={`/StoreItems/${item.id}`} className={styles.card}>
                   <img
