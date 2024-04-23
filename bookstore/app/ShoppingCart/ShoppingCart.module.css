@@ -139,11 +139,13 @@
 }
 
 .quantity{
-  line-height: 1.5rem;
+  /* line-height: 1.5rem; */
 }
 
 .plus {
-  display: inline-block
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 0.2rem;
 }
 
 @media screen and (max-width: 640px) {

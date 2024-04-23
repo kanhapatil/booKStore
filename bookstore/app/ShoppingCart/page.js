@@ -37,10 +37,6 @@ const ShoppingCart = () => {
     fetchShoppingCart();
   }, [updateFlag]);
 
-  if (cart) {
-    const data = cart;
-    console.log(data);
-  }
 
   const handleRemove = async (cartItemId) => {
     try {
@@ -64,13 +60,35 @@ const ShoppingCart = () => {
     }
   };
 
-  const handleIncrease = (cartItemId) => {
-    console.log("Increase", cartItemId);
-  }
+  const handleIncrease = async (cartItemId, quantity) => {
+    console.log("Decrease", cartItemId, quantity);
+    console.log(quantity - 1);
+    if (quantity >= 1) {
+      const cartResponse = await axios.patch(
+        `http://127.0.0.1:8000/cart/mycartitem/${cartItemId}/`,
+        { quantity: quantity + 1 }
+      );
+      if(cartResponse.status === 200){
+        setUpdateFlag(true);
+      }
+    }
+  };
 
-  const handleDecrease = (cartItemId) => {
-    console.log("Decrease", cartItemId);
-  }
+  const handleDecrease = async (cartItemId, quantity) => {
+    console.log("Decrease", cartItemId, quantity);
+    console.log(quantity - 1);
+    if (quantity > 1) {
+      const cartResponse = await axios.patch(
+        `http://127.0.0.1:8000/cart/mycartitem/${cartItemId}/`,
+        { quantity: quantity - 1 }
+      );
+      if(cartResponse.status === 200){
+        setUpdateFlag(true);
+      }
+    }else{
+      handleRemove(cartItemId);
+    }
+  };
 
   return (
     <>
@@ -95,18 +113,32 @@ const ShoppingCart = () => {
                         <p className={styles.name}>
                           <strong>{items.name}</strong>
                         </p>
-
-                        <p className={styles.quantity}>Quantity: {items.quantity}</p>
-
-                        <p className={styles.qt}>
-                          <span className={styles.plus} onClick={() => handleIncrease(items.id)}>
-                            <CiSquarePlus />
-                          </span>
-                          <span className={styles.plus} onClick={() => handleDecrease(items.id)}>
-                            <CiSquareMinus />
-                          </span>
-                        </p>
                       </div>
+
+                      <div className={styles.quantity}>
+                        Quantity: {items.quantity}
+                      </div>
+
+                      <div className={styles.qt}>
+                        <span
+                          className={styles.plus}
+                          onClick={() =>
+                            handleDecrease(items.id, items.quantity)
+                          }
+                        >
+                          <CiSquareMinus />
+                        </span>
+
+                        <span
+                          className={styles.plus}
+                          onClick={() =>
+                            handleIncrease(items.id, items.quantity)
+                          }
+                        >
+                          <CiSquarePlus />
+                        </span>
+                      </div>
+
                       <div className={styles.inStock}>
                         <p>
                           <strong>✅In Stock</strong>
