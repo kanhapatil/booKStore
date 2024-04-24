@@ -15,6 +15,7 @@ Welcome to the Bookstore Project! This is an ongoing project aimed at creating a
 
 ### Next js
 - cd booKStore/bookstore
+- npm i install
 - npm run dev
 
 
