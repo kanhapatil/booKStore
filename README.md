@@ -58,6 +58,8 @@ Note : Project is ongoing...
 
 ![Screenshot 2024-04-24 110950](https://github.com/kanhapatil/booKStore/assets/101468170/36122401-787b-4e75-babb-ef5f60a88a3b)
 
+![Screenshot 2024-04-24 222953](https://github.com/kanhapatil/booKStore/assets/101468170/ad0eeac8-2e08-4044-aed5-d427978ea150)
+
 - Cart page
 
 ![Screenshot 2024-04-24 111004](https://github.com/kanhapatil/booKStore/assets/101468170/0009f4c6-8441-4412-ae52-4eb568f3ac34)
