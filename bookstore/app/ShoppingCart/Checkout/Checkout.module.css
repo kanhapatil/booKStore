@@ -1,0 +1,188 @@
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkOut {
+  margin-top: 2rem;
+  width: 70%;
+  border: 3px solid #f2f2f2;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.billingInfo {
+    width: 65%;
+    background-color: white;
+}
+
+.orderInfo {
+    width: 35%;
+    background-color: #f2f2f2;
+}
+
+.heading {
+    font-size: 2rem;
+    margin: 0.5rem 1rem;
+    border-bottom: 2px solid black;
+}
+
+.info {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info .top {
+    width: 100%;
+    margin-bottom: 0.6rem;
+}
+
+.info .data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtotal {
+    display: flex;
+    flex-direction: column;
+}
+
+.total {
+    padding: 1rem 1rem 0rem 1rem;
+    border-top: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item {
+    padding: 0rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.date {
+    padding: 0rem 1rem 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.placeOrder {
+    padding: 0rem 1rem 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    padding: 0.7rem 1rem;
+    width: 48.5%;
+    background-color: brown;
+    color: whitesmoke;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.form {
+    padding: 1rem;
+}
+
+.userInfo1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userInfo1 .input{
+    background-color: #f2f2f2;
+    height: 45px;
+    width: 49%;
+    padding-left: 1rem;
+    border-radius: 5px;
+}
+
+.userInfo2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userInfo2 .input {
+    margin-top: 0.6rem;
+    background-color: #f2f2f2;
+    height: 45px;
+    width: 49%;
+    padding-left: 1rem;
+    border-radius: 5px;
+}
+
+.address1 {
+    margin-top: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.address1 .input {
+    background-color: #f2f2f2;
+    height: 45px;
+    width: 49%;
+    padding-left: 1rem;
+    border-radius: 5px;
+}
+
+.address2 {
+    margin-top: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.address2 .input {
+    background-color: #f2f2f2;
+    height: 45px;
+    width: 32%;
+    padding-left: 1rem;
+    border-radius: 5px;
+}
+
+.input:focus{
+    outline: 1px solid brown;
+    border-radius: 5px;
+}
+
+.addAddress .button1 {
+    margin-top: 0.6rem;
+    width: 25%;
+    background-color: brown;
+    color: whitesmoke;
+    border-radius: 5px;
+    padding: 0.7rem 1rem;
+}
+
+@media screen and (max-width:1100px) {
+    .checkOut {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width:850px) {
+    .checkOut {
+        width: 98%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .checkOut {
+        width: 90%;
+        flex-wrap: wrap;
+    }
+
+    .billingInfo {
+        width: 100%;
+    }
+
+    .orderInfo {
+        width: 100%;
+    }
+}

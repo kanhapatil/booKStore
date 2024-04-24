@@ -36,6 +36,7 @@
   display: inline;
   font-weight: 700;
   font-size: 1.3rem;
+  margin-top: 3px;
 }
 
 .cart {
@@ -82,6 +83,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-top: -3px;
 }
 
 .continue {
@@ -135,11 +137,8 @@
 .remove {
   color: brown;
   font-weight: 600;
+  margin-bottom: -3px;
   cursor: pointer;
-}
-
-.quantity{
-  /* line-height: 1.5rem; */
 }
 
 .plus {

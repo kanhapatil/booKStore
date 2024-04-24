@@ -6,6 +6,12 @@
     display: none;
 }
 
+*{
+  /* font-family: Georgia, serif; */
+  font-family: "Merriweather", serif;
+  font-style: normal;
+}
+
 .progress-bar {
     position: fixed;
     top: 0;

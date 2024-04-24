@@ -7,6 +7,7 @@ import Link from "next/link";
 import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
 
+
 const ShoppingCart = () => {
   const [cart, setCart] = useState();
   const [updateFlag, setUpdateFlag] = useState(false);
@@ -75,22 +76,22 @@ const ShoppingCart = () => {
   };
 
   const handleDecrease = async (cartItemId, quantity) => {
-    console.log("Decrease", cartItemId, quantity);
-    console.log(quantity - 1);
-    if (quantity > 1) {
-      const cartResponse = await axios.patch(
-        `http://127.0.0.1:8000/cart/mycartitem/${cartItemId}/`,
-        { quantity: quantity - 1 }
-      );
-      if(cartResponse.status === 200){
-        setUpdateFlag(true);
-      }
-    }else{
-      handleRemove(cartItemId);
-    }
-  };
+    console.log("Decrease", cartItemId, quantity); 
+    console.log(quantity - 1); 
+    if (quantity > 1) { 
+      const cartResponse = await axios.patch( 
+        `http://127.0.0.1:8000/cart/mycartitem/${cartItemId}/`, 
+        { quantity: quantity - 1 } 
+      ); 
+      if(cartResponse.status === 200){ 
+        setUpdateFlag(true); 
+      } 
+    }else{ 
+      handleRemove(cartItemId); 
+    } 
+  }; 
 
-  return (
+  return ( 
     <>
       <div className={styles.nav}></div>
       {cart && cart.length > 0 ? (
@@ -169,13 +170,13 @@ const ShoppingCart = () => {
                 </div>
                 <div className={styles.total}>
                   <p>
-                    <strong>${mainCart.subtotal}</strong>
+                    <strong>${mainCart.subtotal}.00</strong>
                   </p>
                 </div>
               </div>
 
               <div className={styles.button}>
-                <button>Checkout</button>
+                <Link href="ShoppingCart/Checkout"><button>Checkout</button></Link>
                 <p className={styles.continue}>
                   <Link href="/">or continue shopping</Link>
                 </p>
