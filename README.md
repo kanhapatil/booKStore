@@ -46,3 +46,25 @@ If you have any questions or need assistance, you can reach out to us by
 - contact: +91 9111-7152-45
 
 Note : Project is ongoing...
+
+
+## Glimpses of the project
+- Home page
+
+![Screenshot 2024-04-24 110924](https://github.com/kanhapatil/booKStore/assets/101468170/cd8612ae-d5e0-4643-bfb7-f612b9243661)
+
+- Individual store products page
+
+![Screenshot 2024-04-24 110950](https://github.com/kanhapatil/booKStore/assets/101468170/36122401-787b-4e75-babb-ef5f60a88a3b)
+
+- Cart page
+
+![Screenshot 2024-04-24 111004](https://github.com/kanhapatil/booKStore/assets/101468170/0009f4c6-8441-4412-ae52-4eb568f3ac34)
+
+- CheckOut page
+
+![Screenshot 2024-04-24 111027](https://github.com/kanhapatil/booKStore/assets/101468170/a4c792e2-1333-44e7-bd96-e1c6b5933495)
+
+- User profile page
+
+![Screenshot 2024-04-24 111040](https://github.com/kanhapatil/booKStore/assets/101468170/2524d394-bf01-4cc5-8e52-898c0f6db6fe)
