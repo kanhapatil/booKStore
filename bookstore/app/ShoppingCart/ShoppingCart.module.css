@@ -28,7 +28,7 @@
   font-size: 1.4rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: brown;
+  color: #7a1f1f;
   padding-bottom: 1rem;
 }
 
@@ -129,13 +129,13 @@
   height: 44px;
   border-radius: 5px;
   color: whitesmoke;
-  background-color: brown;
+  background-color: #7a1f1f;
   font-weight: 600;
   border: none;
 }
 
 .remove {
-  color: brown;
+  color: #7a1f1f;
   font-weight: 600;
   margin-bottom: -3px;
   cursor: pointer;

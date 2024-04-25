@@ -8,7 +8,7 @@
 .checkOut {
   margin-top: 2rem;
   width: 70%;
-  border: 3px solid #f2f2f2;
+  border: 2px solid #f2f2f2;
   border-radius: 5px;
   margin-bottom: 1rem;
   display: flex;
@@ -40,7 +40,6 @@
 
 .info .top {
     width: 100%;
-    margin-bottom: 0.6rem;
 }
 
 .info .data {
@@ -81,7 +80,7 @@
 .button {
     padding: 0.7rem 1rem;
     width: 48.5%;
-    background-color: brown;
+    background-color: #7a1f1f;
     color: whitesmoke;
     border-radius: 5px;
     margin-left: 5px;
@@ -147,14 +146,18 @@
 }
 
 .input:focus{
-    outline: 1px solid brown;
+    outline: 1px solid #7a1f1f;
     border-radius: 5px;
+}
+
+.input::placeholder {
+    color: black;
 }
 
 .addAddress .button1 {
     margin-top: 0.6rem;
     width: 25%;
-    background-color: brown;
+    background-color: #7a1f1f;
     color: whitesmoke;
     border-radius: 5px;
     padding: 0.7rem 1rem;

@@ -39,7 +39,7 @@ const StoreDetails = ({storeDetails}) => {
                 value={storeDetails.average_rating}
                 edit={false}
               />
-              <p className={styles.ratingsText}>(10+ ratings)</p>
+              <p className={styles.ratingsText}>({storeDetails.review_counts})</p>
             </div>
             <button className={styles.button}>Direction</button> &nbsp;
             <button className={styles.button}>Share</button> &nbsp;
