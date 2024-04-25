@@ -16,6 +16,7 @@ Welcome to the Bookstore Project! This is an ongoing project aimed at creating a
    - http://127.0.0.1:8000/user/contact/
    - http://127.0.0.1:8000/user/address/
 
+
 - http://127.0.0.1:8000/store/
    - http://127.0.0.1:8000/store/mystore/
    - http://127.0.0.1:8000/store/storeitem/
@@ -23,9 +24,11 @@ Welcome to the Bookstore Project! This is an ongoing project aimed at creating a
    - http://127.0.0.1:8000/store/itemimage/
    - http://127.0.0.1:8000/store/storerelateditem/
 
+
 - http://127.0.0.1:8000/cart/
    - http://127.0.0.1:8000/cart/mycart/
    - http://127.0.0.1:8000/cart/mycartitem/
+
 
 - http://127.0.0.1:8000/order/
    - http://127.0.0.1:8000/order/myorder/
