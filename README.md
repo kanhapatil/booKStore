@@ -39,6 +39,8 @@ Welcome to the Bookstore Project! This is an ongoing project aimed at creating a
 - npm i install
 - npm run dev
 
+- http://127.0.0.1:3000/
+
 
 ## Contributing
 
