@@ -66,7 +66,7 @@ Note : Project is ongoing...
 
 - CheckOut page
 
-![Screenshot 2024-04-24 111027](https://github.com/kanhapatil/booKStore/assets/101468170/a4c792e2-1333-44e7-bd96-e1c6b5933495)
+![Screenshot 2024-04-25 083142](https://github.com/kanhapatil/booKStore/assets/101468170/fa6afd13-0dee-4dde-a5ef-ecadfad05a8f)
 
 - User profile page
 
