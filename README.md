@@ -12,6 +12,8 @@ Welcome to the Bookstore Project! This is an ongoing project aimed at creating a
 
 - http://127.0.0.1:8000/user/
 - http://127.0.0.1:8000/store/
+- http://127.0.0.1:8000/cart/
+- http://127.0.0.1:8000/order/
 
 ### Next js
 - cd booKStore/bookstore
