@@ -1,12 +1,47 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import navStyles from "../../ShoppingCart.module.css";
 import styles from "./Checkout.module.css";
+import { useParams } from "next/navigation";
+import axios from "axios";
+import EmptyCart from "@/components/EmptyCart";
 
 const Checkout = () => {
+  const id = useParams();
+  const [cartData, setCartData] = useState();
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
+          const response = await axios.get(
+            `http://127.0.0.1:8000/cart/mycart/${id.Checkout}/`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setCartData(response.data);
+        }
+      } catch (error) {
+        console.log("Something went wrong");
+      }
+    };
+    fetchCart();
+  }, []);
+
+  if (cartData) {
+    console.log(cartData);
+  }
+
   return (
     <>
       <div className={navStyles.nav}></div>
-      <section className={styles.section}>
+      {
+        cartData?
+        <section className={styles.section}>
         <div className={styles.checkOut}>
           <div className={styles.billingInfo}>
             <div className={styles.heading}>Billing Information</div>
@@ -95,25 +130,17 @@ const Checkout = () => {
                     </th>
                   </tr>
                 </thead>
-
+    
                 <tbody>
-                  <tr>
-                    <td>Hindi</td>
-                    <td style={{ textAlign: "center" }}>2</td>
-                    <td style={{ textAlign: "right" }}>$299</td>
-                  </tr>
-
-                  <tr>
-                    <td>Mathematics, Hindi</td>
-                    <td style={{ textAlign: "center" }}>1</td>
-                    <td style={{ textAlign: "right" }}>$499</td>
-                  </tr>
-
-                  <tr>
-                    <td>English</td>
-                    <td style={{ textAlign: "center" }}>1</td>
-                    <td style={{ textAlign: "right" }}>$199</td>
-                  </tr>
+                  {cartData && cartData.cart.length > 0
+                    ? cartData.cart.map((items, index) => (
+                        <tr key={index} className={styles.tableData}>
+                          <td>{items.name}</td>
+                          <td style={{ textAlign: "center" }}>{items.quantity}</td>
+                          <td style={{ textAlign: "right" }}>${items.price}</td>
+                        </tr>
+                      ))
+                    : null}
                 </tbody>
               </table>
             </div>
@@ -124,7 +151,7 @@ const Checkout = () => {
                   <strong>Total</strong>
                 </h6>
                 <h6>
-                  <strong>$1200</strong>
+                  <strong>${cartData?cartData.subtotal:null}.00</strong>
                 </h6>
               </div>
 
@@ -133,7 +160,7 @@ const Checkout = () => {
                   <strong>Items</strong>
                 </h6>
                 <h6>
-                  <strong>3</strong>
+                  <strong>{cartData?cartData.cart.length:null}</strong>
                 </h6>
               </div>
 
@@ -142,18 +169,18 @@ const Checkout = () => {
                   <strong>Date</strong>
                 </h6>
                 <h6>
-                  <strong>Apr 24, 2024</strong>
+                  <strong>{cartData?cartData.date:null}</strong>
                 </h6>
               </div>
 
               <div className={styles.placeOrder}>
                 <button className={styles.button}>Order Now</button>
-                <button className={styles.button}>Receipt</button>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section>:<EmptyCart />
+      }
     </>
   );
 };

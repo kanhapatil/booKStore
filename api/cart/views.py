@@ -17,7 +17,10 @@ class MyCart(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user_id = self.request.user.id
-        return Cart.objects.filter(user=user_id)
+        if user_id:
+            return Cart.objects.filter(user=user_id)
+        else:
+            return Cart.objects.all()
 
     def create(self, request):
         user = request.user

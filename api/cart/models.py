@@ -9,7 +9,8 @@ from django.core.validators import MinValueValidator
 class Cart(models.Model): 
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     store = models.ForeignKey(Mystore, on_delete=models.CASCADE, related_name="cart_store") 
-    
+    date = models.DateField(auto_now_add=True, blank=True, null=True)
+
     class Meta:  
         unique_together = ("user", "store") 
         

@@ -72,10 +72,12 @@
 }
 
 .placeOrder {
-    padding: 0rem 1rem 1rem 1rem;
-    display: flex;
-    justify-content: space-between;
+    padding: 0rem 1rem 1rem 0.7rem;
 }
+
+/* .tableData {
+    border-bottom: 1px solid rgb(199, 196, 196);
+} */
 
 .button {
     padding: 0.7rem 1rem;

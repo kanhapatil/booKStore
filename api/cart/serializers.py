@@ -30,7 +30,7 @@ class CartSerialize(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ["id", "user", "store", "store_name", "cart", "subtotal"]
+        fields = ["id", "user", "store", "store_name", "cart", "subtotal", "date"]
 
     def get_subtotal(self, obj):
         subtotal = sum(item.quantity * item.item.price for item in obj.cart.all())
