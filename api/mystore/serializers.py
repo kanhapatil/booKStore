@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.db.models import Avg
 
 
-# Serialize Mystore model
+## Serialize Mystore model
 class MystoreSerialize(serializers.ModelSerializer):
     average_rating = serializers.SerializerMethodField()
     review_counts = serializers.SerializerMethodField()
@@ -40,7 +40,7 @@ class ItemImageSerialize(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# Serialize ReviewItem
+## Serialize ReviewItem
 class ReviewItemSerialize(serializers.ModelSerializer):
     username = serializers.CharField(source="user.username", read_only=True, default="bookstore")
     class Meta:
@@ -48,7 +48,7 @@ class ReviewItemSerialize(serializers.ModelSerializer):
         fields = ["id", "username", "item", "rating", "description", "created_at"]
 
 
-# Serialize StoreItem model
+## Serialize StoreItem model
 class StoreItemSerialize(serializers.ModelSerializer):
     item_review = ReviewItemSerialize(many=True, read_only=True)
     itemImages = ItemImageSerialize(many=True, read_only=True)
@@ -65,3 +65,11 @@ class StoreItemSerialize(serializers.ModelSerializer):
     def get_user_count(self, obj):
         count = ReviewItem.objects.filter(item=obj).count()
         return count
+    
+
+## Serialize ItemOnly
+class ItemOnlySerialize(serializers.ModelSerializer):
+    itemImages = ItemImageSerialize(many=True, read_only=True)
+    class Meta:
+        model = StoreItem
+        fields = ["id", "name", "type", "standard", "price", "itemImages"]

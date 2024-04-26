@@ -1,12 +1,14 @@
 from rest_framework import serializers
 from .models import Order, OrderItem
+from mystore.serializers import ItemOnlySerialize
 
 
 ## Serialize OrderItem model
 class OrderItemSerialize(serializers.ModelSerializer): 
+    item = ItemOnlySerialize()
     class Meta: 
         model = OrderItem 
-        fields = ["id", "order", "item", "quantity"] 
+        fields = ["id", "order", "item", "quantity", "item"] 
 
         
 ## Serialize Order model

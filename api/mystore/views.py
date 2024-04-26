@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Mystore, StoreItem, ReviewItem, ItemImage
-from .serializers import MystoreSerialize, StoreItemSerialize, ReviewItemSerialize, ItemImageSerialize
+from .serializers import MystoreSerialize, StoreItemSerialize, ReviewItemSerialize, ItemImageSerialize, ItemOnlySerialize
 from rest_framework import viewsets
 from account.models import Addres
 from rest_framework import viewsets
@@ -32,6 +32,12 @@ class Store(viewsets.ModelViewSet):
 class Item(viewsets.ModelViewSet):
     queryset = StoreItem.objects.all()
     serializer_class = StoreItemSerialize
+
+
+## Item only api class
+class ItemOnly(viewsets.ModelViewSet):
+    queryset = StoreItem.objects.all()
+    serializer_class = ItemOnlySerialize
 
 
 ## ItemImage api class
