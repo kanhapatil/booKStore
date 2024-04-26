@@ -176,7 +176,7 @@ const ShoppingCart = () => {
               </div>
 
               <div className={styles.button}>
-                <Link href="ShoppingCart/Checkout"><button>Checkout</button></Link>
+                <Link href={`ShoppingCart/Checkout/${mainCart.id}`}><button>Checkout</button></Link>
                 <p className={styles.continue}>
                   <Link href="/">or continue shopping</Link>
                 </p>

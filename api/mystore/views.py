@@ -1,15 +1,13 @@
 from django.shortcuts import render
 from .models import Mystore, StoreItem, ReviewItem, ItemImage
 from .serializers import MystoreSerialize, StoreItemSerialize, ReviewItemSerialize, ItemImageSerialize, ItemOnlySerialize
-from rest_framework import viewsets
 from account.models import Addres
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-
-# Mystore api class
+## Mystore api class
 class Store(viewsets.ModelViewSet):
     serializer_class = MystoreSerialize
 
@@ -28,7 +26,7 @@ class Store(viewsets.ModelViewSet):
             return Mystore.objects.all() 
 
 
-# StoreItem api class
+## StoreItem api class
 class Item(viewsets.ModelViewSet):
     queryset = StoreItem.objects.all()
     serializer_class = StoreItemSerialize
@@ -64,7 +62,6 @@ class StoreRelatedItem(viewsets.ModelViewSet):
                 return StoreItem.objects.none
         else:
             return StoreItem.objects.all()
-
 
 
 # ReviewItem api class
