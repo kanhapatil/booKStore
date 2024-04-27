@@ -1,7 +1,46 @@
-import React from "react";
 import styles from "../../app/ShoppingCart/Checkout/[Checkout]/Checkout.module.css";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-const OrderSummary = ({cartData}) => {
+const OrderSummary = ({ cartData }) => {
+  const router = useRouter();
+
+  const handleOrder = async (storeId, cartId) => {
+    console.log("Store id:", storeId);
+    console.log("Cart id:", cartId);
+
+    const data = {
+      store: storeId,
+      cart: cartId,
+    };
+    console.log(data);
+
+    try {
+      const token = localStorage.getItem("token");
+      if(token){
+        const response = await axios.post(
+          "http://127.0.0.1:8000/order/myorder/",
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response.status);
+        router.push("/Orders");
+      }else{
+        console.log("User is not authenticated");
+      }
+    } catch (error) {
+      console.log("Something went wrong!");
+    }
+  };
+
+  if (cartData) {
+    console.log(cartData);
+  }
+
   return (
     <>
       <div className={styles.orderInfo}>
@@ -60,7 +99,12 @@ const OrderSummary = ({cartData}) => {
           </div>
 
           <div className={styles.placeOrder}>
-            <button className={styles.button}>Order Now</button>
+            <button
+              className={styles.button}
+              onClick={() => handleOrder(cartData.store, cartData.id)}
+            >
+              Order Now
+            </button>
           </div>
         </div>
       </div>

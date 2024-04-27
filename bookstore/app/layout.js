@@ -23,15 +23,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-{
-  /*
-  import NextTopLoader from "nextjs-toploader";
-  <NextTopLoader
-    color="#7a1f1f"
-    height={4}
-    crawl={false}
-    showSpinner={false}
-  />
-*/
-}

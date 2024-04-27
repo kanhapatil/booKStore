@@ -7,13 +7,17 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
   const [data, setData] = useState();
+  const router = useRouter();
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
+        token ? null : router.push("/Login");
         if (token) {
           const response = await axios.get(
             "http://127.0.0.1:8000/user/address/",
@@ -50,7 +54,7 @@ const Signup = () => {
       );
 
       if (!response) {
-        toast.warning("Response is undefined!")
+        toast.warning("Response is undefined!");
       }
 
       if (response.status === 200) {

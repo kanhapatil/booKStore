@@ -8,6 +8,7 @@ from cart.models import Cart
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     store = models.ForeignKey(Mystore, on_delete=models.CASCADE, blank=True, null=True)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True, null=True)
     date = models.DateField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):

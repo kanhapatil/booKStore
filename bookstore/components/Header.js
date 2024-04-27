@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -13,6 +14,8 @@ const navigation = [
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [logout, setLogout] = useState(false);
+  const router = useRouter();
   const token = localStorage.getItem("token");
 
   const closeMobileMenu = () => {
@@ -23,10 +26,17 @@ const Header = () => {
     try {
       localStorage.removeItem("token");
       closeMobileMenu();
+      setLogout(true);
     } catch (error) {
       console.error("Error occurred during logout:", error);
     }
   };
+
+  useEffect(() => {
+    if(logout){
+      router.push("/Login");
+    }
+  },[logout]);
 
   return (
     <>
