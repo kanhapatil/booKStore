@@ -12,6 +12,13 @@
   font-style: normal;
 }
 
+.navbar {
+  width: 100%;
+  background-color: #7a1f1f;
+  height: 70px;
+  margin-bottom: 1.5rem;
+}
+
 .progress-bar {
     position: fixed;
     top: 0;

@@ -52,7 +52,7 @@ const StoreItems = () => {
 
   return (
     <div className={styles.main}>
-      <div className={styles.header}></div>
+      <div className="navbar"></div>
       <ToastContainer />
 
       <div className={styles.container}>

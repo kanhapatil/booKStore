@@ -89,7 +89,7 @@ const ShoppingCart = () => {
 
   return ( 
     <>
-      <div className={styles.nav}></div>
+    <div className="navbar"></div>
       {cart && cart.length > 0 ? (
         cart.map((mainCart, key) => (
           <section key={mainCart.id} className={styles.section}>

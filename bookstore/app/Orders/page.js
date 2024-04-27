@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import navStyles from "../ShoppingCart/ShoppingCart.module.css";
 import Accordion from "@/components/Accordion";
 import axios from "axios";
 
@@ -76,7 +75,7 @@ const Orders = () => {
   };
   return (
     <>
-      <div className={navStyles.nav}></div>
+      <div className="navbar"></div>
       <div>
         <div className="p-2 m-8">
           {accordions.map((accordion) => (

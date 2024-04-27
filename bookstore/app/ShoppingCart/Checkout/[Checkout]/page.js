@@ -36,7 +36,7 @@ const Checkout = () => {
 
   return (
     <>
-      <div className={navStyles.nav}></div>
+      <div className="navbar"></div>
       {
         cartData?
         <section className={styles.section}>
