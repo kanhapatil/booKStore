@@ -5,6 +5,8 @@ from account.models import Addres
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 
 ## Mystore api class
@@ -26,22 +28,20 @@ class Store(viewsets.ModelViewSet):
             return Mystore.objects.all() 
 
 
-## StoreItem api class
-class Item(viewsets.ModelViewSet):
-    queryset = StoreItem.objects.all()
-    serializer_class = StoreItemSerialize
-
-
 ## Item only api class
-class ItemOnly(viewsets.ModelViewSet):
-    queryset = StoreItem.objects.all()
-    serializer_class = ItemOnlySerialize
+class ItemOnly(APIView):
+    def get(self, request):
+        item = StoreItem.objects.all()
+        serialize = ItemOnlySerialize(item, many=True)
+        return Response(serialize.data)
 
 
 ## ItemImage api class
-class Images(viewsets.ModelViewSet):
-    queryset = ItemImage.objects.all()
-    serializer_class = ItemImageSerialize
+class Images(APIView):
+    def get(self, request):
+        images = ItemImage.objects.all()
+        serialize = ItemImageSerialize(images, many=True)
+        return Response(serialize.data)
 
 
 ## StoreRelatedItem api class
@@ -65,6 +65,8 @@ class StoreRelatedItem(viewsets.ModelViewSet):
 
 
 # ReviewItem api class
-class Review(viewsets.ModelViewSet):
-    queryset = ReviewItem.objects.all()
-    serializer_class = ReviewItemSerialize
+class Review(APIView):
+    def get(self, request):
+        review = ReviewItem.objects.all()
+        serialize = ReviewItemSerialize(review, many=True)
+        return Response(serialize.data)

@@ -62,8 +62,6 @@ const ShoppingCart = () => {
   };
 
   const handleIncrease = async (cartItemId, quantity) => {
-    console.log("Decrease", cartItemId, quantity);
-    console.log(quantity - 1);
     if (quantity >= 1) {
       const cartResponse = await axios.patch(
         `http://127.0.0.1:8000/cart/mycartitem/${cartItemId}/`,
@@ -75,9 +73,7 @@ const ShoppingCart = () => {
     }
   };
 
-  const handleDecrease = async (cartItemId, quantity) => {
-    console.log("Decrease", cartItemId, quantity); 
-    console.log(quantity - 1); 
+  const handleDecrease = async (cartItemId, quantity) => { 
     if (quantity > 1) { 
       const cartResponse = await axios.patch( 
         `http://127.0.0.1:8000/cart/mycartitem/${cartItemId}/`, 

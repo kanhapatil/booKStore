@@ -5,12 +5,12 @@ from mystore import views
 
 router = DefaultRouter()
 router.register("mystore", views.Store, basename="mystore")
-router.register("storeitem", views.Item, basename="storeitem")
-router.register("reviewitem", views.Review, basename="reviewitem")
-router.register("itemimage", views.Images, basename="itemimage")
 router.register("storerelateditem", views.StoreRelatedItem, basename="storerelateditem")
-router.register("itemonly", views.ItemOnly, basename="itemonly")
+
 
 urlpatterns = [
-    path("", include(router.urls))
+    path("", include(router.urls)),
+    path("itemonly/", views.ItemOnly.as_view(), name="itemonly"),
+    path("reviewitem/", views.Review.as_view(), name="reviewitem"),
+    path("itemimage/", views.Images.as_view(), name="itemimage")
 ]
