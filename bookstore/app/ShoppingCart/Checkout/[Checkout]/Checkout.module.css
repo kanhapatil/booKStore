@@ -56,23 +56,30 @@
     padding: 1rem 1rem 0rem 1rem;
     border-top: 2px solid black;
     display: flex;
+    text-transform: uppercase;
     justify-content: space-between;
 }
 
 .item {
     padding: 0rem 1rem;
     display: flex;
+    text-transform: uppercase;
     justify-content: space-between;
 }
 
 .date {
     padding: 0rem 1rem 1rem 1rem;
+    text-transform: uppercase;
     display: flex;
     justify-content: space-between;
 }
 
 .placeOrder {
     padding: 0rem 1rem 1rem 0.7rem;
+}
+
+.h5 strong {
+    font-size: 1.1rem;
 }
 
 /* .tableData {
@@ -86,7 +93,12 @@
     color: whitesmoke;
     border-radius: 5px;
     margin-left: 5px;
+    font-size: 1.1rem;
 }
+
+
+
+
 
 .form {
     padding: 1rem;
@@ -163,6 +175,7 @@
     color: whitesmoke;
     border-radius: 5px;
     padding: 0.7rem 1rem;
+    font-size: 1.1rem;
 }
 
 @media screen and (max-width:1100px) {

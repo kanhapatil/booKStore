@@ -162,18 +162,18 @@ const ShoppingCart = () => {
                 </div>
               ))}
 
-              <div className={styles.summary}>
-                <div className={styles.info}>
-                  <p>
-                    <strong>Subtotal</strong>
-                  </p>
-                </div>
-                <div className={styles.total}>
-                  <p>
-                    <strong>${mainCart.subtotal}.00</strong>
-                  </p>
-                </div>
-              </div>
+              <div className={styles.summary}> 
+                <div className={styles.info}> 
+                  <p> 
+                    <strong>Subtotal</strong> 
+                  </p> 
+                </div> 
+                <div className={styles.total}> 
+                  <p> 
+                    <strong>${mainCart.subtotal}.00</strong> 
+                  </p> 
+                </div> 
+              </div> 
 
               <div className={styles.button}>
                 <Link href={`ShoppingCart/Checkout/${mainCart.id}`}><button>Checkout</button></Link>
