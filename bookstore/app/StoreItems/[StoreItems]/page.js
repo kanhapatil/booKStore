@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import StoreDetails from "@/components/StoreDetails";
 import AllStoreItems from "@/components/AllStoreItems";
+import { useParams } from "next/navigation";
 
 
 const StoreItems = () => {
@@ -16,13 +17,13 @@ const StoreItems = () => {
   const [searchValue, setSearchValue] = useState("");
   const [filterValue, setFilterValue] = useState("");
   const [check, setCheck] = useState(false);
+  const storeId = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const id = window.location.href.split("/").pop();
+        const id = storeId.StoreItems;
         const token = localStorage.getItem("token");
-        console.log("chalo");
         const requests = [
           axios.get(
             `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}&itemCategory__category=${filterValue}`
@@ -54,16 +55,11 @@ const StoreItems = () => {
     fetchData();
   }, [searchValue, check]);
 
-  if(storeItems){
-    console.log(storeItems);
-  }
-
   const handleOnChange = (event) => {
     setSearchValue(event.target.value);
   };
 
   const handleFilter = (categoryName) => {
-    console.log(categoryName);
     setFilterValue(categoryName);
     setCheck(true);
   }

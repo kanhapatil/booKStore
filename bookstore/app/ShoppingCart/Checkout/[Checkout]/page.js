@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import navStyles from "../../ShoppingCart.module.css";
 import styles from "./Checkout.module.css";
 import { useParams } from "next/navigation";
 import axios from "axios";

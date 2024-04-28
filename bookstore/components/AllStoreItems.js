@@ -7,9 +7,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+
 
 const AllStoreItems = ({ storeItems, count, setCount }) => {
   const [idArray, setIdArray] = useState([]);
+  const storeId = useParams();
 
   const handleAdd = async (itemId) => {
     const token = localStorage.getItem("token");
@@ -25,7 +28,7 @@ const AllStoreItems = ({ storeItems, count, setCount }) => {
     }
 
     // Get store ID
-    const storeId = window.location.href.split("/").pop();
+    const id = storeId.StoreItems;
 
     try {
       const token = localStorage.getItem("token");
@@ -35,7 +38,7 @@ const AllStoreItems = ({ storeItems, count, setCount }) => {
       }
 
       // Create cart
-      const cartData = { store: Number(storeId) };
+      const cartData = { store: Number(id) };
       const cartResponse = await axios.post(
         "http://127.0.0.1:8000/cart/mycart/",
         cartData,
