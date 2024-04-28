@@ -68,11 +68,13 @@ class StoreItemSerialize(serializers.ModelSerializer):
     itemCategory = ItemCategoriesSerialize(many=True, read_only=True)
     average_rating = serializers.SerializerMethodField()
     user_count = serializers.SerializerMethodField()
+    categoryName = serializers.SerializerMethodField()
+
     class Meta:
         model = StoreItem
         fields = ["id", "store", "name", "standard", "price", 
                   "itemDesc", "itemImages", "item_review", "average_rating", 
-                  "user_count", "itemCategory"]
+                  "user_count", "itemCategory", "categoryName"]
 
     def get_average_rating(self, obj):
         average_rating = ReviewItem.objects.filter(item=obj).aggregate(Avg('rating'))['rating__avg']
@@ -81,6 +83,14 @@ class StoreItemSerialize(serializers.ModelSerializer):
     def get_user_count(self, obj):
         count = ReviewItem.objects.filter(item=obj).count()
         return count
+    
+    def get_categoryName(self, obj):
+        # categories = ItemCategories.objects.filter(item=obj)
+        # category_names = categories.values_list('category', flat=True).distinct()
+        # return list(category_names)
+
+        all_categories = ItemCategories.objects.values_list('category', flat=True).distinct()
+        return list(all_categories)
     
 
 ## Serialize ItemOnly

@@ -150,11 +150,10 @@
   display: flex;
   overflow-x: auto; 
   white-space: nowrap; 
-  padding-bottom: 20px;
 }
 
 .categories p {
-  margin: 0.7rem 0.5rem 0.5rem 0rem;
+  margin: 0.7rem 0.5rem 0rem 0rem;
   padding: 0.1rem 0.6rem;
   border: 1px solid #7a1f1f;
   color: #7a1f1f;
@@ -183,7 +182,7 @@
 }
 
 .allItems {
-  margin-top: 1rem;
+  margin-top: -5px;
   width: 100%;
   height: auto;
 }

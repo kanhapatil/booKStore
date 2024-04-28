@@ -11,17 +11,21 @@ import AllStoreItems from "@/components/AllStoreItems";
 const StoreItems = () => {
   const [storeItems, setStoreItems] = useState(null);
   const [storeDetails, setStoreDetails] = useState(null);
+  const [category, setCategory] = useState([]);
   const [count, setCount] = useState(0);
   const [searchValue, setSearchValue] = useState("");
+  const [filterValue, setFilterValue] = useState("");
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const id = window.location.href.split("/").pop();
         const token = localStorage.getItem("token");
+        console.log("chalo");
         const requests = [
           axios.get(
-            `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}`
+            `http://127.0.0.1:8000/store/storerelateditem/?store_id=${id}&search=${searchValue}&itemCategory__category=${filterValue}`
           ),
           axios.get(`http://127.0.0.1:8000/store/mystore/${id}/`),
         ];
@@ -36,17 +40,19 @@ const StoreItems = () => {
           );
         }
 
-        const [itemsResponse, detailsResponse, cartResponse] = await Promise.all(requests);
+        const [itemsResponse, detailsResponse, cartResponse] =
+          await Promise.all(requests);
         setStoreItems(itemsResponse.data);
+        setCategory(itemsResponse.data[0].categoryName);
         setStoreDetails(detailsResponse.data);
         setCount(token ? cartResponse.data.length : 0);
       } catch (error) {
         console.error("Error occurred:", error);
       }
     };
+    setCheck(false);
     fetchData();
-  }, [searchValue]);
-
+  }, [searchValue, check]);
 
   if(storeItems){
     console.log(storeItems);
@@ -55,6 +61,12 @@ const StoreItems = () => {
   const handleOnChange = (event) => {
     setSearchValue(event.target.value);
   };
+
+  const handleFilter = (categoryName) => {
+    console.log(categoryName);
+    setFilterValue(categoryName);
+    setCheck(true);
+  }
 
   return (
     <div className={styles.main}>
@@ -77,36 +89,23 @@ const StoreItems = () => {
             />
           </div>
 
-          {/*<div>
-            {storeItems && storeItems.length > 0 ? (
-              storeItems.map((name, index) => (
-                <p key={index}>{name.itemCategory[0].category}</p>
-              ))
-            ):null}
-          </div>*/}
           <div className={styles.categories}>
-            <p>School books</p>
-            <p>Philosohpy</p>
-            <p>Spiritual</p>
-            <p>Play boy</p>
-            <p>School books</p>
-            <p>Philosohpy</p>
-            <p>Spiritual</p>
-            <p>Play boy</p>
-            <p>School books</p>
-            <p>Philosohpy</p>
-            <p>Spiritual</p>
-            <p>Play boy</p>
+            {category && category.length > 0
+              ? category.map((categoryName, index) => (
+                  <p key={index} onClick={() => handleFilter(categoryName)}>{categoryName}</p>
+                ))
+              : null}
+            <p onClick={() => handleFilter("")}>Remove</p>
           </div>
 
           {/* Store Items component start */}
-          <div className={styles.allItems}> 
+          <div className={styles.allItems}>
             <AllStoreItems
               storeItems={storeItems}
               count={count}
               setCount={setCount}
             />
-          </div> 
+          </div>
           {/* Store Items component end */}
         </div>
       </div>
