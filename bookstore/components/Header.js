@@ -49,6 +49,7 @@ const Header = () => {
             <Link
               href="/"
               className="-m-1.5 p-1.5 text-white text-xl font-semibold leading-6"
+              style={{fontSize:'1.7rem'}}
               onClick={closeMobileMenu}
             >
               <span className="sr-only">Your Company</span>
@@ -71,6 +72,7 @@ const Header = () => {
                 key={item.name}
                 href={item.href}
                 className="text-sm font-semibold leading-6 text-white"
+                style={{fontSize:'17px'}}
               >
                 {item.name}
               </Link>
@@ -81,6 +83,7 @@ const Header = () => {
               <Link
                 href="/Login"
                 className="text-sm font-semibold leading-6 text-white"
+                style={{fontSize:'17px'}}
               >
                 LogIn <span aria-hidden="true">&rarr;</span>
               </Link>
@@ -89,6 +92,7 @@ const Header = () => {
                 <Link
                   href="#"
                   className="text-sm font-semibold leading-6 text-white"
+                  style={{fontSize:'17px'}}
                   onClick={handleLogout}
                 >
                   LogOut &nbsp;
@@ -96,6 +100,7 @@ const Header = () => {
                 <Link
                   href="/Profile"
                   className="text-sm font-semibold leading-6 text-white"
+                  style={{fontSize:'17px'}}
                 >
                   Profile
                 </Link>
@@ -116,6 +121,7 @@ const Header = () => {
                 href="/"
                 className="-m-1.5 p-1.5 text-white"
                 onClick={closeMobileMenu}
+                style={{fontSize:'1.4rem', color:'black'}}
               >
                 <span className="sr-only">Your Company</span>
                 booKStore

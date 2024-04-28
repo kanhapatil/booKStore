@@ -14,6 +14,8 @@ class OrderItemSerialize(serializers.ModelSerializer):
 ## Serialize Order model
 class OrderSerialize(serializers.ModelSerializer):
     orderItem = OrderItemSerialize(many=True, read_only=True)
+    storeName = serializers.CharField(source="store.name")
+
     class Meta:
         model = Order 
-        fields = ["id", "user", "store", "date", "orderItem"]
+        fields = ["id", "user", "store", "storeName", "date", "orderItem"]

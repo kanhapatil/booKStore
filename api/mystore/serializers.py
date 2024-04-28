@@ -85,4 +85,4 @@ class ItemOnlySerialize(serializers.ModelSerializer):
     itemImages = ItemImageSerialize(many=True, read_only=True)
     class Meta:
         model = StoreItem
-        fields = ["id", "name", "type", "standard", "price", "itemImages"]
+        fields = ["id", "name", "standard", "price", "itemImages"]
