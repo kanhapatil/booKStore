@@ -1,4 +1,5 @@
-from .models import Mystore, StoreItem, ReviewItem, ItemImage
+from .models import (Mystore, StoreItem, ReviewItem, ItemImage, 
+                     ItemCategories, School)
 from rest_framework import serializers
 from django.db.models import Avg
 
@@ -33,6 +34,18 @@ class MystoreSerialize(serializers.ModelSerializer):
         return count
 
 
+## Serialize Categories model
+class ItemCategoriesSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = ItemCategories
+        fields = ["id", "item", "category"]
+
+## Serialize School model
+class SchoolSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = School
+        fields = ["id", "item", "school_name"]
+
 ## Serialize ItemImage model
 class ItemImageSerialize(serializers.ModelSerializer):
     class Meta:
@@ -56,7 +69,7 @@ class StoreItemSerialize(serializers.ModelSerializer):
     user_count = serializers.SerializerMethodField()
     class Meta:
         model = StoreItem
-        fields = ["id", "store", "name", "type", "standard", "price", "itemDesc", "itemImages", "item_review", "average_rating", "user_count"]
+        fields = ["id", "store", "name", "standard", "price", "itemDesc", "itemImages", "item_review", "average_rating", "user_count"]
 
     def get_average_rating(self, obj):
         average_rating = ReviewItem.objects.filter(item=obj).aggregate(Avg('rating'))['rating__avg']

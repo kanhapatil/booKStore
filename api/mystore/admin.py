@@ -1,7 +1,5 @@
-from typing import Any
 from django.contrib import admin
-from django.http import HttpRequest
-from .models import Mystore, StoreItem, ReviewItem, ItemImage
+from .models import Mystore, StoreItem, ReviewItem, ItemImage, ItemCategories, School
 from django.utils.safestring import mark_safe
 
 
@@ -47,11 +45,27 @@ class MystoreAdmin(admin.ModelAdmin):
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-# Register StoreItem
+## Register StoreItem
 @admin.register(StoreItem)
 class StoreItemAdmin(admin.ModelAdmin):
     list_display = ["id", "store", "name", "standard"]
 
+    def get_queryset(self, request):
+        if request.user.is_superuser:
+            return StoreItem.objects.all()
+        else:
+            my_store = Mystore.objects.get(user=request.user)
+            return StoreItem.objects.filter(store=my_store)
+
+## Register ItemCategories
+@admin.register(ItemCategories)
+class ItemCategoriesAdmin(admin.ModelAdmin):
+    list_display = ["item", "category"]
+
+## Register School
+@admin.register(School)
+class SchoolAdmin(admin.ModelAdmin):
+    list_display = ["item", "school_name"]
 
 ## Register ItemImage
 @admin.register(ItemImage) 

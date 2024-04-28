@@ -23,17 +23,9 @@ class Mystore(models.Model):
 
 
 ## Store item model
-ITEM_TYPES = (
-    ("School Book", "School Book"),
-    ("Syllabus Book", "Syllabus Book"),
-    ("College Book", "College Book"),
-    ("Notes", "Notes"), 
-    ("Other", "Other"), 
-) 
 class StoreItem(models.Model):
     store = models.ForeignKey(Mystore, on_delete=models.CASCADE, related_name="storeItem")
     name = models.CharField(max_length=100, blank=True, null=True)
-    type = models.CharField(max_length=100, blank=True, null=True, choices=ITEM_TYPES)
     standard = models.CharField(max_length=255, blank=True, null=True)
     inStock = models.PositiveIntegerField(blank=True, null=True)
     price = models.IntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
@@ -41,7 +33,16 @@ class StoreItem(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+## Store item categories
+class ItemCategories(models.Model):
+    item = models.ForeignKey(StoreItem, on_delete=models.CASCADE, related_name="itemCategory")
+    category = models.CharField(max_length=255)
+
+## School (Syllabus of school's)
+class School(models.Model):
+    item = models.ForeignKey(StoreItem, on_delete=models.CASCADE, related_name="itemSchool")
+    school_name = models.CharField(max_length=255)
 
 ## Store item images
 class ItemImage(models.Model):

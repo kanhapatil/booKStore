@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from .models import Mystore, StoreItem, ReviewItem, ItemImage
-from .serializers import MystoreSerialize, StoreItemSerialize, ReviewItemSerialize, ItemImageSerialize, ItemOnlySerialize
+from .models import Mystore, StoreItem, ReviewItem, ItemImage, ItemCategories, School
+from .serializers import (MystoreSerialize, StoreItemSerialize, 
+                          ReviewItemSerialize, ItemImageSerialize, 
+                          ItemOnlySerialize, ItemCategoriesSerialize, 
+                          SchoolSerialize)
 from account.models import Addres
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
@@ -27,6 +30,17 @@ class Store(viewsets.ModelViewSet):
             print("except", self.request.user)
             return Mystore.objects.all() 
 
+
+## ItemCategories api class
+class ItemCategory(viewsets.ModelViewSet):
+    queryset = ItemCategories.objects.all()
+    serializer_class = ItemCategoriesSerialize
+
+
+## School api class
+class SchoolItem(viewsets.ModelViewSet):
+    queryset = School.objects.all()
+    serializer_class = SchoolSerialize
 
 ## Item only api class
 class ItemOnly(APIView):
