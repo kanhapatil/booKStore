@@ -146,6 +146,23 @@
   text-align: center;
 }
 
+.categories {
+  display: flex;
+  overflow-x: auto; 
+  white-space: nowrap; 
+  padding-bottom: 20px;
+}
+
+.categories p {
+  margin: 0.7rem 0.5rem 0.5rem 0rem;
+  padding: 0.1rem 0.6rem;
+  border: 1px solid #7a1f1f;
+  color: #7a1f1f;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
 .input::placeholder {
   text-align: center;
   color: rgb(83, 83, 83);

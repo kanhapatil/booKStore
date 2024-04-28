@@ -10,6 +10,7 @@ from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from .filters import StoreItemFilter
 
 
 ## Mystore api class
@@ -63,7 +64,8 @@ class StoreRelatedItem(viewsets.ModelViewSet):
     serializer_class = StoreItemSerialize
 
     filter_backends = (DjangoFilterBackend, SearchFilter)
-    filterset_fields = ('price',)
+    # filterset_fields = ('price', 'itemCategory__category')
+    filterset_class = StoreItemFilter
     search_fields = ['name', 'price', 'standard']
 
     def get_queryset(self):

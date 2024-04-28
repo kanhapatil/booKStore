@@ -39,6 +39,9 @@ class ItemCategories(models.Model):
     item = models.ForeignKey(StoreItem, on_delete=models.CASCADE, related_name="itemCategory")
     category = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.category
+
 ## School (Syllabus of school's)
 class School(models.Model):
     item = models.ForeignKey(StoreItem, on_delete=models.CASCADE, related_name="itemSchool")

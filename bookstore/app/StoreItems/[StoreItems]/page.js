@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./StoreItems.module.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import StoreDetails from "@/components/StoreDetails";
 import AllStoreItems from "@/components/AllStoreItems";
+
 
 const StoreItems = () => {
   const [storeItems, setStoreItems] = useState(null);
@@ -46,6 +47,11 @@ const StoreItems = () => {
     fetchData();
   }, [searchValue]);
 
+
+  if(storeItems){
+    console.log(storeItems);
+  }
+
   const handleOnChange = (event) => {
     setSearchValue(event.target.value);
   };
@@ -71,14 +77,36 @@ const StoreItems = () => {
             />
           </div>
 
+          {/*<div>
+            {storeItems && storeItems.length > 0 ? (
+              storeItems.map((name, index) => (
+                <p key={index}>{name.itemCategory[0].category}</p>
+              ))
+            ):null}
+          </div>*/}
+          <div className={styles.categories}>
+            <p>School books</p>
+            <p>Philosohpy</p>
+            <p>Spiritual</p>
+            <p>Play boy</p>
+            <p>School books</p>
+            <p>Philosohpy</p>
+            <p>Spiritual</p>
+            <p>Play boy</p>
+            <p>School books</p>
+            <p>Philosohpy</p>
+            <p>Spiritual</p>
+            <p>Play boy</p>
+          </div>
+
           {/* Store Items component start */}
-          <div className={styles.allItems}>
+          <div className={styles.allItems}> 
             <AllStoreItems
               storeItems={storeItems}
               count={count}
               setCount={setCount}
             />
-          </div>
+          </div> 
           {/* Store Items component end */}
         </div>
       </div>
