@@ -192,13 +192,13 @@ const Footer = () => {
 
               <ul className="mb-0 list-none">
                 <li>
-                  <a href="#!">Link 1</a>
+                  <Link href="/School">School</Link>
                 </li>
                 <li>
-                  <a href="#!">Link 2</a>
+                  <Link href="/Orders">Orders</Link>
                 </li>
                 <li>
-                  <a href="#!">Link 3</a>
+                  <Link href="/Profile">Profile</Link>
                 </li>
                 <li>
                   <a href="#!">Link 4</a>
