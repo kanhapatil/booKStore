@@ -18,7 +18,7 @@ class Store(viewsets.ModelViewSet):
     serializer_class = MystoreSerialize
 
     filter_backends = (DjangoFilterBackend, SearchFilter)
-    search_fields = ['city']
+    search_fields = ['city', 'name']
 
     def get_queryset(self):
         try:

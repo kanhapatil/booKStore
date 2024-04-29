@@ -58,12 +58,12 @@ const Orders = () => {
 
                 <div className={styles.total}>
                   <h5>Total</h5>
-                  <h6>{orders.orderItem.length}</h6>
+                  <h6>$1299</h6>
                 </div>
 
                 <div className={styles.status}>
                   <h5>Status</h5>
-                  <h6>{orders.orderItem.length}</h6>
+                  <h6>Pending</h6>
                 </div>
               </div>
             </Link>

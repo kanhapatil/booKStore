@@ -13,6 +13,10 @@ export default function Hero() {
     setFilterCity(event.target.value);
   }
 
+  const handleStoreName =(event) => {
+    console.log(event.target.value);
+  }
+
   return (
     <>
       <div className="bg-white">
@@ -54,7 +58,8 @@ export default function Hero() {
               <input
                 type="search"
                 className={styles.input}
-                placeholder="Search for stores, syllabus, book"
+                placeholder="Search by store names.."
+                onChange={handleStoreName}
               />
             </div>
 

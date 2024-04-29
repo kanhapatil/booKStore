@@ -6,6 +6,7 @@ export const useFilter = () => useContext(FilterContext);
 
 const ContextProvider = ({ children }) => {
   const [filterCity, setFilterCity] = useState("");
+
   return (
     <FilterContext.Provider value={{filterCity, setFilterCity}}>
       {children}

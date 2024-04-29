@@ -8,11 +8,12 @@
 .orders {
     margin-top: 1rem;
     width: 70%;
-    height: 160px;
+    height: 174px;
     border: 1px solid rgb(16, 14, 14);
     border-radius: 10px;
     margin-bottom: 1rem;
     cursor: pointer;
+    background-color: whitesmoke;
 }
 
 .topHeading {
@@ -35,13 +36,18 @@
 }
 
 .orderInfo {
-    margin: 0.5rem 1rem;
+    margin: 0rem 1rem;
     text-transform: uppercase;
     display: flex;
     flex-direction: column;
 }
 
 .item, .total, .status {
+    background-color: white;
+    padding: 0rem 0.5rem;
+    margin: 0.3rem;
+    border-radius: 5px;
+
     display: flex;
     justify-content: space-between;
 }

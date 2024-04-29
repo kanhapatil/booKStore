@@ -12,12 +12,13 @@ from rest_framework.permissions import IsAuthenticated
 class Myorder(viewsets.ModelViewSet): 
     serializer_class = OrderSerialize 
 
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_queryset(self): 
         user_id = self.request.user.id 
+
         if user_id:
-            return Order.objects.filter(user__id=user_id)
+            return Order.objects.filter(user__id=user_id).order_by("-id")
         else:
             return Order.objects.all()
 
@@ -44,3 +45,14 @@ class Myorder(viewsets.ModelViewSet):
 class MyOrderItem(viewsets.ModelViewSet): 
     queryset = OrderItem.objects.all() 
     serializer_class = OrderItemSerialize 
+
+    def get_queryset(self):
+        try:
+            order_id = self.request.query_params.get('order_id')
+            order = Order.objects.get(id=order_id)
+            if order:
+                return OrderItem.objects.filter(order=order)
+            else:
+                return OrderItem.objects.all()
+        except:
+            return OrderItem.objects.all()

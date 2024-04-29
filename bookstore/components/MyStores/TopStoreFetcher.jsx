@@ -4,6 +4,9 @@ import { useFilter } from "../Context";
 
 const TopStoreFetcher = ({ setStores }) => {
   const { filterCity } = useFilter();
+
+  console.log(filterCity);
+
   useEffect(() => {
     const fetchStores = async () => {
       try {
