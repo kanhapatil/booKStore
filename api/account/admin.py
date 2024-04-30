@@ -8,6 +8,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ["username", "email", "contact", "is_staff"]
     readonly_fields = ["password", "is_superuser", "is_staff", "is_active", "date_joined", "last_login", "groups", "user_permissions"]
     list_per_page = 5
+    
 
     ## Function to get a logIn user object 
     def get_queryset(self, request): 
