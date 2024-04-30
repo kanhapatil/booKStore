@@ -5,7 +5,7 @@ Welcome to the Bookstore Project! This is an ongoing project aimed at creating a
 ### Django rest-framework
 - git clone https://github.com/kanhapatil/booKStore 
 - cd booKStore/api
-- pip install requirements.txt
+- pip install -r requirements.txt
 - python manage.py makemigrations
 - python manage.py migrate
 - python manage.py runserver
