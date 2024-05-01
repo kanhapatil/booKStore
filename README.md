@@ -92,6 +92,14 @@ Note : Project is ongoing...
 
 ![Screenshot 2024-04-25 083142](https://github.com/kanhapatil/booKStore/assets/101468170/fa6afd13-0dee-4dde-a5ef-ecadfad05a8f)
 
+- Order page
+  
+![Screenshot 2024-05-01 091711](https://github.com/kanhapatil/booKStore/assets/101468170/bb3a36b3-4aee-4578-8b55-db12642a231a)
+
+- Order Items page
+  
+![Screenshot 2024-05-01 091319](https://github.com/kanhapatil/booKStore/assets/101468170/dbc6adb8-898d-4ee3-af14-8908a3d9b36c)
+
 - User profile page
 
 ![Screenshot 2024-04-24 111040](https://github.com/kanhapatil/booKStore/assets/101468170/2524d394-bf01-4cc5-8e52-898c0f6db6fe)
