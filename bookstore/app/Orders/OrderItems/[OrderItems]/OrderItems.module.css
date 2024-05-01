@@ -1,0 +1,99 @@
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+    margin-top: 1rem;
+    width: 70%;
+}
+
+.header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header .address h2{
+    color: #7a1f1f;
+    font-size: 1.6rem;
+}
+
+.header .address p{
+    line-height: 1.5rem;
+}
+
+.header .purchased h1{
+    color: #7a1f1f;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.info {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info .deliver h2{
+    font-size: 1.1rem;
+    color: #7a1f1f;
+    font-weight: 600;
+}
+
+.info .dates h2 {
+    color: #7a1f1f;
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+}
+
+.info .dates h2 span {
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.items {
+    margin-top: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.items table {
+    width: 100%;
+}
+
+.items table thead {
+    color: #7a1f1f;
+    height: 35px;
+    border-bottom: 2px solid gray;
+}
+
+.items table tbody {
+    text-align: center;
+}
+
+.items table tbody tr {
+    height: 35px;
+    border-bottom: 2px solid silver;
+}
+
+.total {
+    margin-top: 0.6rem;
+    display: flex;
+    justify-content: end;
+}
+
+.total .button {
+    width: 200px;
+    background-color: #7a1f1f;
+    padding: 0.5rem 1rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}

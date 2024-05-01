@@ -63,7 +63,7 @@ const Orders = () => {
 
                 <div className={styles.status}>
                   <h5>Status</h5>
-                  <h6>Pending</h6>
+                  <h6>{orders.status === false ? "Pending" : "Accept"}</h6>
                 </div>
               </div>
             </Link>
