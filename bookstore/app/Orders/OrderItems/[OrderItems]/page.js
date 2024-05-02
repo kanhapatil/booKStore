@@ -96,7 +96,11 @@ const page = () => {
             </div>
 
             <div className={styles.total}>
-              <div className={styles.button}>
+            <div className={styles.button1}>
+                <p>Download receipt</p>
+              </div>
+
+              <div className={styles.button2}>
                 <p>Total</p>
                 <p>$1299</p>
               </div>
