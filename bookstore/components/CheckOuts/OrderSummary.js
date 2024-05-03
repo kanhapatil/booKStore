@@ -1,9 +1,11 @@
 import styles from "../../app/ShoppingCart/Checkout/[Checkout]/Checkout.module.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { usePDF } from "react-to-pdf";
 
 const OrderSummary = ({ cartData }) => {
   const router = useRouter();
+  const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
 
   const handleOrder = async (storeId, cartId) => {
     console.log("Store id:", storeId);
@@ -17,7 +19,7 @@ const OrderSummary = ({ cartData }) => {
 
     try {
       const token = localStorage.getItem("token");
-      if(token){
+      if (token) {
         const response = await axios.post(
           "http://127.0.0.1:8000/order/myorder/",
           data,
@@ -29,7 +31,7 @@ const OrderSummary = ({ cartData }) => {
         );
         console.log(response.status);
         router.push("/Orders");
-      }else{
+      } else {
         console.log("User is not authenticated");
       }
     } catch (error) {
@@ -43,7 +45,7 @@ const OrderSummary = ({ cartData }) => {
 
   return (
     <>
-      <div className={styles.orderInfo}>
+      <div className={styles.orderInfo} ref={targetRef}>
         <div className={styles.heading}>Order Summary</div>
 
         <div className={styles.info}>
@@ -104,6 +106,10 @@ const OrderSummary = ({ cartData }) => {
               onClick={() => handleOrder(cartData.store, cartData.id)}
             >
               Order Now
+            </button>
+
+            <button className={styles.button} onClick={() => toPDF()}>
+              Receipt
             </button>
           </div>
         </div>

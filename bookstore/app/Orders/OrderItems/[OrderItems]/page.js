@@ -83,7 +83,7 @@ const page = () => {
                   {orderItems && orderItems.length > 0
                     ? orderItems.map((item, index) => (
                         <tr key={index}>
-                          <td>{item.id}</td>
+                          <td>{index + 1}</td>
                           <td>{item.item.name}</td>
                           <td>{item.quantity}</td>
                           <td>${item.item.price}</td>

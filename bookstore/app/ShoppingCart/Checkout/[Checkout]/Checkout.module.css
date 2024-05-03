@@ -53,12 +53,17 @@
 }
 
 .total {
-    padding: 1rem 1rem 0rem 1rem;
+    margin: 0rem 1rem 0rem 1rem;
+    padding-top: 0.8rem;
     border-top: 2px solid black;
     display: flex;
     text-transform: uppercase;
     justify-content: space-between;
 }
+
+/* .box {
+    background-color: #f2f2f2;
+} */
 
 .item {
     padding: 0rem 1rem;
@@ -76,15 +81,14 @@
 
 .placeOrder {
     padding: 0rem 1rem 1rem 0.7rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .h5 strong {
     font-size: 1.1rem;
 }
 
-/* .tableData {
-    border-bottom: 1px solid rgb(199, 196, 196);
-} */
 
 .button {
     padding: 0.7rem 1rem;
@@ -95,10 +99,6 @@
     margin-left: 5px;
     font-size: 1.1rem;
 }
-
-
-
-
 
 .form {
     padding: 1rem;

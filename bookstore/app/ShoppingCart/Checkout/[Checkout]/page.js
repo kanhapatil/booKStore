@@ -7,6 +7,7 @@ import EmptyCart from "@/components/EmptyCart";
 import OrderSummary from "@/components/CheckOuts/OrderSummary";
 import BillingInfo from "@/components/CheckOuts/BillingInfo";
 
+
 const Checkout = () => {
   const id = useParams();
   const [cartData, setCartData] = useState();
