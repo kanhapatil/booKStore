@@ -1,7 +1,4 @@
-from typing import Any
 from django.contrib import admin
-from django.db.models.query import QuerySet
-from django.http import HttpRequest
 from .models import Order, OrderItem
 from mystore.models import Mystore
 
@@ -31,3 +28,5 @@ class OrderItemAdmin(admin.ModelAdmin):
             my_store = Mystore.objects.get(user=request.user)    
             my_store_order = Order.objects.filter(store=my_store) 
             return OrderItem.objects.filter(order__in=my_store_order)
+        
+        

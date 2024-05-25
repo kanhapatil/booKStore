@@ -81,6 +81,15 @@ class StoreItemAdmin(admin.ModelAdmin):
 class ItemCategoriesAdmin(admin.ModelAdmin):
     list_display = ["item", "category"]
 
+    def get_queryset(self, request):
+        if request.user.is_superuser:
+            return ItemCategories.objects.all()
+        else:
+            my_store = Mystore.objects.get(user=request.user)
+            my_store_items = StoreItem.objects.filter(store=my_store)
+            return ItemCategories.objects.filter(item__in=my_store_items)
+
+
 
 ## Register School
 @admin.register(School)
@@ -112,7 +121,7 @@ class ItemImageAdmin(admin.ModelAdmin):
             store_item = StoreItem.objects.filter(store=my_store)
             return ItemImage.objects.filter(item__in=store_item)
         else:
-            return super().get_queryset(request)
+            return super().get_queryset(request) 
         
     ## Function to display only logIn user store items name
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
