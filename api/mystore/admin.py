@@ -80,7 +80,7 @@ class StoreItemAdmin(admin.ModelAdmin):
 @admin.register(ItemCategories)
 class ItemCategoriesAdmin(admin.ModelAdmin):
     list_display = ["item", "category"]
-    # autocomplete_fields = ['item']
+
 
 ## Register School
 @admin.register(School)

@@ -6,7 +6,7 @@ import { usePDF } from "react-to-pdf";
 const OrderSummary = ({ cartData }) => {
   const router = useRouter();
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
-
+  
   const handleOrder = async (storeId, cartId) => {
     console.log("Store id:", storeId);
     console.log("Cart id:", cartId);
@@ -41,7 +41,7 @@ const OrderSummary = ({ cartData }) => {
 
   if (cartData) {
     console.log(cartData);
-  }
+  } 
 
   return (
     <>
