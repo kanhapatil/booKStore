@@ -1,66 +1,128 @@
 .main {
-    width: 100%;
-    min-height: 100vh;
-    background-color: white;
-  }
-  
-  .container {
-    margin-top: 3rem;
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 1.5rem;
-  }
+  width: 100%;
+  min-height: 100vh;
+  background-color: white;
+}
 
+.container {
+  margin-top: 3rem;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.search {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+
+.search .input {
+  display: block;
+  width: 100%;
+  height: 48px;
+  background-color: rgb(216, 215, 215);
+  border: none;
+  border-radius: 5px;
+  color: rgb(83, 83, 83);
+  text-align: center;
+}
+
+.input::placeholder {
+  text-align: center;
+  color: rgb(83, 83, 83);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.searchInput::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.school_store {
+  width: 70%;
+  height: 240px;
+  border: 1px solid rgb(216, 215, 215);
+  border-radius: 1px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.school {
+  width: 39%;
+  margin: 0.5rem 0rem 0.5rem 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.school img {
+  display: block;
+  width: 100%; 
+  height: 100%;
+  object-fit: cover;
+}
+
+.school .name {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 100%;
+  transition: opacity 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white; 
+  padding: 10px;
+}
+
+.name p {
+  font-size: 1.5rem;
+  margin: 0; 
+}
+
+.store {
+  width: 60%;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.store img {
+  display: block;
+  width: 100%; 
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 860px) {
   .search {
-    width: 70%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .search .input {
-    display: block;
-    width: 100%;
-    height: 48px;
-    background-color: rgb(216, 215, 215);
-    border: none;
-    border-radius: 5px;
-    color: rgb(83, 83, 83);
-    text-align: center;
+    width: 86%;
   }
 
-  .input::placeholder {
-    text-align: center;
-    color: rgb(83, 83, 83);
-  }
-  
-  .input:focus {
-    outline: none;
-  }
-  
-  .searchInput::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-  }
-  
   .school_store {
-    width: 70%;
-    height: 240px;
-    border: 1px solid black;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
+    width: 86%;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .search {
+    width: 96%;
   }
 
-  .school {
-    width: 35%;
-    margin: 0.5rem 0rem 0.5rem 0.5rem;
-    border: 1px solid red;
+  .school_store {
+    width: 96%;
   }
+}
 
+@media screen and (max-width:460px) {
   .store {
-    width: 64%;
-    margin: 0.5rem;
-    border: 1px solid red;
+    display: none;
   }
+  
+  .school {
+    width: 100%;
+  }
+}
