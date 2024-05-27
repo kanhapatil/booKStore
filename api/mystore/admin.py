@@ -8,13 +8,15 @@ class ItemImageInline(admin.TabularInline):
     model = ItemImage
     extra = 1
 
+
 ## Item category tab/inline field
 class ItemCategoryInline(admin.TabularInline):
     model = ItemCategories
     extra = 1
 
+
 ## Item related to school tab/inline field
-class ItemRelatedSchool(admin.TabularInline):
+class StoreRelatedSchool(admin.TabularInline):
     model = School
     extra = 1
 
@@ -24,6 +26,7 @@ class ItemRelatedSchool(admin.TabularInline):
 class MystoreAdmin(admin.ModelAdmin):
     list_display = ["user", "name", "contact", "date"]
     readonly_fields = ["verification", "recharge", "url_image", "url"] 
+    inlines = [StoreRelatedSchool]
 
     ## Function to display url image 
     def url_image(self, obj): 
@@ -65,8 +68,7 @@ class MystoreAdmin(admin.ModelAdmin):
 @admin.register(StoreItem)
 class StoreItemAdmin(admin.ModelAdmin):
     list_display = ["id", "store", "name", "standard"]
-    inlines = [ItemImageInline, ItemCategoryInline, ItemRelatedSchool]
-    # search_fields = ["name"]
+    inlines = [ItemImageInline, ItemCategoryInline]
 
     def get_queryset(self, request):
         if request.user.is_superuser:
@@ -94,50 +96,57 @@ class ItemCategoriesAdmin(admin.ModelAdmin):
 ## Register School
 @admin.register(School)
 class SchoolAdmin(admin.ModelAdmin):
-    list_display = ["item", "school_name"]
+    list_display = ["school_name", "city", "address"]
+
+    def get_queryset(self, request):
+        if request.user.is_superuser:
+            return School.objects.all()
+        else:
+            my_store = Mystore.objects.get(user=request.user)
+            return School.objects.filter(store=my_store)
 
 
 ## Register ItemImage
-@admin.register(ItemImage) 
-class ItemImageAdmin(admin.ModelAdmin): 
-    list_display = ["id", "item", "img"] 
-    readonly_fields = ["img"] 
-    list_filter = ["item"]
-    readonly_fields = ["img_image"] 
+# @admin.register(ItemImage) 
+# class ItemImageAdmin(admin.ModelAdmin): 
+#     list_display = ["id", "item", "img"] 
+#     readonly_fields = ["img"] 
+#     list_filter = ["item"]
+#     readonly_fields = ["img_image"] 
 
-    def img_image(self, obj): 
-        return mark_safe('<img src="{url}" width="{width}" height="{height}" />'.format( 
-            url=obj.img.url, 
-            width=100, 
-            height=100, 
-        )) 
+#     def img_image(self, obj): 
+#         return mark_safe('<img src="{url}" width="{width}" height="{height}" />'.format( 
+#             url=obj.img.url, 
+#             width=100, 
+#             height=100, 
+#         )) 
     
-    img_image.short_description = "Image"
+#     img_image.short_description = "Image"
     
-    ## Function to filter out ItemImages of current store item
-    def get_queryset(self, request):
-        if request.user.is_staff and not request.user.is_superuser:
-            my_store = Mystore.objects.get(user=request.user)
-            store_item = StoreItem.objects.filter(store=my_store)
-            return ItemImage.objects.filter(item__in=store_item)
-        else:
-            return super().get_queryset(request) 
+#     ## Function to filter out ItemImages of current store item
+#     def get_queryset(self, request):
+#         if request.user.is_staff and not request.user.is_superuser:
+#             my_store = Mystore.objects.get(user=request.user)
+#             store_item = StoreItem.objects.filter(store=my_store)
+#             return ItemImage.objects.filter(item__in=store_item)
+#         else:
+#             return super().get_queryset(request) 
         
-    ## Function to display only logIn user store items name
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if request.user.is_staff and not request.user.is_superuser:
-            if db_field.name == "item":
-                my_store = Mystore.objects.get(user=request.user)
-                kwargs["queryset"] = StoreItem.objects.filter(store=my_store)
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+#     ## Function to display only logIn user store items name
+#     def formfield_for_foreignkey(self, db_field, request, **kwargs):
+#         if request.user.is_staff and not request.user.is_superuser:
+#             if db_field.name == "item":
+#                 my_store = Mystore.objects.get(user=request.user)
+#                 kwargs["queryset"] = StoreItem.objects.filter(store=my_store)
+#         return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
-    ## Function to disabled edit & add button
-    def get_form(self, request, obj=None, **kwargs):
-        form = super().get_form(request, obj, **kwargs)
-        if request.user.is_staff and not request.user.is_superuser:
-            form.base_fields['item'].widget.can_add_related = False
-            form.base_fields['item'].widget.can_change_related = False
-        return form 
+#     ## Function to disabled edit & add button
+#     def get_form(self, request, obj=None, **kwargs):
+#         form = super().get_form(request, obj, **kwargs)
+#         if request.user.is_staff and not request.user.is_superuser:
+#             form.base_fields['item'].widget.can_add_related = False
+#             form.base_fields['item'].widget.can_change_related = False
+#         return form 
 
 
 ## Register ReviewItem 

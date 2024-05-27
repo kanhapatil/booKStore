@@ -42,8 +42,12 @@ class ItemCategories(models.Model):
 
 ## School (Syllabus of school's)
 class School(models.Model):
-    item = models.ForeignKey(StoreItem, on_delete=models.CASCADE, related_name="itemSchool")
+    store = models.ForeignKey(Mystore, on_delete=models.CASCADE, blank=True, null=True, related_name="storeSchool")
     school_name = models.CharField(max_length=255)
+    city = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    image = models.ImageField(upload_to="storeImages/", blank=True, null=True)
+
 
 ## Store item images
 class ItemImage(models.Model):

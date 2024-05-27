@@ -65,7 +65,7 @@ const StoreItems = () => {
   }
 
   return (
-    <div className={styles.main}>
+    <main className={styles.main}>
       <div className="navbar"></div>
       <ToastContainer />
 
@@ -105,7 +105,7 @@ const StoreItems = () => {
           {/* Store Items component end */}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
