@@ -5,12 +5,13 @@ import axios from "axios";
 import Link from "next/link";
 
 const School = () => {
-  const [schoolStore, setSchoolStore] = useState([]);
+  const [schoolStore, setSchoolStore] = useState();
+  const [filter, setFilter] = useState("");
   useEffect(() => {
     const fetchSchoolStore = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/store/schools/"
+          `http://127.0.0.1:8000/store/schools/?search=${filter}`
         );
         setSchoolStore(response.data);
       } catch (error) {
@@ -18,7 +19,11 @@ const School = () => {
       }
     };
     fetchSchoolStore();
-  }, []);
+  }, [filter]);
+
+  const handleOnChange = (event) => {
+    setFilter(event.target.value);
+  };
 
   return (
     <>
@@ -26,20 +31,27 @@ const School = () => {
         <div className="navbar"></div>
 
         <div className={styles.container}>
+        <p className={styles.sub_heading}>⇤all schools⇥</p>
           <div className={styles.search}>
             <input
               type="search"
               className={`${styles.input} ${styles.searchInput}`}
-              placeholder="Search by your school name or store name"
+              onChange={handleOnChange}
+              placeholder="Search by your school name or city"
             />
           </div>
 
           {schoolStore
             ? schoolStore.map((item, index) => (
-                <div key={index} className={styles.school_store}>
+                <Link
+                  href={`StoreItems/${item.store.id}`}
+                  className={styles.school_store}
+                  key={index}
+                >
                   {/* School information */}
                   <div className={styles.school}>
                     <img src={item.image} alt="school image" />
+
                     <div className={styles.name}>
                       <p>{item.school_name}</p>
                     </div>
@@ -47,12 +59,13 @@ const School = () => {
 
                   {/* Store information */}
                   <div className={styles.store}>
-                      <Link href={`StoreItems/${item.store.id}`}>
-                      <img src={item.store.image1} alt="store image" />
-                      </Link>
-                      <div className={styles.name}></div>
+                    <img src={item.store.image1} alt="school image" />
+
+                    <div className={styles.name}>
+                      <p>{item.store.name}</p>
                     </div>
-                </div>
+                  </div>
+                </Link>
               ))
             : null}
         </div>

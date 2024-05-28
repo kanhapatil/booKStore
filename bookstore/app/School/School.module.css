@@ -5,7 +5,7 @@
 }
 
 .container {
-  margin-top: 3rem;
+  margin-top: 2.3rem;
   width: 100%;
   height: auto;
   display: flex;
@@ -15,7 +15,14 @@
   margin-bottom: 2rem;
 }
 
+.sub_heading {
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .search {
+  margin-top: -0.9rem;
   width: 70%;
   display: flex;
   justify-content: center;
@@ -87,14 +94,25 @@
 .store {
   width: 60%;
   margin: 0.5rem;
-  cursor: pointer;
+  position: relative;
+  display: inline-block;
 }
 
 .store img {
   display: block;
   width: 100%; 
   height: 100%;
-  object-fit: cover;
+}
+
+.store .name {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 100%;
+  transition: opacity 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white; 
+  padding: 10px;
 }
 
 @media screen and (max-width: 860px) {
@@ -124,5 +142,6 @@
   
   .school {
     width: 100%;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
   }
 }
