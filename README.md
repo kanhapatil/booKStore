@@ -103,3 +103,7 @@ Note : Project is ongoing...
 - User profile page
 
 ![Screenshot 2024-04-24 111040](https://github.com/kanhapatil/booKStore/assets/101468170/2524d394-bf01-4cc5-8e52-898c0f6db6fe)
+
+- Stores relation with school page
+
+![Screenshot 2024-05-28 083351](https://github.com/kanhapatil/booKStore/assets/101468170/4ef7c81e-26cb-4db9-a57d-4ef32d843063)
