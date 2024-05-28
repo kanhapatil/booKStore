@@ -45,7 +45,7 @@ class SchoolSerialize(serializers.ModelSerializer):
     store = MystoreSerialize()
     class Meta:
         model = School
-        fields = ["id", "school_name", "image", "store"]
+        fields = ["school_name", "city", "image", "store"]
 
 ## Serialize ItemImage model
 class ItemImageSerialize(serializers.ModelSerializer):

@@ -7,7 +7,7 @@ router = DefaultRouter()
 router.register("mystore", views.Store, basename="mystore")
 router.register("storerelateditem", views.StoreRelatedItem, basename="storerelateditem")
 router.register("itemcategory", views.ItemCategory, basename="itemcategory")
-router.register("schools", views.SchoolItem, basename="schools")
+router.register("schools", views.SchoolStore, basename="schools")
 
 urlpatterns = [
     path("", include(router.urls)),

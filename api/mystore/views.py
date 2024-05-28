@@ -39,9 +39,12 @@ class ItemCategory(viewsets.ModelViewSet):
 
 
 ## School api class
-class SchoolItem(viewsets.ModelViewSet):
+class SchoolStore(viewsets.ModelViewSet):
     queryset = School.objects.all()
     serializer_class = SchoolSerialize
+
+    filter_backends = (DjangoFilterBackend, SearchFilter)
+    search_fields = ["school_name", "city"]
 
 ## Item only api class
 class ItemOnly(APIView):
