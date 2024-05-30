@@ -3,13 +3,14 @@ import axios from "axios";
 import styles from "../../app/ShoppingCart/Checkout/[Checkout]/Checkout.module.css";
 
 const BillingInfo = () => {
+  const [user, setUser] = useState();
   const [address, setAddress] = useState();
   useEffect(() => {
     const fetchAddress = async () => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const response = await axios.get(
+          const userAddress = await axios.get(
             "http://127.0.0.1:8000/user/address/",
             {
               headers: {
@@ -17,7 +18,17 @@ const BillingInfo = () => {
               },
             }
           );
-          setAddress(response.data);
+          setAddress(userAddress.data);
+
+          const userData = await axios.get(
+            "http://127.0.0.1:8000/user/register/",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setUser(userData.data);
         } else {
           console.log("something went wrong");
         }
@@ -28,8 +39,8 @@ const BillingInfo = () => {
     fetchAddress();
   }, []);
 
-  if (address){
-    console.log(address[0]["state"]);
+  if (user){
+    console.log(user);
   }
   return (
     <>
@@ -54,11 +65,13 @@ const BillingInfo = () => {
             <input
               type="text"
               className={styles.input}
+              value={user? user[0]["username"]: null}
               placeholder="Email Address"
             />
             <input
               type="text"
               className={styles.input}
+              value={user? user[0]["contact"]: null}
               placeholder="Phone Number"
             />
           </div>

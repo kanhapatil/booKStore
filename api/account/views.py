@@ -19,7 +19,10 @@ from mystore.models import Mystore
 # Register api class
 class Register(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return User.objects.filter(username=self.request.user)
 
     def perform_create(self, serializer):
         user_instance = serializer.save()
@@ -57,8 +60,6 @@ class Contact(viewsets.ModelViewSet):
     def create(self, request):
         subject = request.data.get("subject")
         username = request.data.get("email")
-
-        print(subject)
         
         if subject == "Open store":
             group = Group.objects.get(name="staff")
