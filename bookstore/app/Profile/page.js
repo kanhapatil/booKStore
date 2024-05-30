@@ -39,7 +39,7 @@ const Signup = () => {
     fetchUserData();
   }, []);
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (event) => {
     try {
       event.preventDefault();
       const token = localStorage.getItem("token");
