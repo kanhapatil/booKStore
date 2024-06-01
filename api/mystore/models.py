@@ -16,7 +16,6 @@ class Mystore(models.Model):
     image1 = models.ImageField(upload_to="storeImages/")
     image2 = models.ImageField(upload_to="storeImages/", blank=True, null=True)
     image3 = models.ImageField(upload_to="storeImages/", blank=True, null=True)
-    url = models.ImageField(upload_to="storeImages/", blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -30,7 +29,11 @@ class StoreItem(models.Model):
     inStock = models.PositiveIntegerField(blank=True, null=True)
     price = models.IntegerField(validators=[MinValueValidator(1)], blank=True, null=True)
     itemDesc = models.TextField(blank=True, null=True)
-
+    topay = models.PositiveIntegerField(blank=True, null=True) 
+    open_to_sell = models.BooleanField(default=True, blank=True, null=True)
+    start_date = models.DateField(auto_now_add=True, blank=True, null=True) 
+    end_date = models.DateField(blank=True, null=True)
+    
     def __str__(self):
         return self.name
 

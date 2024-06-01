@@ -1,0 +1,77 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  #popup-modal {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 20px;
+  }
+  #popup-modal .close-btn {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: gray;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .upi {
+    display: flex;
+    justify-content: center;
+  }
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+</style>
+
+<button type="button" class="btn btn-success" id="open-modal">
+  Recharge store
+</button>
+
+<!-- Overlay -->
+<div id="overlay"></div>
+
+<!-- Popup modal -->
+<div id="popup-modal">
+  <button class="close-btn">&times;</button>
+  <div class="upi">
+    <img src="data:image/png;base64,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" alt="">
+  </div>
+</div>
+
+<!-- Custom script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#open-modal").click(function () {
+      // Open the popup-modal
+      $("#popup-modal").fadeIn(500);
+      $("#overlay").fadeIn(500);
+    });
+
+    // Close the popup-modal
+    $(".close-btn").click(function () {
+        $("#popup-modal").fadeOut(500);
+        $("#overlay").fadeOut(500);
+    })
+  });
+</script>
