@@ -42,6 +42,8 @@ class ItemCategories(models.Model):
     item = models.ForeignKey(StoreItem, on_delete=models.CASCADE, related_name="itemCategory")
     category = models.CharField(max_length=255, blank=True, null=True)
     
+    def __str__(self):
+        return self.category
 
 ## School (Syllabus of school's)
 class School(models.Model):
@@ -64,7 +66,7 @@ class ItemImage(models.Model):
 # Review model
 class ReviewItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name="user_review")
-    item = models.ForeignKey(StoreItem, on_delete=models.CASCADE, related_name="item_review")
+    item = models.ForeignKey(StoreItem, on_delete=models.SET_NULL, blank=True, null=True, related_name="item_review")
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     description = models.TextField()
     created_at = models.DateField(auto_now_add=True)

@@ -39,7 +39,9 @@
         <div class="col-12 col-md-auto d-flex align-items-center justify-content-end page-actions">
             {% block object-tools %}
                 {% block object-tools-items %}
-                    {% include "./popup_box.html" %}
+                    {% if cl.opts.model_name == 'mystore' %}
+                        {% include "./popup_box.html" %}
+                    {% endif %}
                     {% change_list_object_tools %}
                 {% endblock %}
             {% endblock %}

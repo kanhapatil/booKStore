@@ -47,7 +47,7 @@ class MystoreAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return ["user", "name", "date", "verification"]
         else:
-            return []
+            return [] 
         
     ## Function to filter out logIn user store 
     def get_queryset(self, request): 
@@ -194,6 +194,15 @@ class ItemCategoriesAdmin(admin.ModelAdmin):
             my_store = Mystore.objects.get(user=request.user)
             my_store_items = StoreItem.objects.filter(store=my_store)
             return ItemCategories.objects.filter(item__in=my_store_items)
+        
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "item" and not request.user.is_superuser:
+            try:
+                my_store = Mystore.objects.get(user=request.user)
+                kwargs["queryset"] = StoreItem.objects.filter(store=my_store)
+            except Mystore.DoesNotExist:
+                kwargs["queryset"] = StoreItem.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 ## Register School
@@ -210,46 +219,46 @@ class SchoolAdmin(admin.ModelAdmin):
 
 
 ## Register ItemImage
-# @admin.register(ItemImage) 
-# class ItemImageAdmin(admin.ModelAdmin): 
-#     list_display = ["id", "item", "img"] 
-#     readonly_fields = ["img"] 
-#     list_filter = ["item"]
-#     readonly_fields = ["img_image"] 
+@admin.register(ItemImage) 
+class ItemImageAdmin(admin.ModelAdmin): 
+    list_display = ["id", "item", "img"] 
+    readonly_fields = ["img"] 
+    list_filter = ["item"]
+    readonly_fields = ["img_image"] 
 
-#     def img_image(self, obj): 
-#         return mark_safe('<img src="{url}" width="{width}" height="{height}" />'.format( 
-#             url=obj.img.url, 
-#             width=100, 
-#             height=100, 
-#         )) 
+    def img_image(self, obj): 
+        return mark_safe('<img src="{url}" width="{width}" height="{height}" />'.format( 
+            url=obj.img.url, 
+            width=100, 
+            height=100, 
+        )) 
     
-#     img_image.short_description = "Image"
+    img_image.short_description = "Image"
     
-#     ## Function to filter out ItemImages of current store item
-#     def get_queryset(self, request):
-#         if request.user.is_staff and not request.user.is_superuser:
-#             my_store = Mystore.objects.get(user=request.user)
-#             store_item = StoreItem.objects.filter(store=my_store)
-#             return ItemImage.objects.filter(item__in=store_item)
-#         else:
-#             return super().get_queryset(request) 
+    ## Function to filter out ItemImages of current store item
+    def get_queryset(self, request):
+        if request.user.is_staff and not request.user.is_superuser:
+            my_store = Mystore.objects.get(user=request.user)
+            store_item = StoreItem.objects.filter(store=my_store)
+            return ItemImage.objects.filter(item__in=store_item)
+        else:
+            return super().get_queryset(request) 
         
-#     ## Function to display only logIn user store items name
-#     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-#         if request.user.is_staff and not request.user.is_superuser:
-#             if db_field.name == "item":
-#                 my_store = Mystore.objects.get(user=request.user)
-#                 kwargs["queryset"] = StoreItem.objects.filter(store=my_store)
-#         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    ## Function to display only logIn user store items name
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if request.user.is_staff and not request.user.is_superuser:
+            if db_field.name == "item":
+                my_store = Mystore.objects.get(user=request.user)
+                kwargs["queryset"] = StoreItem.objects.filter(store=my_store)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
-#     ## Function to disabled edit & add button
-#     def get_form(self, request, obj=None, **kwargs):
-#         form = super().get_form(request, obj, **kwargs)
-#         if request.user.is_staff and not request.user.is_superuser:
-#             form.base_fields['item'].widget.can_add_related = False
-#             form.base_fields['item'].widget.can_change_related = False
-#         return form 
+    ## Function to disabled edit & add button
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        if request.user.is_staff and not request.user.is_superuser:
+            form.base_fields['item'].widget.can_add_related = False
+            form.base_fields['item'].widget.can_change_related = False
+        return form 
 
 
 ## Register ReviewItem 

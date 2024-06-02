@@ -18,6 +18,6 @@ class Order(models.Model):
 
 ## OrderItem model 
 class OrderItem(models.Model): 
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="orderItem") 
-    item = models.ForeignKey(StoreItem, on_delete=models.CASCADE, blank=True, null=True)  
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True, related_name="orderItem") 
+    item = models.ForeignKey(StoreItem, on_delete=models.SET_NULL, blank=True, null=True)  
     quantity = models.PositiveIntegerField(blank=True, null=True) 
