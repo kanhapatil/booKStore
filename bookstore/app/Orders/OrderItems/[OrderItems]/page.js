@@ -4,12 +4,14 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import styles from "./OrderItems.module.css";
 import EmptyCart from "@/components/EmptyCart";
+import PopupModal from "@/components/PopupModal";
 
 const page = () => {
   const id = useParams();
   const [orderItems, setOrderItems] = useState();
+  const [open, setOpen] = useState(false);
+  const [itemId, setItemId] = useState();
 
-  
   useEffect(() => {
     const fetchOrderItems = async () => {
       try {
@@ -25,15 +27,20 @@ const page = () => {
     fetchOrderItems();
   }, []);
 
-  if (orderItems) {
-    console.log(orderItems);
+  const handleOpen = (itemId) => {
+    setOpen(true);
+    setItemId(itemId);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   }
 
   return (
     <>
       <div className="navbar"></div>
 
-      <section className={styles.section}>
+      <section className={`${styles.section} ${open ? styles.sectionOpaque : ""}`}>
         {orderItems && orderItems.length > 0 ? (
           <main className={styles.main}>
             <header className={styles.header}>
@@ -76,6 +83,7 @@ const page = () => {
                     <th>Quantity</th>
                     <th>Rate</th>
                     <th>Amount</th>
+                    <th>Review</th>
                   </tr>
                 </thead>
 
@@ -84,10 +92,16 @@ const page = () => {
                     ? orderItems.map((item, index) => (
                         <tr key={index}>
                           <td>{index + 1}</td>
-                          <td>{item.item.name}</td>
+                          <td>{item.item ? item.item.name : null}</td>
                           <td>{item.quantity}</td>
-                          <td>${item.item.price}</td>
-                          <td>${item.item.price * item.quantity}</td>
+                          <td>${item.item ? item.item.price : null}</td>
+                          <td>
+                            $
+                            {item.item ? item.item.price * item.quantity : null}
+                          </td>
+                          <td className={styles.clickme} onClick={() => handleOpen(item.id)}>
+                            Click me
+                          </td>
                         </tr>
                       ))
                     : null}
@@ -96,7 +110,7 @@ const page = () => {
             </div>
 
             <div className={styles.total}>
-            <div className={styles.button1}>
+              <div className={styles.button1}>
                 <p>Download receipt</p>
               </div>
 
@@ -110,6 +124,9 @@ const page = () => {
           <EmptyCart />
         )}
       </section>
+
+      {/* Popup modal */}
+      {open && <PopupModal handleClose={handleClose} itemId={itemId} />}
     </>
   );
 };
