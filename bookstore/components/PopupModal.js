@@ -13,19 +13,33 @@ const PopupModal = ({ handleClose, itemId }) => {
     setStars(newRating);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const descriptionValue = descriptionRef.current.value;
     console.log("Stars:", stars);
     console.log("Description:", descriptionValue);
-    console.log(itemId?itemId:null);
-
+    console.log(itemId ? itemId : null);
+  
+    const reviewData = {
+      item: itemId,
+      rating:2,
+      description:descriptionValue
+    };
+  
+    try {
+      const response = await axios.post(`http://127.0.0.1:8000/store/reviewitem/${itemId}/`, reviewData);
+      console.log(response.status);
+    } catch (error) {
+      console.error("There was an error submitting the review:", error);
+    }
+  
     handleClose();
   };
+  
 
   useEffect(() => {
     const fetchItemReview = async () => {
-        const response = await axios.get("http://127.0.0.1:8000/store/reviewitem/");
-        console.log(response.data);
+        const response = await axios.get("http://127.0.0.1:8000/store/reviewitem/5/");
+        console.log(response.data, "kanha");
     }
     fetchItemReview();
   },[])

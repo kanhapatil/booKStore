@@ -36,6 +36,10 @@ const page = () => {
     setOpen(false);
   }
 
+  if(orderItems){
+    console.log(orderItems);
+  }
+
   return (
     <>
       <div className="navbar"></div>
@@ -99,7 +103,7 @@ const page = () => {
                             $
                             {item.item ? item.item.price * item.quantity : null}
                           </td>
-                          <td className={styles.clickme} onClick={() => handleOpen(item.id)}>
+                          <td className={styles.clickme} onClick={() => handleOpen(item.item.id)}>
                             Click me
                           </td>
                         </tr>

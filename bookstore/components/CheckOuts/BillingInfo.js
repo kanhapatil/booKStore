@@ -39,9 +39,6 @@ const BillingInfo = () => {
     fetchAddress();
   }, []);
 
-  if (user){
-    console.log(user);
-  }
   return (
     <>
       <div className={styles.billingInfo}>

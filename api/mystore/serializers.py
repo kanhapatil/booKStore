@@ -75,7 +75,7 @@ class StoreItemSerialize(serializers.ModelSerializer):
         model = StoreItem
         fields = ["id", "store", "name", "standard", "price", 
                   "itemDesc", "itemImages", "item_review", "average_rating", 
-                  "user_count", "itemCategory", "categoryName"]
+                  "user_count", "itemCategory", "categoryName", "is_deleted"]
 
     def get_average_rating(self, obj):
         average_rating = ReviewItem.objects.filter(item=obj).aggregate(Avg('rating'))['rating__avg']

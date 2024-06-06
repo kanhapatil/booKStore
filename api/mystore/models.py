@@ -33,9 +33,12 @@ class StoreItem(models.Model):
     open_to_sell = models.BooleanField(default=True, blank=True, null=True)
     start_date = models.DateField(auto_now_add=True, blank=True, null=True) 
     end_date = models.DateField(blank=True, null=True)
+    is_deleted = models.BooleanField(default=False)
     
+
     def __str__(self):
         return self.name
+    
 
 ## Store item categories
 class ItemCategories(models.Model):

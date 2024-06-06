@@ -8,10 +8,10 @@ router.register("mystore", views.Store, basename="mystore")
 router.register("storerelateditem", views.StoreRelatedItem, basename="storerelateditem")
 router.register("itemcategory", views.ItemCategory, basename="itemcategory")
 router.register("schools", views.SchoolStore, basename="schools")
+router.register("reviewitem", views.Review, basename="reviewitem")
 
 urlpatterns = [
     path("", include(router.urls)),
     path("itemonly/", views.ItemOnly.as_view(), name="itemonly"),
-    path("reviewitem/", views.Review.as_view(), name="reviewitem"),
     path("itemimage/", views.Images.as_view(), name="itemimage")
 ]

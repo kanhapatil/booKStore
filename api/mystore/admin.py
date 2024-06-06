@@ -79,12 +79,21 @@ class StoreItemAdmin(admin.ModelAdmin):
     def message_user(self, request, message, level: int | str = ..., extra_tags: str = ..., fail_silently: bool = ...) -> None:
         return super().message_user(request, message, level, extra_tags, fail_silently)
     
+    ## Overide the delete method
+    def delete_model(self, request, obj):
+        print(request.user)
+        obj.is_deleted = True
+        obj.save()
+            
+
+    ## Get list display
     def get_list_display(self, request):
         if request.user.is_superuser:
-            return self.list_display
+            return self.list_display 
         else:
             return ["name", "price", "topay", "open_to_sell", "end_date"]
     
+    ## Get list filters
     def get_list_filter(self, request):
         if request.user.is_superuser:
             return ["store", "name", "standard"]

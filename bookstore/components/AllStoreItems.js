@@ -9,7 +9,6 @@ import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-
 const AllStoreItems = ({ storeItems, count, setCount }) => {
   const [idArray, setIdArray] = useState([]);
   const storeId = useParams();
@@ -62,76 +61,78 @@ const AllStoreItems = ({ storeItems, count, setCount }) => {
       console.error("Error occurred:", error);
     }
   };
-  
+
   return (
     <>
       <ToastContainer />
       {storeItems ? (
-        storeItems.map((item) => (
-          <div key={item.id} className={styles.itemDetails}>
-            <div className={styles.item}>
-              <div className={styles.itemInfo}>
-                <p className={styles.itemName}>{item.name}</p>
-                <p>₨.{item.price}</p>
-                <p>
-                  Class {item.standard}
-                  <sup>th</sup>
-                </p>
-                <div className={styles.ratingContainer}>
-                  <ReactStars
-                    count={5}
-                    size={24}
-                    color2={"#ffd700"}
-                    value={item.average_rating}
-                    edit={false}
-                  />
-                  <p className={styles.ratingsText}>({item.user_count})</p>
-                </div>
-                <p className={styles.itemDesc}>{item.itemDesc}</p>
-              </div>
-
-              <div className={styles.itemImage}>
-                <img
-                  className={styles.img}
-                  src={item.itemImages[0]?.img || ""}
-                />
-
-                <div className={styles.add}>
-                  <p onClick={() => handleAdd(item.id)}>ADD</p>
-                </div>
-              </div>
-            </div>
-
-            {item.item_review && item.item_review.length > 0 ? (
-              <div className={styles.itemReviews}>
-                {item.item_review.map((review) => (
-                  <div key={review.id} className={styles.review}>
-                    <div>
-                      <p>
-                        <strong>User:</strong> {review.username}
-                      </p>
-                      <div>
-                        <ReactStars
-                          count={5}
-                          size={24}
-                          color2={"#ffd700"}
-                          value={review.rating}
-                          edit={false}
-                        />
-                      </div>
-                      <p>
-                        <strong>Description:</strong> {review.description}
-                      </p>
-                      <p>
-                        <strong>Created at:</strong> {review.created_at}
-                      </p>
-                    </div>
+        storeItems.map((item) =>
+          item.is_deleted ? null : (
+            <div key={item.id} className={styles.itemDetails}>
+              <div className={styles.item}>
+                <div className={styles.itemInfo}>
+                  <p className={styles.itemName}>{item.name}</p>
+                  <p>₨.{item.price}</p>
+                  <p>
+                    Class {item.standard}
+                    <sup>th</sup>
+                  </p>
+                  <div className={styles.ratingContainer}>
+                    <ReactStars
+                      count={5}
+                      size={24}
+                      color2={"#ffd700"}
+                      value={item.average_rating}
+                      edit={false}
+                    />
+                    <p className={styles.ratingsText}>({item.user_count})</p>
                   </div>
-                ))}
+                  <p className={styles.itemDesc}>{item.itemDesc}</p>
+                </div>
+
+                <div className={styles.itemImage}>
+                  <img
+                    className={styles.img}
+                    src={item.itemImages[0]?.img || ""}
+                  />
+
+                  <div className={styles.add}>
+                    <p onClick={() => handleAdd(item.id)}>ADD</p>
+                  </div>
+                </div>
               </div>
-            ) : null}
-          </div>
-        ))
+
+              {item.item_review && item.item_review.length > 0 ? (
+                <div className={styles.itemReviews}>
+                  {item.item_review.map((review) => (
+                    <div key={review.id} className={styles.review}>
+                      <div>
+                        <p>
+                          <strong>User:</strong> {review.username}
+                        </p>
+                        <div>
+                          <ReactStars
+                            count={5}
+                            size={24}
+                            color2={"#ffd700"}
+                            value={review.rating}
+                            edit={false}
+                          />
+                        </div>
+                        <p>
+                          <strong>Description:</strong> {review.description}
+                        </p>
+                        <p>
+                          <strong>Created at:</strong> {review.created_at}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          )
+        )
       ) : (
         <div className={styles.noData}>
           <NoDataFound />

@@ -83,9 +83,21 @@ class StoreRelatedItem(viewsets.ModelViewSet):
             return StoreItem.objects.all()
 
 
-# ReviewItem api class
-class Review(APIView):
-    def get(self, request):
-        review = ReviewItem.objects.all()
-        serialize = ReviewItemSerialize(review, many=True)
-        return Response(serialize.data)
+# ## ReviewItem api class
+# class Review(APIView):
+#     def get(self, request, item_id):
+#         item = StoreItem.objects.get(id=item_id)
+#         review = ReviewItem.objects.filter(item=item)
+#         serialize = ReviewItemSerialize(review, many=True)
+#         return Response(serialize.data)
+    
+
+class Review(viewsets.ModelViewSet):
+    serializer_class = ReviewItemSerialize
+
+    def get_queryset(self):
+        item_id = self.request.query_params.get('item_id')
+        item = StoreItem.objects.get(id=item_id)
+        return ReviewItem.objects.filter(item=item)
+    
+    

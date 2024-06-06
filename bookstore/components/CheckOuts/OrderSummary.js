@@ -8,14 +8,10 @@ const OrderSummary = ({ cartData }) => {
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
   
   const handleOrder = async (storeId, cartId) => {
-    console.log("Store id:", storeId);
-    console.log("Cart id:", cartId);
-
     const data = {
       store: storeId,
       cart: cartId,
     };
-    console.log(data);
 
     try {
       const token = localStorage.getItem("token");
@@ -29,19 +25,14 @@ const OrderSummary = ({ cartData }) => {
             },
           }
         );
-        console.log(response.status);
         router.push("/Orders");
       } else {
         console.log("User is not authenticated");
       }
     } catch (error) {
-      console.log("Something went wrong!");
+      console.log("Something went wrong!", error.response.status);
     }
   };
-
-  if (cartData) {
-    console.log(cartData);
-  } 
 
   return (
     <>
