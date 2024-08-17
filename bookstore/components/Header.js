@@ -37,7 +37,6 @@ const Header = () => {
       router.push("/Login");
     }
   },[logout]);
-
   return (
     <>
       <header className="absolute inset-x-0 top-0 z-50">
@@ -67,7 +66,7 @@ const Header = () => {
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
+            {navigation.map((item, key) => (
               <Link
                 key={item.name}
                 href={item.href}

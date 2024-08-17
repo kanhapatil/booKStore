@@ -37,7 +37,7 @@ const TopStoreRenderer = ({ stores }) => {
                       </svg>
                       <img
                         className={styles.card__thumb}
-                        src={`https://www.shutterstock.com/shutterstock/photos/536451070/display_1500/stock-photo-portrait-of-a-beautiful-brunette-woman-looking-for-a-book-in-store-536451070.jpg`}
+                        src={item.image1}
                         alt=""
                       />
                       <div className={`${styles.card__header}, {styles.text}`}>
